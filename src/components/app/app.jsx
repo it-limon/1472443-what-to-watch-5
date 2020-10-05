@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import MainPage from "../main-page/main-page";
 
-const App = ({promoMovieProps}) => {
+const App = (props) => {
   return (
-    <MainPage promoMovieProps={promoMovieProps}/>
+    <MainPage promoMovieProps={props.promoMovieProps}/>
   );
 };
 

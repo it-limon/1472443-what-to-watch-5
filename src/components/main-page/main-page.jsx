@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const MainPage = ({promoMovieProps}) => {
-  const {name: promoMovieName, genre: promoMovieGenre, releaseYear: promoMovieReleaseYear} = promoMovieProps;
+const MainPage = (props) => {
+  const {name: promoMovieName, genre: promoMovieGenre, releaseYear: promoMovieReleaseYear} = props.promoMovieProps;
 
   return (
     <React.Fragment>
