@@ -3,8 +3,8 @@ import ReactDOM from "react-dom";
 import App from "./components/app/app";
 
 const PromoMovieProps = {
-  name: `The Dark Knight`,
-  genre: `Thriller`,
+  name: `The Grand Budapest Hotel`,
+  genre: `Drama`,
   releaseYear: 2014
 };
 
