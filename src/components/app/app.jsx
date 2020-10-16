@@ -29,7 +29,9 @@ const App = (props) => {
         <Route path="/films/:id" exact>
           <MoviePage movie={movies[0]} />
         </Route>
-        <Route path="/films/:id/review" exact component={ReviewPage} />
+        <Route path="/films/:id/review" exact>
+          <ReviewPage movie={movies[0]} />
+        </Route>
         <Route path="/player/:id" exact>
            <PlayerPage movie={movies[0]} />
         </Route>
