@@ -4,6 +4,7 @@ import Props from "../../props";
 
 const MainPage = (props) => {
   const {name: promoMovieName, genre: promoMovieGenre, releaseYear: promoMovieReleaseYear} = props.promoMovie;
+  const movies = props.movies;
 
   return (
     <Fragment>
@@ -99,7 +100,7 @@ const MainPage = (props) => {
             </li>
           </ul>
 
-          <CatalogMoviesList movies={props.movies} />
+          <CatalogMoviesList movies={movies} />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>

@@ -9,24 +9,30 @@ import PlayerPage from "../player-page/player-page";
 import Props from "../../props";
 
 const App = (props) => {
+  const {promoMovie, movies} = props;
+
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/" exact>
           <MainPage
-            promoMovie={props.promoMovie}
-            movies={props.movies}
+            promoMovie={promoMovie}
+            movies={movies}
           />
         </Route>
         <Route path="/login" exact>
           <AuthPage />
         </Route>
         <Route path="/mylist" exact>
-          <MyListPage />
+          <MyListPage movie={movies[0]} />
         </Route>
-        <Route path="/films/:id" exact component={MoviePage} />
+        <Route path="/films/:id" exact>
+          <MoviePage movie={movies[0]} />
+        </Route>
         <Route path="/films/:id/review" exact component={ReviewPage} />
-        <Route path="/player/:id" exact component={PlayerPage} />
+        <Route path="/player/:id" exact>
+           <PlayerPage movie={movies[0]} />
+        </Route>
         <Route
           render={() => (
             <Fragment>

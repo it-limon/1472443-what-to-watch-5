@@ -8,14 +8,19 @@ class CatalogMoviesList extends PureComponent {
   }
 
   render() {
+    const movies = this.props.movies;
+
     return (
       <div className="catalog__movies-list">
-        <SmallMovieCard
-          movies={this.props.movies}
-          onActiveMovieCardChange={(movieId) => {
-            this.setState(() => ({activeMovieCard: movieId}))
-          }}
-        />
+        {movies.map((movie) => (
+          <SmallMovieCard
+            key={movie.id}
+            movie={movie}
+            onActiveMovieCardChange={(movieId) => {
+              this.setState(() => ({activeMovieCard: movieId}))
+            }}
+          />
+        ))}
       </div>
     );
   }

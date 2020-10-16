@@ -1,6 +1,8 @@
 import React, {Fragment} from "react";
 
-const MoviePage = () => {
+const MoviePage = (props) => {
+  const {name, genre, releaseYear, rating, ratingDesc, votesNumber, annotation, director, starring, img} = props.movie;
+
   return (
     <Fragment>
       <section className="movie-card movie-card--full">
@@ -29,10 +31,10 @@ const MoviePage = () => {
 
           <div className="movie-card__wrap">
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">The Grand Budapest Hotel</h2>
+              <h2 className="movie-card__title">{name}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">Drama</span>
-                <span className="movie-card__year">2014</span>
+                <span className="movie-card__genre">{genre}</span>
+                <span className="movie-card__year">{releaseYear}</span>
               </p>
 
               <div className="movie-card__buttons">
@@ -76,21 +78,18 @@ const MoviePage = () => {
               </nav>
 
               <div className="movie-rating">
-                <div className="movie-rating__score">8,9</div>
+                <div className="movie-rating__score">{rating}</div>
                 <p className="movie-rating__meta">
-                  <span className="movie-rating__level">Very good</span>
-                  <span className="movie-rating__count">240 ratings</span>
+                  <span className="movie-rating__level">{ratingDesc}</span>
+                  <span className="movie-rating__count">{`${votesNumber} ratings`}</span>
                 </p>
               </div>
 
               <div className="movie-card__text">
-                <p>In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave&aposs friend and protege.</p>
+                <p>{annotation}</p>
+                <p className="movie-card__director"><strong>{`Director: ${director}`}</strong></p>
 
-                <p>Gustave prides himself on providing first-className service to the hotel&aposs guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave&aposs lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.</p>
-
-                <p className="movie-card__director"><strong>Director: Wes Andreson</strong></p>
-
-                <p className="movie-card__starring"><strong>Starring: Bill Murray, Edward Norton, Jude Law, Willem Dafoe and other</strong></p>
+                <p className="movie-card__starring"><strong>{`Starring: ${starring}`}</strong></p>
               </div>
             </div>
           </div>
