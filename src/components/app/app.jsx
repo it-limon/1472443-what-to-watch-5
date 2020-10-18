@@ -1,5 +1,6 @@
 import React, {Fragment} from "react";
 import {BrowserRouter, Route, Switch, Link} from "react-router-dom";
+import PropTypes from "prop-types";
 import MainPage from "../main-page/main-page";
 import AuthPage from "../auth-page/auth-page";
 import MyListPage from "../my-list-page/my-list-page";
@@ -14,26 +15,30 @@ const App = (props) => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" exact>
-          <MainPage
-            promoMovie={promoMovie}
-            movies={movies}
-          />
-        </Route>
-        <Route path="/login" exact>
+        <Route exact
+          path="/"
+          render={({history}) => (
+            <MainPage
+              promoMovie={promoMovie}
+              movies={movies}
+              onSmallMovieCardClick={() => history.push(`/films/0`)}
+            />
+          )}
+        />
+        <Route exact path="/login">
           <AuthPage />
         </Route>
-        <Route path="/mylist" exact>
-          <MyListPage movie={movies[0]} />
+        <Route exact path="/mylist">
+          <MyListPage movies={movies} />
         </Route>
-        <Route path="/films/:id" exact>
+        <Route exact path="/films/:id">
           <MoviePage movie={movies[0]} />
         </Route>
-        <Route path="/films/:id/review" exact>
+        <Route exact path="/films/:id/review">
           <ReviewPage movie={movies[0]} />
         </Route>
-        <Route path="/player/:id" exact>
-           <PlayerPage movie={movies[0]} />
+        <Route exact path="/player/:id">
+          <PlayerPage movie={movies[0]} />
         </Route>
         <Route
           render={() => (
@@ -53,7 +58,8 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  promoMovie: Props.promoMovie
+  promoMovie: Props.promoMovie,
+  movies: PropTypes.arrayOf(Props.movie).isRequired
 };
 
 export default App;

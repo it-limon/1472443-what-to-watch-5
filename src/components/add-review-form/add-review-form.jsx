@@ -6,7 +6,7 @@ class AddReviewForm extends PureComponent {
     this.state = {
       reviewText: ``,
       rating: 3
-    }
+    };
     this._handleSubmit = this._handleSubmit.bind(this);
     this._handleReviewChange = this._handleReviewChange.bind(this);
   }

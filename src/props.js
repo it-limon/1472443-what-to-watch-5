@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import {MovieGenre} from "../src/const";
+import {MovieGenre, MovieRating} from "../src/const";
 
 const Props = {
   promoMovie: PropTypes.shape({
@@ -9,19 +9,32 @@ const Props = {
   }).isRequired,
 
   movie: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    key: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
+    genre: PropTypes.oneOf(MovieGenre).isRequired,
     releaseYear: PropTypes.number.isRequired,
-    cardImg: PropTypes.string.isRequired,
-    img: PropTypes.string.isRequired,
+    runTime: PropTypes.string.isRequired,
 
-    rating: 6.6,
-    ratingName: `Very good`,
-    ratingsCount: 5,
+    rating: PropTypes.string.isRequired,
+    ratingDesc: PropTypes.oneOf(MovieRating).isRequired,
+    votesNumber: PropTypes.number.isRequired,
+
     annotation: PropTypes.string.isRequired,
     director: PropTypes.string.isRequired,
     starring: PropTypes.string.isRequired,
+
+    previewImg: PropTypes.string.isRequired,
+    video: PropTypes.string.isRequired,
+    img: PropTypes.string.isRequired
+  }).isRequired,
+
+  review: PropTypes.shape({
+    key: PropTypes.number.isRequired,
+    movieKey: PropTypes.number.isRequired,
+    text: PropTypes.string.isRequired,
+    rating: PropTypes.string.isRequired,
+    userName: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired
   }).isRequired
 };
 

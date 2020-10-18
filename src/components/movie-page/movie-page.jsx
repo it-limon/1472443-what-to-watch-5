@@ -1,4 +1,5 @@
 import React, {Fragment} from "react";
+import Props from "../../props";
 
 const MoviePage = (props) => {
   const {name, genre, releaseYear, rating, ratingDesc, votesNumber, annotation, director, starring, img} = props.movie;
@@ -59,7 +60,7 @@ const MoviePage = (props) => {
         <div className="movie-card__wrap movie-card__translate-top">
           <div className="movie-card__info">
             <div className="movie-card__poster movie-card__poster--big">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={img} alt="The Grand Budapest Hotel poster" width="218" height="327" />
             </div>
 
             <div className="movie-card__desc">
@@ -155,6 +156,10 @@ const MoviePage = (props) => {
       </div>
     </Fragment>
   );
+};
+
+MoviePage.propTypes = {
+  movie: Props.movie
 };
 
 export default MoviePage;

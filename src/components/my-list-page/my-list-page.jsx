@@ -1,7 +1,11 @@
 import React from "react";
+import PropTypes from "prop-types";
 import SmallMovieCard from "../small-movie-card/small-movie-card";
+import Props from "../../props";
 
 const MyListPage = (props) => {
+  const movies = props.movies;
+
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -26,10 +30,14 @@ const MyListPage = (props) => {
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
         <div className="catalog__movies-list">
-          <SmallMovieCard
-            movie={props.movie}
-            onActiveMovieCardChange={() => {}}
-          />
+          {movies.map((movie) => (
+            <SmallMovieCard
+              key={movie.key}
+              movie={movie}
+              onActiveMovieCardChange={() => {}}
+              onSmallMovieCardClick={() => {}}
+            />
+          ))}
         </div>
       </section>
 
@@ -48,6 +56,10 @@ const MyListPage = (props) => {
       </footer>
     </div>
   );
+};
+
+MyListPage.propTypes = {
+  movies: PropTypes.arrayOf(Props.movie).isRequired
 };
 
 export default MyListPage;

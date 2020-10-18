@@ -1,4 +1,5 @@
 import React from "react";
+import Props from "../../props";
 
 const PlayerPage = (props) => {
   const movie = props.movie;
@@ -37,6 +38,10 @@ const PlayerPage = (props) => {
       </div>
     </div>
   );
+};
+
+PlayerPage.propTypes = {
+  movie: Props.movie
 };
 
 export default PlayerPage;

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/app/app";
-import movies from "./mocks/movies"
+import movies from "./mocks/movies";
 
 const PromoMovie = {
   name: `The Grand Budapest Hotel`,

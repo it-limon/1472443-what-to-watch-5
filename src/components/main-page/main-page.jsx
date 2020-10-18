@@ -1,10 +1,11 @@
 import React, {Fragment} from "react";
+import PropTypes from "prop-types";
 import CatalogMoviesList from "../catalog-movies-list/catalog-movies-list";
 import Props from "../../props";
 
 const MainPage = (props) => {
   const {name: promoMovieName, genre: promoMovieGenre, releaseYear: promoMovieReleaseYear} = props.promoMovie;
-  const movies = props.movies;
+  const {movies, onSmallMovieCardClick} = props;
 
   return (
     <Fragment>
@@ -100,7 +101,10 @@ const MainPage = (props) => {
             </li>
           </ul>
 
-          <CatalogMoviesList movies={movies} />
+          <CatalogMoviesList
+            movies={movies}
+            onSmallMovieCardClick={onSmallMovieCardClick}
+          />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
@@ -126,7 +130,10 @@ const MainPage = (props) => {
 };
 
 MainPage.propTypes = {
-  promoMovie: Props.promoMovie
+  promoMovie: Props.promoMovie,
+  movies: PropTypes.arrayOf(Props.movie).isRequired,
+  onSmallMovieCardClick: PropTypes.func.isRequired
 };
+
 
 export default MainPage;

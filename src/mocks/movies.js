@@ -1,6 +1,6 @@
 export default [
   {
-    id: 0,
+    key: 0,
     name: `Fantastic Beasts: The Crimes of Grindelwald`,
     genre: `Crime`,
     releaseYear: 2014,
@@ -21,14 +21,14 @@ export default [
     img: `img/the-grand-budapest-hotel-poster.jpg`
   },
   {
-    id: 1,
+    key: 1,
     name: `Bohemian Rhapsody`,
     genre: `Drama`,
     releaseYear: 2018,
     runTime: `2h 15m`,
 
     rating: `8`,
-    ratingDesc: `Very good`,
+    ratingDesc: `Very Good`,
     votesNumber: 450,
 
     annotation: `Freddie Mercury - the lead singer of Queen - defies stereotypes and convention to become one of history's most beloved entertainers.
@@ -42,7 +42,7 @@ export default [
     img: `img/the-grand-budapest-hotel-poster.jpg`
   },
   {
-    id: 2,
+    key: 2,
     name: `Macbeth`,
     genre: `Drama`,
     releaseYear: 2015,
@@ -62,7 +62,7 @@ export default [
     img: `img/the-grand-budapest-hotel-poster.jpg`
   },
   {
-    id: 3,
+    key: 3,
     name: `The Aviator`,
     genre: `Drama`,
     releaseYear: 2004,
@@ -84,7 +84,7 @@ export default [
     img: `img/the-grand-budapest-hotel-poster.jpg`
   },
   {
-    id: 4,
+    key: 4,
     name: `We need to talk about Kevin`,
     genre: `Thriller`,
     releaseYear: 2010,
@@ -106,7 +106,7 @@ export default [
     img: `img/the-grand-budapest-hotel-poster.jpg`
   },
   {
-    id: 5,
+    key: 5,
     name: `What We Do in the Shadows`,
     genre: `Comedie`,
     releaseYear: 2014,
@@ -125,7 +125,7 @@ export default [
     img: `img/the-grand-budapest-hotel-poster.jpg`
   },
   {
-    id: 6,
+    key: 6,
     name: `The Revenant`,
     genre: `Drama`,
     releaseYear: 2015,
@@ -147,7 +147,7 @@ export default [
     img: `img/the-grand-budapest-hotel-poster.jpg`
   },
   {
-    id: 7,
+    key: 7,
     name: `Johnny English`,
     genre: `Comedie`,
     releaseYear: 2003,
@@ -167,4 +167,4 @@ export default [
     video: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     img: `img/the-grand-budapest-hotel-poster.jpg`
   }
-]
+];

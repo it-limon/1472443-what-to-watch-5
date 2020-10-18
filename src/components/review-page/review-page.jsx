@@ -1,5 +1,6 @@
 import React from "react";
 import AddReviewForm from "../add-review-form/add-review-form";
+import Props from "../../props";
 
 const ReviewPage = (props) => {
   const movie = props.movie;
@@ -8,7 +9,7 @@ const ReviewPage = (props) => {
     <section className="movie-card movie-card--full">
       <div className="movie-card__header">
         <div className="movie-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src="img/bg-the-grand-budapest-hotel.jpg" alt={movie.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -41,7 +42,7 @@ const ReviewPage = (props) => {
         </header>
 
         <div className="movie-card__poster movie-card__poster--small">
-          <img src="img/the-grand-budapest-hotel-poster.jpg" alt={`${movie.name} poster`} width="218" height="327" />
+          <img src={movie.img} alt={`${movie.name} poster`} width="218" height="327" />
         </div>
       </div>
 
@@ -50,6 +51,10 @@ const ReviewPage = (props) => {
       </div>
     </section>
   );
+};
+
+ReviewPage.propTypes = {
+  movie: Props.movie
 };
 
 export default ReviewPage;
