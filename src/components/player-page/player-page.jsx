@@ -1,9 +1,12 @@
 import React from "react";
+import Props from "../../props";
 
-const PlayerPage = () => {
+const PlayerPage = (props) => {
+  const movie = props.movie;
+
   return (
     <div className="player">
-      <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
+      <video src={movie.video} className="player__video" poster="img/player-poster.jpg" autoPlay></video>
 
       <button type="button" className="player__exit">Exit</button>
 
@@ -23,7 +26,7 @@ const PlayerPage = () => {
             </svg>
             <span>Play</span>
           </button>
-          <div className="player__name">Transpotting</div>
+          <div className="player__name">{movie.name}</div>
 
           <button type="button" className="player__full-screen">
             <svg viewBox="0 0 27 27" width="27" height="27">
@@ -35,6 +38,10 @@ const PlayerPage = () => {
       </div>
     </div>
   );
+};
+
+PlayerPage.propTypes = {
+  movie: Props.movie
 };
 
 export default PlayerPage;
