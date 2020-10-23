@@ -21,7 +21,7 @@ const App = (props) => {
             <MainPage
               promoMovie={promoMovie}
               movies={movies}
-              onSmallMovieCardClick={() => history.push(`/films/0`)}
+              onActiveCardClick={() => history.push(`/films/0`)}
             />
           )}
         />

@@ -17,7 +17,7 @@ export default [
     starring: `Eddie Redmayne, Katherine Waterston, Dan Fogler`,
 
     previewImg: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-    video: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    video: `https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1eaVUkF02uVIpPArdBJYNHz-XA3O0BPb6`,
     img: `img/the-grand-budapest-hotel-poster.jpg`
   },
   {
@@ -38,7 +38,7 @@ export default [
     starring: `Rami Malek, Lucy Boynton, Gwilym Lee, Ben Hardy`,
 
     previewImg: `img/bohemian-rhapsody.jpg`,
-    video: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    video: `https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1eaVUkF02uVIpPArdBJYNHz-XA3O0BPb6`,
     img: `img/the-grand-budapest-hotel-poster.jpg`
   },
   {
@@ -58,7 +58,7 @@ export default [
     starring: `Michael Fassbender, Marion Cotillard, David Thewlis, Jack Reynor`,
 
     previewImg: `img/macbeth.jpg`,
-    video: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    video: `https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1eaVUkF02uVIpPArdBJYNHz-XA3O0BPb6`,
     img: `img/the-grand-budapest-hotel-poster.jpg`
   },
   {
@@ -80,7 +80,7 @@ export default [
     starring: `Leonardo DiCaprio, Cate Blanchett, Kate Beckinsale, John C. Reilly, Alec Baldwin`,
 
     previewImg: `img/aviator.jpg`,
-    video: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    video: `https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1eaVUkF02uVIpPArdBJYNHz-XA3O0BPb6`,
     img: `img/the-grand-budapest-hotel-poster.jpg`
   },
   {
@@ -102,7 +102,7 @@ export default [
     starring: `Tilda Swinton, John C. Reilly, Ezra Miller, Jasper Newell`,
 
     previewImg: `img/we-need-to-talk-about-kevin.jpg`,
-    video: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    video: `https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1eaVUkF02uVIpPArdBJYNHz-XA3O0BPb6`,
     img: `img/the-grand-budapest-hotel-poster.jpg`
   },
   {
@@ -121,7 +121,7 @@ export default [
     starring: `Jemaine Clement, Taika Waititi, Jonny Brugh, Cori Gonzalez-Macuer`,
 
     previewImg: `img/what-we-do-in-the-shadows.jpg`,
-    video: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    video: `https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1eaVUkF02uVIpPArdBJYNHz-XA3O0BPb6`,
     img: `img/the-grand-budapest-hotel-poster.jpg`
   },
   {
@@ -143,7 +143,7 @@ export default [
     starring: `Leonardo DiCaprio, Tom Hardy, Domhnall Gleeson, Will Poulter, Forrest Goodluck, Paul Anderson`,
 
     previewImg: `img/revenant.jpg`,
-    video: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    video: `https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1eaVUkF02uVIpPArdBJYNHz-XA3O0BPb6`,
     img: `img/the-grand-budapest-hotel-poster.jpg`
   },
   {
@@ -164,7 +164,7 @@ export default [
     starring: `Rowan Atkinson, John Malkovich, Natalie Imbruglia, Ben Miller, Douglas McFerran`,
 
     previewImg: `img/johnny-english.jpg`,
-    video: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    video: `https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1eaVUkF02uVIpPArdBJYNHz-XA3O0BPb6`,
     img: `img/the-grand-budapest-hotel-poster.jpg`
   }
 ];

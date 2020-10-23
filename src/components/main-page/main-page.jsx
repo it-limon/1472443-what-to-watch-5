@@ -5,7 +5,7 @@ import Props from "../../props";
 
 const MainPage = (props) => {
   const {name: promoMovieName, genre: promoMovieGenre, releaseYear: promoMovieReleaseYear} = props.promoMovie;
-  const {movies, onSmallMovieCardClick} = props;
+  const {movies, onActiveCardClick} = props;
 
   return (
     <Fragment>
@@ -103,7 +103,7 @@ const MainPage = (props) => {
 
           <CatalogMoviesList
             movies={movies}
-            onSmallMovieCardClick={onSmallMovieCardClick}
+            onActiveCardClick={onActiveCardClick}
           />
 
           <div className="catalog__more">
@@ -132,7 +132,7 @@ const MainPage = (props) => {
 MainPage.propTypes = {
   promoMovie: Props.promoMovie,
   movies: PropTypes.arrayOf(Props.movie).isRequired,
-  onSmallMovieCardClick: PropTypes.func.isRequired
+  onActiveCardClick: PropTypes.func.isRequired
 };
 
 
