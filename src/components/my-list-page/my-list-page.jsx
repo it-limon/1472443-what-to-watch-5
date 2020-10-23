@@ -34,8 +34,8 @@ const MyListPage = (props) => {
             <SmallMovieCard
               key={movie.key}
               movie={movie}
-              onActiveMovieCardChange={() => {}}
-              onSmallMovieCardClick={() => {}}
+              onActiveCardChange={() => {}}
+              onActiveCardClick={() => {}}
             />
           ))}
         </div>
