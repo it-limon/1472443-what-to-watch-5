@@ -10,7 +10,7 @@ import PlayerPage from "../player-page/player-page";
 import Props from "../../props";
 
 const App = (props) => {
-  const {promoMovie, movies} = props;
+  const {promoMovie, movies, reviews} = props;
 
   return (
     <BrowserRouter>
@@ -31,9 +31,17 @@ const App = (props) => {
         <Route exact path="/mylist">
           <MyListPage movies={movies} />
         </Route>
-        <Route exact path="/films/:id">
-          <MoviePage movie={movies[0]} />
-        </Route>
+        <Route exact
+          path="/films/:id"
+          render={({history}) => (
+            <MoviePage
+              movie={movies[0]}
+              movies={movies}
+              reviews={reviews}
+              onActiveCardClick={() => history.push(`/films/0`)}
+            />
+          )}
+        />
         <Route exact path="/films/:id/review">
           <ReviewPage movie={movies[0]} />
         </Route>
@@ -59,7 +67,8 @@ const App = (props) => {
 
 App.propTypes = {
   promoMovie: Props.promoMovie,
-  movies: PropTypes.arrayOf(Props.movie).isRequired
+  movies: PropTypes.arrayOf(Props.movie).isRequired,
+  reviews: PropTypes.arrayOf(Props.review).isRequired
 };
 
 export default App;
