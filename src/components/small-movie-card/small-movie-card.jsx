@@ -7,23 +7,19 @@ class SmallMovieCard extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {
-      isActive: false
-    };
-
-    this._handleOnMouseEnter = this._handleOnMouseEnter.bind(this);
-    this._handleOnMouseLeave = this._handleOnMouseLeave.bind(this);
+    this._handleMouseEnter = this._handleMouseEnter.bind(this);
+    this._handleMouseLeave = this._handleMouseLeave.bind(this);
 
     this.timer = null;
   }
 
-  _handleOnMouseEnter() {
-    this.timer = setTimeout(() => this.setState({isActive: true}), 1000);
+  _handleMouseEnter() {
+    this.timer = setTimeout(() => this.props.onChangeActiveState(true), 1000);
   }
 
-  _handleOnMouseLeave() {
+  _handleMouseLeave() {
     clearTimeout(this.timer);
-    this.setState({isActive: false});
+    this.props.onChangeActiveState(false);
   }
 
   componentWillUnmount() {
@@ -31,14 +27,13 @@ class SmallMovieCard extends PureComponent {
   }
 
   render() {
-    const {movie, onActiveCardClick} = this.props;
-    const {isActive: isPlaying} = this.state;
+    const {movie, isActive: isPlaying, onActiveCardClick} = this.props;
 
     return (
       <article
         className="small-movie-card catalog__movies-card"
-        onMouseEnter={this._handleOnMouseEnter}
-        onMouseLeave={this._handleOnMouseLeave}
+        onMouseEnter={this._handleMouseEnter}
+        onMouseLeave={this._handleMouseLeave}
         onClick={onActiveCardClick}
       >
         <div className="small-movie-card__image">
@@ -53,7 +48,11 @@ class SmallMovieCard extends PureComponent {
           <a
             className="small-movie-card__link"
             href="#"
-            onClick={onActiveCardClick}>
+            onClick={(evt) => {
+              evt.preventDefault();
+              onActiveCardClick();
+            }}
+          >
             {movie.name}
           </a>
         </h3>
@@ -64,7 +63,9 @@ class SmallMovieCard extends PureComponent {
 
 SmallMovieCard.propTypes = {
   movie: Props.movie,
-  onActiveCardClick: PropTypes.func.isRequired
+  isActive: PropTypes.bool.isRequired,
+  onActiveCardClick: PropTypes.func.isRequired,
+  onChangeActiveState: PropTypes.func.isRequired
 };
 
 export default SmallMovieCard;

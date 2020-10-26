@@ -1,8 +1,19 @@
 import React, {Fragment} from "react";
+import PropTypes from "prop-types";
 import Props from "../../props";
+import MovieTabs from "../movie-tabs/movie-tabs";
+import CatalogMoviesList from "../catalog-movies-list/catalog-movies-list";
+import {withActiveIndex} from "../../hocs/with-active-index/with-active-index";
+import {LIKE_THIS_MOVIE_COUNT} from "../../const";
+
+const MovieTabsWrapped = withActiveIndex(MovieTabs);
 
 const MoviePage = (props) => {
-  const {name, genre, releaseYear, rating, ratingDesc, votesNumber, annotation, director, starring, img} = props.movie;
+  const {movie, movies, reviews, onActiveCardClick} = props;
+
+  const _getMoviesByGenre = () => {
+    return movies.filter((currMovie) => currMovie.genre === movie.genre && currMovie.key !== movie.key).slice(0, LIKE_THIS_MOVIE_COUNT);
+  };
 
   return (
     <Fragment>
@@ -32,10 +43,10 @@ const MoviePage = (props) => {
 
           <div className="movie-card__wrap">
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">{name}</h2>
+              <h2 className="movie-card__title">{movie.name}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">{genre}</span>
-                <span className="movie-card__year">{releaseYear}</span>
+                <span className="movie-card__genre">{movie.genre}</span>
+                <span className="movie-card__year">{movie.releaseYear}</span>
               </p>
 
               <div className="movie-card__buttons">
@@ -60,38 +71,14 @@ const MoviePage = (props) => {
         <div className="movie-card__wrap movie-card__translate-top">
           <div className="movie-card__info">
             <div className="movie-card__poster movie-card__poster--big">
-              <img src={img} alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={movie.img} alt="The Grand Budapest Hotel poster" width="218" height="327" />
             </div>
 
             <div className="movie-card__desc">
-              <nav className="movie-nav movie-card__nav">
-                <ul className="movie-nav__list">
-                  <li className="movie-nav__item movie-nav__item--active">
-                    <a href="#" className="movie-nav__link">Overview</a>
-                  </li>
-                  <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">Details</a>
-                  </li>
-                  <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">Reviews</a>
-                  </li>
-                </ul>
-              </nav>
-
-              <div className="movie-rating">
-                <div className="movie-rating__score">{rating}</div>
-                <p className="movie-rating__meta">
-                  <span className="movie-rating__level">{ratingDesc}</span>
-                  <span className="movie-rating__count">{`${votesNumber} ratings`}</span>
-                </p>
-              </div>
-
-              <div className="movie-card__text">
-                <p>{annotation}</p>
-                <p className="movie-card__director"><strong>{`Director: ${director}`}</strong></p>
-
-                <p className="movie-card__starring"><strong>{`Starring: ${starring}`}</strong></p>
-              </div>
+              <MovieTabsWrapped
+                movie={movie}
+                reviews={reviews}
+              />
             </div>
           </div>
         </div>
@@ -101,43 +88,11 @@ const MoviePage = (props) => {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
-          <div className="catalog__movies-list">
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175" />
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Fantastic Beasts: The Crimes of Grindelwald</a>
-              </h3>
-            </article>
+          <CatalogMoviesList
+            movies={_getMoviesByGenre()}
+            onActiveCardClick={onActiveCardClick}
+          />
 
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/bohemian-rhapsody.jpg" alt="Bohemian Rhapsody" width="280" height="175" />
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Bohemian Rhapsody</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/macbeth.jpg" alt="Macbeth" width="280" height="175" />
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Macbeth</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/aviator.jpg" alt="Aviator" width="280" height="175" />
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Aviator</a>
-              </h3>
-            </article>
-          </div>
         </section>
 
         <footer className="page-footer">
@@ -159,7 +114,10 @@ const MoviePage = (props) => {
 };
 
 MoviePage.propTypes = {
-  movie: Props.movie
+  movie: Props.movie,
+  movies: PropTypes.arrayOf(Props.movie).isRequired,
+  reviews: PropTypes.arrayOf(Props.review).isRequired,
+  onActiveCardClick: PropTypes.func.isRequired
 };
 
 export default MoviePage;

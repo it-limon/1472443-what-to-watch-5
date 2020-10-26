@@ -2,7 +2,7 @@ export default [
   {
     key: 0,
     name: `Fantastic Beasts: The Crimes of Grindelwald`,
-    genre: `Crime`,
+    genre: `Drama`,
     releaseYear: 2014,
     runTime: `2h 14m`,
 

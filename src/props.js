@@ -34,7 +34,7 @@ const Props = {
     text: PropTypes.string.isRequired,
     rating: PropTypes.string.isRequired,
     userName: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired
+    date: PropTypes.instanceOf(Date)
   }).isRequired
 };
 
