@@ -2,7 +2,7 @@ export default [
   {
     key: 0,
     name: `Fantastic Beasts: The Crimes of Grindelwald`,
-    genre: `Drama`,
+    genreKey: 4,
     releaseYear: 2014,
     runTime: `2h 14m`,
 
@@ -23,7 +23,7 @@ export default [
   {
     key: 1,
     name: `Bohemian Rhapsody`,
-    genre: `Drama`,
+    genreKey: 4,
     releaseYear: 2018,
     runTime: `2h 15m`,
 
@@ -44,7 +44,7 @@ export default [
   {
     key: 2,
     name: `Macbeth`,
-    genre: `Drama`,
+    genreKey: 4,
     releaseYear: 2015,
     runTime: `1h 53m`,
 
@@ -64,7 +64,7 @@ export default [
   {
     key: 3,
     name: `The Aviator`,
-    genre: `Drama`,
+    genreKey: 4,
     releaseYear: 2004,
     runTime: `2h 43m`,
 
@@ -86,7 +86,7 @@ export default [
   {
     key: 4,
     name: `We need to talk about Kevin`,
-    genre: `Thriller`,
+    genreKey: 9,
     releaseYear: 2010,
     runTime: `1h 52m`,
 
@@ -108,7 +108,7 @@ export default [
   {
     key: 5,
     name: `What We Do in the Shadows`,
-    genre: `Comedie`,
+    genreKey: 1,
     releaseYear: 2014,
     runTime: `1h 25m`,
 
@@ -127,7 +127,7 @@ export default [
   {
     key: 6,
     name: `The Revenant`,
-    genre: `Drama`,
+    genreKey: 4,
     releaseYear: 2015,
     runTime: `2h 36m`,
 
@@ -149,7 +149,7 @@ export default [
   {
     key: 7,
     name: `Johnny English`,
-    genre: `Comedie`,
+    genreKey: 1,
     releaseYear: 2003,
     runTime: `1h 24m`,
 

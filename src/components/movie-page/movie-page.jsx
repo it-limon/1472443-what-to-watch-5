@@ -4,7 +4,8 @@ import Props from "../../props";
 import MovieTabs from "../movie-tabs/movie-tabs";
 import CatalogMoviesList from "../catalog-movies-list/catalog-movies-list";
 import {withActiveIndex} from "../../hocs/with-active-index/with-active-index";
-import {LIKE_THIS_MOVIE_COUNT} from "../../const";
+import {LIKE_THIS_MOVIE_COUNT} from "../../const/const";
+import {getGenreNameByKey} from "../../utils";
 
 const MovieTabsWrapped = withActiveIndex(MovieTabs);
 
@@ -45,7 +46,7 @@ const MoviePage = (props) => {
             <div className="movie-card__desc">
               <h2 className="movie-card__title">{movie.name}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">{movie.genre}</span>
+                <span className="movie-card__genre">{getGenreNameByKey(movie.genreKey)}</span>
                 <span className="movie-card__year">{movie.releaseYear}</span>
               </p>
 
