@@ -1,52 +1,62 @@
 export const MovieGenresList = [
   {
     key: 0,
-    name:  `All genres`,
+    ord: 0,
+    name: `All genres`,
     filterName: `All genres`,
   },
   {
     key: 1,
-    name:  `Comedie`,
+    ord: 1,
+    name: `Comedie`,
     filterName: `Comedies`,
   },
   {
     key: 2,
-    name:  `Crime`,
+    ord: 2,
+    name: `Crime`,
     filterName: `Crime`,
   },
   {
     key: 3,
-    name:  `Documentary`,
+    ord: 3,
+    name: `Documentary`,
     filterName: `Documentary`,
   },
   {
     key: 4,
-    name:  `Drama`,
+    ord: 4,
+    name: `Drama`,
     filterName: `Dramas`,
   },
   {
     key: 5,
-    name:  `Horror`,
+    ord: 5,
+    name: `Horror`,
     filterName: `Horror`,
   },
   {
     key: 6,
-    name:  `Kids & Family`,
+    ord: 6,
+    name: `Kids & Family`,
     filterName: `Kids & Family`,
   },
   {
     key: 7,
-    name:  `Romance`,
+    ord: 7,
+    name: `Romance`,
     filterName: `Romance`,
   },
   {
     key: 8,
-    name:  `Sci-Fi`,
+    ord: 8,
+    name: `Sci-Fi`,
     filterName: `Sci-Fi`,
   },
   {
     key: 9,
-    name:  `Thriller`,
+    ord: 9,
+    name: `Thriller`,
     filterName: `Thrillers`,
   }
 ];

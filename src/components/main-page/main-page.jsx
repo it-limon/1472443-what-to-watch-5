@@ -1,16 +1,12 @@
 import React, {Fragment} from "react";
 import PropTypes from "prop-types";
-import CatalogMoviesList from "../catalog-movies-list/catalog-movies-list";
 import GenresList from "../genres-list/genres-list";
 import Props from "../../props";
-import {withActiveIndex} from "../../hocs/with-active-index/with-active-index";
 import {getGenreNameByKey} from "../../utils";
-
-const GenresListWrapped = withActiveIndex(GenresList);
 
 const MainPage = (props) => {
   const {name: promoMovieName, genreKey: promoMovieGenreKey, releaseYear: promoMovieReleaseYear} = props.promoMovie;
-  const {movies, onActiveCardClick} = props;
+  const {onActiveCardClick} = props;
 
   return (
     <Fragment>
@@ -73,12 +69,7 @@ const MainPage = (props) => {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenresListWrapped />
-
-          <CatalogMoviesList
-            movies={movies}
-            onActiveCardClick={onActiveCardClick}
-          />
+          <GenresList onActiveCardClick={onActiveCardClick} />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
@@ -105,7 +96,6 @@ const MainPage = (props) => {
 
 MainPage.propTypes = {
   promoMovie: Props.promoMovie,
-  movies: PropTypes.arrayOf(Props.movie).isRequired,
   onActiveCardClick: PropTypes.func.isRequired
 };
 

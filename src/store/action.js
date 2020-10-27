@@ -1,13 +1,10 @@
 export const ActionType = {
-  SET_CURRENT_MOVIE_GENRE: `SET_CURRENT_MOVIE_GENRE`,
-  GET_MOVIES_BY_GENRE: `GET_MOVIES_BY_GENRE`
+  CHANGE_MOVIE_GENRE: `CHANGE_MOVIE_GENRE`
 };
 
 export const ActionCreator = {
-  setCurrentMovieGenre: (genreKey) => ({
-
-  }),
-  getMoviesByGenre: (genreKey) => ({
-
+  changeMovieGenre: (genreKey) => ({
+    type: ActionType.CHANGE_MOVIE_GENRE,
+    payload: genreKey
   })
 };
