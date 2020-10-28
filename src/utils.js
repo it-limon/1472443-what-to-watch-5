@@ -1,5 +1,5 @@
-import {REVIEW_COLUMNS_COUNT, ALL_GENRES_KEY} from "./const/const";
-import {MovieGenresList} from "../src/const/movie-genres-list.const";
+import {MovieRating, REVIEW_COLUMNS_COUNT, ALL_GENRES_KEY} from "./const";
+import genres from "../src/genres";
 
 export const extend = (a, b) => {
   return Object.assign({}, a, b);
@@ -30,13 +30,29 @@ export const getReviewsPerColumns = (reviews, movieKey) => {
 };
 
 export const getGenreNameByKey = (genreKey) => {
-  return MovieGenresList.filter((genre) => genre.key === genreKey)[0].name;
+  return genres.filter((genre) => genre.key === genreKey).shift().name;
 };
 
-export const getFilteredMovies = (movies, genreKey) => {
+export const getFilteredMoviesByGenre = (movies, genreKey) => {
   if (genreKey === ALL_GENRES_KEY) {
     return movies;
   } else {
     return movies.filter((currMovie) => currMovie.genreKey === genreKey);
+  }
+};
+
+export const getRatingNameByRating = (rating) => {
+  if (rating < 3) {
+    return MovieRating.BAD;
+  } else if (rating >= 3 && rating < 5) {
+    return MovieRating.NORMAL;
+  } else if (rating >= 5 && rating < 8) {
+    return MovieRating.GOOD;
+  } else if (rating >= 8 && rating < 10) {
+    return MovieRating.VERY_GOOD;
+  } else if (rating === 10) {
+    return MovieRating.AWESOME;
+  } else {
+    return ``;
   }
 };

@@ -1,13 +1,12 @@
 import React, {Fragment} from "react";
 import PropTypes from "prop-types";
 import Props from "../../props";
-import {getReviewsPerColumns, getGenreNameByKey} from "../../utils";
-import {MovieTabsList} from "../../const/movie-tabs-list.const";
+import {getReviewsPerColumns, getGenreNameByKey, getRatingNameByRating} from "../../utils";
 
 const MovieTabs = (props) => {
 
   const _getTabByActiveIndex = (index) => {
-    const {key, genreKey, releaseYear, rating, ratingDesc, votesNumber, annotation, director, starring, runTime} = props.movie;
+    const {key, genreKey, releaseYear, rating, votesCount, annotation, director, starring, runTime} = props.movie;
     let reviews = props.reviews;
 
     switch (index) {
@@ -17,16 +16,16 @@ const MovieTabs = (props) => {
             <div className="movie-rating">
               <div className="movie-rating__score">{rating}</div>
               <p className="movie-rating__meta">
-                <span className="movie-rating__level">{ratingDesc}</span>
-                <span className="movie-rating__count">{`${votesNumber} ratings`}</span>
+                <span className="movie-rating__level">{getRatingNameByRating(rating)}</span>
+                <span className="movie-rating__count">{`${votesCount} ratings`}</span>
               </p>
             </div>
 
             <div className="movie-card__text">
               <p>{annotation}</p>
-              <p className="movie-card__director"><strong>{`Director: ${director}`}</strong></p>
+              <p className="movie-card__director"><strong>{`Director: ${director.join(`, `)}`}</strong></p>
 
-              <p className="movie-card__starring"><strong>{`Starring: ${starring}`}</strong></p>
+              <p className="movie-card__starring"><strong>{`Starring: ${starring.join(`, `)}`}</strong></p>
             </div>
           </Fragment>
         );
@@ -36,13 +35,11 @@ const MovieTabs = (props) => {
             <div className="movie-card__text-col">
               <p className="movie-card__details-item">
                 <strong className="movie-card__details-name">Director</strong>
-                <span className="movie-card__details-value">{director}</span>
+                <span className="movie-card__details-value">{director.join(`, `)}</span>
               </p>
               <p className="movie-card__details-item">
                 <strong className="movie-card__details-name">Starring</strong>
-                <span className="movie-card__details-value">
-                  {starring}
-                </span>
+                <span className="movie-card__details-value">{starring.join(`, `)}</span>
               </p>
             </div>
 
@@ -92,21 +89,22 @@ const MovieTabs = (props) => {
   };
 
   const {activeIndex, onChangeActiveIndex} = props;
+  const movieTabs = [`Overview`, `Details`, `Reviews`];
 
   return (
     <Fragment>
       <nav className="movie-nav movie-card__nav">
         <ul className="movie-nav__list">
-          {MovieTabsList.map((tab) => (
-            <li key={tab.key} className={`movie-nav__item ${(tab.key === activeIndex) ? `movie-nav__item--active` : ``}`}>
+          {movieTabs.map((tab, i) => (
+            <li key={i} className={`movie-nav__item ${(i === activeIndex) ? `movie-nav__item--active` : ``}`}>
               <a
                 href="#"
                 className="movie-nav__link"
                 onClick={(evt) => {
                   evt.preventDefault();
-                  onChangeActiveIndex(tab.key);
+                  onChangeActiveIndex(i);
                 }}
-              >{tab.name}</a>
+              >{tab}</a>
             </li>
           ))}
         </ul>

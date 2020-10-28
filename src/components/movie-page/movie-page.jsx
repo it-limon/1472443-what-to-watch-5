@@ -4,14 +4,12 @@ import Props from "../../props";
 import MovieTabs from "../movie-tabs/movie-tabs";
 import CatalogMoviesList from "../catalog-movies-list/catalog-movies-list";
 import {withActiveIndex} from "../../hocs/with-active-index/with-active-index";
-import {LIKE_THIS_MOVIE_COUNT} from "../../const/const";
 import {getGenreNameByKey} from "../../utils";
-import {connect} from "react-redux";
 
 const MovieTabsWrapped = withActiveIndex(MovieTabs);
 
 const MoviePage = (props) => {
-  const {allMovies: movies, movie, reviews, onActiveCardClick} = props;
+  const {movie, reviews, onActiveCardClick} = props;
 
   return (
     <Fragment>
@@ -87,7 +85,7 @@ const MoviePage = (props) => {
           <h2 className="catalog__title">More like this</h2>
 
           <CatalogMoviesList
-            movies={movies.filter((currMovie) => currMovie.genreKey === movie.genreKey && currMovie.key !== movie.key).slice(0, LIKE_THIS_MOVIE_COUNT)}
+            movieKeyForLikeThis={movie.key}
             onActiveCardClick={onActiveCardClick}
           />
 
@@ -113,14 +111,8 @@ const MoviePage = (props) => {
 
 MoviePage.propTypes = {
   movie: Props.movie,
-  allMovies: PropTypes.arrayOf(Props.movie).isRequired,
   reviews: PropTypes.arrayOf(Props.review).isRequired,
   onActiveCardClick: PropTypes.func.isRequired
 };
 
-const mapStateToProps = (state) => ({
-  allMovies: state.allMovies
-});
-
-export {MoviePage};
-export default connect(mapStateToProps)(MoviePage);
+export default MoviePage;

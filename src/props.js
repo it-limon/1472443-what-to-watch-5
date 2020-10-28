@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import {MovieRatings} from "./const/const";
 
 const Props = {
   promoMovie: PropTypes.shape({
@@ -15,13 +14,12 @@ const Props = {
     releaseYear: PropTypes.number.isRequired,
     runTime: PropTypes.string.isRequired,
 
-    rating: PropTypes.string.isRequired,
-    ratingDesc: PropTypes.oneOf(MovieRatings).isRequired,
-    votesNumber: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    votesCount: PropTypes.number.isRequired,
 
     annotation: PropTypes.string.isRequired,
-    director: PropTypes.string.isRequired,
-    starring: PropTypes.string.isRequired,
+    director: PropTypes.arrayOf(PropTypes.string).isRequired,
+    starring: PropTypes.arrayOf(PropTypes.string).isRequired,
 
     previewImg: PropTypes.string.isRequired,
     video: PropTypes.string.isRequired,
@@ -32,7 +30,7 @@ const Props = {
     key: PropTypes.number.isRequired,
     movieKey: PropTypes.number.isRequired,
     text: PropTypes.string.isRequired,
-    rating: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
     userName: PropTypes.string.isRequired,
     date: PropTypes.instanceOf(Date)
   }).isRequired

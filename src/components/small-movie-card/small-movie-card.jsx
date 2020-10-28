@@ -50,7 +50,6 @@ class SmallMovieCard extends PureComponent {
             href="#"
             onClick={(evt) => {
               evt.preventDefault();
-              onActiveCardClick();
             }}
           >
             {movie.name}
