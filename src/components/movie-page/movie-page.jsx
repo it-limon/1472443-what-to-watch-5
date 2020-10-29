@@ -4,16 +4,12 @@ import Props from "../../props";
 import MovieTabs from "../movie-tabs/movie-tabs";
 import CatalogMoviesList from "../catalog-movies-list/catalog-movies-list";
 import {withActiveIndex} from "../../hocs/with-active-index/with-active-index";
-import {LIKE_THIS_MOVIE_COUNT} from "../../const";
+import {getGenreNameByKey} from "../../utils";
 
 const MovieTabsWrapped = withActiveIndex(MovieTabs);
 
 const MoviePage = (props) => {
-  const {movie, movies, reviews, onActiveCardClick} = props;
-
-  const _getMoviesByGenre = () => {
-    return movies.filter((currMovie) => currMovie.genre === movie.genre && currMovie.key !== movie.key).slice(0, LIKE_THIS_MOVIE_COUNT);
-  };
+  const {movie, reviews, onActiveCardClick} = props;
 
   return (
     <Fragment>
@@ -45,7 +41,7 @@ const MoviePage = (props) => {
             <div className="movie-card__desc">
               <h2 className="movie-card__title">{movie.name}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">{movie.genre}</span>
+                <span className="movie-card__genre">{getGenreNameByKey(movie.genreKey)}</span>
                 <span className="movie-card__year">{movie.releaseYear}</span>
               </p>
 
@@ -89,7 +85,7 @@ const MoviePage = (props) => {
           <h2 className="catalog__title">More like this</h2>
 
           <CatalogMoviesList
-            movies={_getMoviesByGenre()}
+            movieKeyForLikeThis={movie.key}
             onActiveCardClick={onActiveCardClick}
           />
 
@@ -115,7 +111,6 @@ const MoviePage = (props) => {
 
 MoviePage.propTypes = {
   movie: Props.movie,
-  movies: PropTypes.arrayOf(Props.movie).isRequired,
   reviews: PropTypes.arrayOf(Props.review).isRequired,
   onActiveCardClick: PropTypes.func.isRequired
 };

@@ -20,7 +20,6 @@ const App = (props) => {
           render={({history}) => (
             <MainPage
               promoMovie={promoMovie}
-              movies={movies}
               onActiveCardClick={() => history.push(`/films/0`)}
             />
           )}
@@ -36,7 +35,6 @@ const App = (props) => {
           render={({history}) => (
             <MoviePage
               movie={movies[0]}
-              movies={movies}
               reviews={reviews}
               onActiveCardClick={() => history.push(`/films/0`)}
             />
