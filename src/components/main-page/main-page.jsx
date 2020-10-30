@@ -1,6 +1,7 @@
 import React, {Fragment} from "react";
 import PropTypes from "prop-types";
 import CatalogMoviesList from "../catalog-movies-list/catalog-movies-list";
+import ShowMoreButton from "../show-more-button/show-more-button";
 import GenresList from "../genres-list/genres-list";
 import Props from "../../props";
 import {getGenreNameByKey} from "../../utils";
@@ -74,9 +75,7 @@ const MainPage = (props) => {
 
           <CatalogMoviesList onActiveCardClick={onActiveCardClick} />
 
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          <ShowMoreButton />
         </section>
 
         <footer className="page-footer">
