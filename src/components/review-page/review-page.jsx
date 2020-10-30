@@ -1,6 +1,9 @@
 import React from "react";
-import AddReviewForm from "../add-review-form/add-review-form";
 import Props from "../../props";
+import AddReviewForm from "../add-review-form/add-review-form";
+import {withReview} from "../../hocs/with-review/with-review";
+
+const AddReviewFormWrapped = withReview(AddReviewForm);
 
 const ReviewPage = (props) => {
   const movie = props.movie;
@@ -47,7 +50,7 @@ const ReviewPage = (props) => {
       </div>
 
       <div className="add-review">
-        <AddReviewForm />
+        <AddReviewFormWrapped />
       </div>
     </section>
   );

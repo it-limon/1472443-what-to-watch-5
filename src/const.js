@@ -1,7 +1,8 @@
-export const REVIEW_COLUMNS_COUNT = 2;
-export const LIKE_THIS_MOVIE_COUNT = 4;
 export const ALL_GENRES_KEY = 0;
-export const DEFAULT_MOVIES_COUNT = 8;
+export const REVIEWS_COLUMNS_COUNT = 2;
+export const LIKE_THIS_MOVIES_COUNT = 4;
+export const DEFAULT_SHOWN_MOVIES_COUNT = 8;
+export const DEFAULT_REVIEW_RATING = 3;
 
 export const ALL_GENRES = {
   key: 0,

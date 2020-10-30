@@ -1,64 +1,47 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import Props from "../../props";
-import VideoPlayer from "../video-player/video-player";
+import Player from "../video-player/video-player";
+import {withVideo} from "../../hocs/with-video/with-video";
 
-class SmallMovieCard extends PureComponent {
-  constructor(props) {
-    super(props);
+const VideoPlayer = withVideo(Player);
 
-    this._handleMouseEnter = this._handleMouseEnter.bind(this);
-    this._handleMouseLeave = this._handleMouseLeave.bind(this);
+const SmallMovieCard = (props) => {
+  const {movie, isActive: isPlaying, onChangeActiveState, onActiveCardClick} = props;
 
-    this.timer = null;
-  }
-
-  _handleMouseEnter() {
-    this.timer = setTimeout(() => this.props.onChangeActiveState(true), 1000);
-  }
-
-  _handleMouseLeave() {
-    clearTimeout(this.timer);
-    this.props.onChangeActiveState(false);
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this.timer);
-  }
-
-  render() {
-    const {movie, isActive: isPlaying, onActiveCardClick} = this.props;
-
-    return (
-      <article
-        className="small-movie-card catalog__movies-card"
-        onMouseEnter={this._handleMouseEnter}
-        onMouseLeave={this._handleMouseLeave}
-        onClick={onActiveCardClick}
-      >
-        <div className="small-movie-card__image">
-          <VideoPlayer
-            src={movie.video}
-            poster={movie.previewImg}
-            isPlaying={isPlaying}
-            isMuted={true}
-          />
-        </div>
-        <h3 className="small-movie-card__title">
-          <a
-            className="small-movie-card__link"
-            href="#"
-            onClick={(evt) => {
-              evt.preventDefault();
-            }}
-          >
-            {movie.name}
-          </a>
-        </h3>
-      </article>
-    );
-  }
-}
+  return (
+    <article
+      className="small-movie-card catalog__movies-card"
+      onMouseEnter={() => {
+        onChangeActiveState(true);
+      }}
+      onMouseLeave={() => {
+        onChangeActiveState(false);
+      }}
+      onClick={onActiveCardClick}
+    >
+      <div className="small-movie-card__image">
+        <VideoPlayer
+          src={movie.video}
+          poster={movie.previewImg}
+          isPlaying={isPlaying}
+          isMuted={true}
+        />
+      </div>
+      <h3 className="small-movie-card__title">
+        <a
+          className="small-movie-card__link"
+          href="#"
+          onClick={(evt) => {
+            evt.preventDefault();
+          }}
+        >
+          {movie.name}
+        </a>
+      </h3>
+    </article>
+  );
+};
 
 SmallMovieCard.propTypes = {
   movie: Props.movie,

@@ -6,7 +6,7 @@ export const withActiveIndex = (Component) => {
       super(props);
 
       this.state = {
-        activeIndex: 0,
+        activeIndex: 0
       };
 
       this._handleActiveIndexChange = this._handleActiveIndexChange.bind(this);
