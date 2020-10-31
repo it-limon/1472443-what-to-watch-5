@@ -1,5 +1,7 @@
 import React, {PureComponent} from "react";
 
+const MOUSE_ENTER_DELAY = 1000;
+
 export const withActiveState = (Component) => {
   class WithActiveState extends PureComponent {
     constructor(props) {
@@ -10,10 +12,20 @@ export const withActiveState = (Component) => {
       };
 
       this._handleActiveStateChange = this._handleActiveStateChange.bind(this);
+      this.timer = null;
     }
 
     _handleActiveStateChange(state) {
-      this.setState({isActive: state});
+      if (state) {
+        this.timer = setTimeout(() => this.setState({isActive: state}), MOUSE_ENTER_DELAY);
+      } else {
+        clearTimeout(this.timer);
+        this.setState({isActive: state});
+      }
+    }
+
+    componentWillUnmount() {
+      clearTimeout(this.timer);
     }
 
     render() {

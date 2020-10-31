@@ -14,7 +14,7 @@ const MovieTabs = (props) => {
         return (
           <Fragment>
             <div className="movie-rating">
-              <div className="movie-rating__score">{rating}</div>
+              <div className="movie-rating__score">{rating.toFixed(1)}</div>
               <p className="movie-rating__meta">
                 <span className="movie-rating__level">{getRatingNameByRating(rating)}</span>
                 <span className="movie-rating__count">{`${votesCount} ratings`}</span>
@@ -77,7 +77,7 @@ const MovieTabs = (props) => {
                       </footer>
                     </blockquote>
 
-                    <div className="review__rating">{review.rating}</div>
+                    <div className="review__rating">{review.rating.toFixed(1)}</div>
                   </div>
                 ))}
               </div>

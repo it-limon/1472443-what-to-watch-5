@@ -1,4 +1,4 @@
-import {MovieRating, REVIEW_COLUMNS_COUNT, ALL_GENRES_KEY} from "./const";
+import {MovieRating, REVIEWS_COLUMNS_COUNT, ALL_GENRES_KEY} from "./const";
 import genres from "../src/genres";
 
 export const extend = (a, b) => {
@@ -10,11 +10,11 @@ export const getReviewsPerColumns = (reviews, movieKey) => {
   reviews = reviews.filter((review) => review.movieKey === movieKey);
   reviews.sort((a, b) => a.date - b.date);
 
-  const reviewsCountInColumn = Math.ceil(reviews.length / REVIEW_COLUMNS_COUNT);
+  const reviewsCountInColumn = Math.ceil(reviews.length / REVIEWS_COLUMNS_COUNT);
   const reviewsPerColumns = [];
   let j = 0;
 
-  for (let i = 0; i < REVIEW_COLUMNS_COUNT; ++i) {
+  for (let i = 0; i < REVIEWS_COLUMNS_COUNT; ++i) {
     const column = reviews.slice(j, j + reviewsCountInColumn);
 
     if (column.length > 0) {
