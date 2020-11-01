@@ -10,13 +10,13 @@
     "start": "webpack-dev-server"
   },
   "dependencies": {
+    "history": "4.10.0",
     "prop-types": "15.7.0",
     "react": "16.12.0",
     "react-dom": "16.12.0",
     "react-redux": "7.2.1",
     "react-router-dom": "5.1.2",
-    "redux": "4.0.5",
-    "history": "4.10.10"
+    "redux": "4.0.5"
   },
   "devDependencies": {
     "eslint": "5.13.0",
