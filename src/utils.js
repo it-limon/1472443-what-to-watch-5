@@ -1,4 +1,4 @@
-import {MovieRating, REVIEWS_COLUMNS_COUNT, ALL_GENRES_KEY} from "./const";
+import {MovieRating, MAX_REVIEWS_COLUMNS_COUNT, ALL_GENRES_KEY} from "./const";
 import genres from "../src/genres";
 
 export const extend = (a, b) => {
@@ -10,11 +10,11 @@ export const getReviewsPerColumns = (reviews, movieKey) => {
   reviews = reviews.filter((review) => review.movieKey === movieKey);
   reviews.sort((a, b) => a.date - b.date);
 
-  const reviewsCountInColumn = Math.ceil(reviews.length / REVIEWS_COLUMNS_COUNT);
+  const reviewsCountInColumn = Math.ceil(reviews.length / MAX_REVIEWS_COLUMNS_COUNT);
   const reviewsPerColumns = [];
   let j = 0;
 
-  for (let i = 0; i < REVIEWS_COLUMNS_COUNT; ++i) {
+  for (let i = 0; i < MAX_REVIEWS_COLUMNS_COUNT; ++i) {
     const column = reviews.slice(j, j + reviewsCountInColumn);
 
     if (column.length > 0) {
@@ -33,12 +33,20 @@ export const getGenreNameByKey = (genreKey) => {
   return genres.filter((genre) => genre.key === genreKey).shift().name;
 };
 
+export const getMovieByKey = (movies, movieKey) => {
+  return movies.filter((movie) => movie.key === movieKey).shift();
+};
+
 export const getFilteredMoviesByGenre = (movies, genreKey) => {
   if (genreKey === ALL_GENRES_KEY) {
     return movies;
   } else {
     return movies.filter((currMovie) => currMovie.genreKey === genreKey);
   }
+};
+
+export const getReviewsByMovie = (reviews, movieKey) => {
+  return reviews.filter((currReview) => currReview.movieKey === movieKey);
 };
 
 export const getRatingNameByRating = (rating) => {

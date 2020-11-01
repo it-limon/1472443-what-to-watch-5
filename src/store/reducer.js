@@ -1,12 +1,14 @@
 import {extend, getFilteredMoviesByGenre} from "../utils";
 import {ActionType} from "./action";
 import movies from "../mocks/movies";
+import allReviews from "../mocks/reviews";
 import {ALL_GENRES, DEFAULT_SHOWN_MOVIES_COUNT} from "../const";
 
 const initialState = {
   filteredMovies: movies,
   currentMovieGenreKey: ALL_GENRES.key,
-  shownMoviesCount: DEFAULT_SHOWN_MOVIES_COUNT
+  shownMoviesCount: DEFAULT_SHOWN_MOVIES_COUNT,
+  reviews: allReviews
 };
 
 export const reducer = (state = initialState, action) => {

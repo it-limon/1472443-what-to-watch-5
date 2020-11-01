@@ -15,6 +15,10 @@ const VideoPlayer = (props) => {
   );
 };
 
+VideoPlayer.defaultProps = {
+  isMuted: false
+};
+
 VideoPlayer.propTypes = {
   videoRef: PropTypes.object.isRequired,
   src: PropTypes.string.isRequired,

@@ -8,7 +8,7 @@ import {withActiveState} from "../../hocs/with-active-state/with-active-state";
 const SmallMovieCardWrapped = withActiveState(SmallMovieCard);
 
 const CatalogMoviesList = (props) => {
-  const {movies, shownMoviesCount, onActiveCardClick} = props;
+  const {movies, shownMoviesCount} = props;
 
   return (
     <div className="catalog__movies-list">
@@ -16,7 +16,6 @@ const CatalogMoviesList = (props) => {
         <SmallMovieCardWrapped
           key={movie.key}
           movie={movie}
-          onActiveCardClick={onActiveCardClick}
         />
       ))}
     </div>
@@ -25,8 +24,7 @@ const CatalogMoviesList = (props) => {
 
 CatalogMoviesList.propTypes = {
   movies: PropTypes.arrayOf(Props.movie).isRequired,
-  shownMoviesCount: PropTypes.number.isRequired,
-  onActiveCardClick: PropTypes.func.isRequired
+  shownMoviesCount: PropTypes.number.isRequired
 };
 
 const mapStateToProps = (state) => ({
