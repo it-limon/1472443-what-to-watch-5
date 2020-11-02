@@ -37,8 +37,6 @@ const MyListPage = (props) => {
             <SmallMovieCardWrapped
               key={movie.key}
               movie={movie}
-              onActiveCardChange={() => {}}
-              onActiveCardClick={() => {}}
             />
           ))}
         </div>

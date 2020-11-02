@@ -7,7 +7,7 @@ import {ActionCreator} from "../../store/action";
 import genres from "../../genres";
 
 const GenresList = (props) => {
-  const {filteredMovies, currentMovieGenreKey, onChangeMovieGenre, onActiveCardClick} = props;
+  const {filteredMovies, currentMovieGenreKey, onChangeMovieGenre} = props;
 
   return (
     <Fragment>
@@ -30,7 +30,6 @@ const GenresList = (props) => {
 
       <CatalogMoviesList
         movies={filteredMovies}
-        onActiveCardClick={onActiveCardClick}
       />
     </Fragment>
   );
@@ -39,8 +38,7 @@ const GenresList = (props) => {
 GenresList.propTypes = {
   filteredMovies: PropTypes.arrayOf(Props.movie).isRequired,
   currentMovieGenreKey: PropTypes.number.isRequired,
-  onChangeMovieGenre: PropTypes.func.isRequired,
-  onActiveCardClick: PropTypes.func.isRequired
+  onChangeMovieGenre: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({

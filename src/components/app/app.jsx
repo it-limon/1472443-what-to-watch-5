@@ -1,26 +1,30 @@
 import React, {Fragment} from "react";
-import {BrowserRouter, Route, Switch, Link} from "react-router-dom";
+import {Route, Router as BrowserRouter, Switch, Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import MainPage from "../main-page/main-page";
 import AuthPage from "../auth-page/auth-page";
 import MyListPage from "../my-list-page/my-list-page";
 import MoviePage from "../movie-page/movie-page";
 import ReviewPage from "../review-page/review-page";
-import PlayerPage from "../player-page/player-page";
+import Player from "../player-page/player-page";
 import Props from "../../props";
+import {withMovieVideo} from "../../hocs/with-movie-video/with-movie-video";
+import history from "../../browser-history";
+
+const PlayerPage = withMovieVideo(Player);
 
 const App = (props) => {
-  const {promoMovie, movies, reviews} = props;
+  const {promoMovie, movies} = props;
 
   return (
-    <BrowserRouter>
+    <BrowserRouter history={history}>
       <Switch>
         <Route exact
           path="/"
-          render={({history}) => (
+          render={({routeProps}) => (
             <MainPage
               promoMovie={promoMovie}
-              onActiveCardClick={() => history.push(`/films/0`)}
+              {...routeProps}
             />
           )}
         />
@@ -32,20 +36,23 @@ const App = (props) => {
         </Route>
         <Route exact
           path="/films/:id"
-          render={({history}) => (
+          render={(routeProps) =>
             <MoviePage
-              movie={movies[0]}
-              reviews={reviews}
-              onActiveCardClick={() => history.push(`/films/0`)}
+              {...routeProps}
             />
-          )}
+          }
         />
         <Route exact path="/films/:id/review">
           <ReviewPage movie={movies[0]} />
         </Route>
-        <Route exact path="/player/:id">
-          <PlayerPage movie={movies[0]} />
-        </Route>
+        <Route exact
+          path="/player/:id"
+          render={(routeProps) =>
+            <PlayerPage
+              {...routeProps}
+            />
+          }
+        />
         <Route
           render={() => (
             <Fragment>

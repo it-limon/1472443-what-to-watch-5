@@ -1,5 +1,4 @@
 import React, {Fragment} from "react";
-import PropTypes from "prop-types";
 import ShowMoreButton from "../show-more-button/show-more-button";
 import GenresList from "../genres-list/genres-list";
 import Props from "../../props";
@@ -7,7 +6,6 @@ import {getGenreNameByKey} from "../../utils";
 
 const MainPage = (props) => {
   const {name: promoMovieName, genreKey: promoMovieGenreKey, releaseYear: promoMovieReleaseYear} = props.promoMovie;
-  const {onActiveCardClick} = props;
 
   return (
     <Fragment>
@@ -70,7 +68,7 @@ const MainPage = (props) => {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenresList onActiveCardClick={onActiveCardClick}/>
+          <GenresList />
 
           <ShowMoreButton />
         </section>
@@ -94,8 +92,7 @@ const MainPage = (props) => {
 };
 
 MainPage.propTypes = {
-  promoMovie: Props.promoMovie,
-  onActiveCardClick: PropTypes.func.isRequired
+  promoMovie: Props.promoMovie
 };
 
 export default MainPage;

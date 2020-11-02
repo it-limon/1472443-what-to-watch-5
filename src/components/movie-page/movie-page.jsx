@@ -5,13 +5,15 @@ import Props from "../../props";
 import MovieTabs from "../movie-tabs/movie-tabs";
 import CatalogMoviesList from "../catalog-movies-list/catalog-movies-list";
 import {withActiveIndex} from "../../hocs/with-active-index/with-active-index";
-import {getGenreNameByKey} from "../../utils";
-import {LIKE_THIS_MOVIES_COUNT} from "../../const";
+import {getGenreNameByKey, getReviewsByMovie} from "../../utils";
+import {DEFAULT_LIKE_MOVIES_COUNT} from "../../const";
+import {getMovieByKey} from "../../utils";
+import {Link} from "react-router-dom";
 
 const MovieTabsWrapped = withActiveIndex(MovieTabs);
 
 const MoviePage = (props) => {
-  const {movie, filteredMovies, reviews, onActiveCardClick} = props;
+  const {movie, filteredMovies, reviews} = props;
 
   return (
     <Fragment>
@@ -48,12 +50,13 @@ const MoviePage = (props) => {
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
+                <Link to={`/player/${movie.key}`} className="btn btn--play movie-card__button" type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
                   <span>Play</span>
-                </button>
+                </Link>
+
                 <button className="btn btn--list movie-card__button" type="button">
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     <use xlinkHref="#add"></use>
@@ -87,8 +90,7 @@ const MoviePage = (props) => {
           <h2 className="catalog__title">More like this</h2>
 
           <CatalogMoviesList
-            movies={filteredMovies.filter((currMovie) => (currMovie.key !== movie.key) && (currMovie.genrekey !== movie.genreKey)).slice(0, LIKE_THIS_MOVIES_COUNT)}
-            onActiveCardClick={onActiveCardClick}
+            movies={filteredMovies.filter((currMovie) => (currMovie.key !== movie.key) && (currMovie.genreKey === movie.genreKey)).slice(0, DEFAULT_LIKE_MOVIES_COUNT)}
           />
 
         </section>
@@ -114,12 +116,13 @@ const MoviePage = (props) => {
 MoviePage.propTypes = {
   movie: Props.movie,
   filteredMovies: PropTypes.arrayOf(Props.movie).isRequired,
-  reviews: PropTypes.arrayOf(Props.review).isRequired,
-  onActiveCardClick: PropTypes.func.isRequired
+  reviews: PropTypes.arrayOf(Props.review).isRequired
 };
 
-const mapStateToProps = (state) => ({
-  filteredMovies: state.filteredMovies
+const mapStateToProps = (state, props) => ({
+  movie: getMovieByKey(state.filteredMovies, parseInt(props.match.params.id, 10)),
+  filteredMovies: state.filteredMovies,
+  reviews: getReviewsByMovie(state.reviews, parseInt(props.match.params.id, 10)).sort((it1, it2) => it1.date - it2.date)
 });
 
 export {MoviePage};
