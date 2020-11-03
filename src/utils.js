@@ -1,4 +1,4 @@
-import {MovieRating, MAX_REVIEWS_COLUMNS_COUNT, ALL_GENRES, SIMILAR_MOVIES_COUNT} from "./const";
+import {MovieRating, MAX_REVIEWS_COLUMNS_COUNT} from "./const";
 
 export const extend = (a, b) => {
   return Object.assign({}, a, b);
@@ -26,27 +26,6 @@ export const getReviewsPerColumns = (reviews, movieKey) => {
   }
 
   return reviewsPerColumns;
-};
-
-export const getGenres = (movies) => {
-  return [ALL_GENRES, ...Array.from(new Set(movies.map((it) => it.genre))).sort((a, b) => a.localeCompare(b))];
-};
-
-export const getMovieById = (movies, movieId) => {
-  const [movie] = movies.filter((it) => it.id === movieId);
-  return movie;
-};
-
-export const getMoviesByGenre = (movies, genre) => {
-  if (genre === ALL_GENRES) {
-    return movies;
-  } else {
-    return movies.filter((currMovie) => currMovie.genre === genre);
-  }
-};
-
-export const getSimilarMovies = (movies, movie) => {
-  return movies.filter((currMovie) => (currMovie.id !== movie.id) && (currMovie.genre === movie.genre)).slice(0, SIMILAR_MOVIES_COUNT);
 };
 
 export const getReviewsByMovie = (reviews, movieKey) => {

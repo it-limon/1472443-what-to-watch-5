@@ -1,16 +1,16 @@
 import {combineReducers} from "redux";
 import {appData} from "./reducers/app-data/app-data";
 import {appState} from "./reducers/app-state/app-state";
-import {user} from "./reducers/user/user";
+import {appUser} from "./reducers/app-user/app-user";
 
 export const NameSpace = {
-  DATA: `DATA`,
-  STATE: `STATE`,
-  USER: `USER`
+  APP_DATA: `APP_DATA`,
+  APP_STATE: `APP_STATE`,
+  APP_USER: `APP_USER`
 };
 
 export default combineReducers({
-  [NameSpace.DATA]: appData,
-  [NameSpace.STATE]: appState,
-  [NameSpace.USER]: user
+  [NameSpace.APP_DATA]: appData,
+  [NameSpace.APP_STATE]: appState,
+  [NameSpace.APP_USER]: appUser
 });

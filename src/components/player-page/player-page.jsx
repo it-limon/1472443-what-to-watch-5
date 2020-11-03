@@ -2,8 +2,8 @@ import React, {Fragment} from "react";
 import PropTypes from "prop-types";
 import Props from "../../props";
 import VideoPlayer from "../video-player/video-player";
-import {getMovieById} from "../../utils";
 import {connect} from "react-redux";
+import {getMovieById} from "../../store/reducers/app-data/selector";
 
 const PlayerPage = (props) => {
   const {movie, isPlaying, elapsedTimePrc, timeLeft, videoRef, onPlaybackStatusChange, onExitButtonClick, onFullScreenButtonClick} = props;
@@ -77,8 +77,8 @@ PlayerPage.propTypes = {
   onFullScreenButtonClick: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({DATA}, props) => ({
-  movie: getMovieById(DATA.movies, parseInt(props.match.params.id, 10)),
+const mapStateToProps = (state, props) => ({
+  movie: getMovieById(state, parseInt(props.match.params.id, 10))
 });
 
 export {PlayerPage};

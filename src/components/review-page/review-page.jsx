@@ -3,7 +3,7 @@ import Props from "../../props";
 import AddReviewForm from "../add-review-form/add-review-form";
 import {withReview} from "../../hocs/with-review/with-review";
 import {connect} from "react-redux";
-import {getMovieById} from "../../utils";
+import {getMovieById} from "../../store/reducers/app-data/selector";
 
 const AddReviewFormWrapped = withReview(AddReviewForm);
 
@@ -62,8 +62,8 @@ ReviewPage.propTypes = {
   movie: Props.movie
 };
 
-const mapStateToProps = ({DATA}, props) => ({
-  movie: getMovieById(DATA.movies, parseInt(props.match.params.id, 10))
+const mapStateToProps = (state, props) => ({
+  movie: getMovieById(state, parseInt(props.match.params.id, 10))
 });
 
 export {ReviewPage};

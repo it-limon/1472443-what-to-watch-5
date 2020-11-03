@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import Props from "../../props";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
-import {getMoviesByGenre} from "../../utils";
+import {getMoviesByGenre} from "../../store/reducers/app-state/selector";
+import {getShownMoviesCount} from "../../store/reducers/app-state/selector";
 
 const ShowMoreButton = (props) => {
   const {movies, shownMoviesCount, onIncreaseShownMoviesCount} = props;
@@ -28,9 +29,9 @@ ShowMoreButton.propTypes = {
   onIncreaseShownMoviesCount: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({DATA, STATE}) => ({
-  movies: getMoviesByGenre(DATA.movies, STATE.currentGenre),
-  shownMoviesCount: STATE.shownMoviesCount
+const mapStateToProps = (state) => ({
+  movies: getMoviesByGenre(state),
+  shownMoviesCount: getShownMoviesCount(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

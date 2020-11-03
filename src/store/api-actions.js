@@ -12,9 +12,7 @@ export const fetchMoviesList = () => (dispatch, _getState, api) => {
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(`/login`)
     .then(() => dispatch(ActionCreator.requiredAuthorization(AuthorizationStatus.AUTH)))
-    .catch((err) => {
-      throw err;
-    })
+    .catch(() => {})
 );
 
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (

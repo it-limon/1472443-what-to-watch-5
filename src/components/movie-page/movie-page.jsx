@@ -6,8 +6,8 @@ import MovieTabs from "../movie-tabs/movie-tabs";
 import CatalogMoviesList from "../catalog-movies-list/catalog-movies-list";
 import {withActiveIndex} from "../../hocs/with-active-index/with-active-index";
 import {getReviewsByMovie} from "../../utils";
-import {getMovieById, getSimilarMovies} from "../../utils";
 import {Link} from "react-router-dom";
+import {getMovieById, getSimilarMovies} from "../../store/reducers/app-data/selector";
 
 const MovieTabsWrapped = withActiveIndex(MovieTabs);
 
@@ -118,10 +118,10 @@ MoviePage.propTypes = {
   reviews: PropTypes.arrayOf(Props.review).isRequired
 };
 
-const mapStateToProps = ({DATA}, props) => ({
-  movie: getMovieById(DATA.movies, parseInt(props.match.params.id, 10)),
-  movies: getSimilarMovies(DATA.movies, getMovieById(DATA.movies, parseInt(props.match.params.id, 10))),
-  reviews: getReviewsByMovie(DATA.reviews, parseInt(props.match.params.id, 10)).sort((it1, it2) => it1.date - it2.date)
+const mapStateToProps = (state, props) => ({
+  movie: getMovieById(state, props.match.params.id),
+  movies: getSimilarMovies(state, props.match.params.id),
+  reviews: getReviewsByMovie(state.APP_DATA.reviews, parseInt(props.match.params.id, 10)).sort((it1, it2) => it1.date - it2.date)
 });
 
 export {MoviePage};

@@ -12,11 +12,12 @@ import {withMovieVideo} from "../../hocs/with-movie-video/with-movie-video";
 import history from "../../browser-history";
 import {connect} from "react-redux";
 import LoaderPage from "../loader-page/loader-page";
+import {getLoadingStatus} from "../../store/reducers/app-state/selector";
 
 const PlayerPage = withMovieVideo(Player);
 
 const App = (props) => {
-  const {isLoading, promoMovie} = props;
+  const {isLoading} = props;
 
   return (
     <Fragment>
@@ -28,7 +29,6 @@ const App = (props) => {
               path="/"
               render={({routeProps}) => (
                 <MainPage
-                  promoMovie={promoMovie}
                   {...routeProps}
                 />
               )}
@@ -90,13 +90,12 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  promoMovie: Props.promoMovie,
   reviews: PropTypes.arrayOf(Props.review).isRequired,
   isLoading: PropTypes.bool.isRequired
 };
 
-const mapStateToProps = ({STATE}) => ({
-  isLoading: STATE.isLoading
+const mapStateToProps = (state) => ({
+  isLoading: getLoadingStatus(state)
 });
 
 export {App};

@@ -4,10 +4,11 @@ import {connect} from "react-redux";
 import CatalogMoviesList from "../catalog-movies-list/catalog-movies-list";
 import Props from "../../props";
 import {ActionCreator} from "../../store/action";
-import {getGenres, getMoviesByGenre} from "../../utils";
+import {getGenres} from "../../store/reducers/app-data/selector";
+import {getMoviesByGenre, getGenre} from "../../store/reducers/app-state/selector";
 
 const GenresList = (props) => {
-  const {movies, currentGenre, genres, onChangeMovieGenre} = props;
+  const {movies, genres, currentGenre, onChangeMovieGenre} = props;
 
   return (
     <Fragment>
@@ -42,10 +43,10 @@ GenresList.propTypes = {
   onChangeMovieGenre: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({DATA, STATE}) => ({
-  movies: getMoviesByGenre(DATA.movies, STATE.currentGenre),
-  currentGenre: STATE.currentGenre,
-  genres: getGenres(DATA.movies)
+const mapStateToProps = (state) => ({
+  movies: getMoviesByGenre(state),
+  genres: getGenres(state),
+  currentGenre: getGenre(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

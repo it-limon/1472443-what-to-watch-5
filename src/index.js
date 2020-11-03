@@ -12,12 +12,6 @@ import {ActionCreator} from "./store/action";
 import {AuthorizationStatus} from "./const";
 import {composeWithDevTools} from "redux-devtools-extension";
 
-const PromoMovie = {
-  name: `The Grand Budapest Hotel`,
-  genre: `Crime`,
-  released: 2014
-};
-
 const api = createAPI(
     () => store.dispatch(ActionCreator.requiredAuthorization(AuthorizationStatus.NO_AUTH))
 );
@@ -29,15 +23,17 @@ const store = createStore(
     )
 );
 
-store.dispatch(fetchMoviesList());
-store.dispatch(checkAuth());
-
-ReactDOM.render(
-    <Provider store={store}>
-      <App
-        promoMovie={PromoMovie}
-        reviews={reviews}
-      />
-    </Provider>,
-    document.querySelector(`#root`)
-);
+Promise.all([
+  store.dispatch(fetchMoviesList()),
+  store.dispatch(checkAuth())
+])
+.then(() => {
+  ReactDOM.render(
+      <Provider store={store}>
+        <App
+          reviews={reviews}
+        />
+      </Provider>,
+      document.querySelector(`#root`)
+  );
+});

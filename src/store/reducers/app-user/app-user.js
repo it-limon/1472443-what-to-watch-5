@@ -6,7 +6,7 @@ const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
 };
 
-export const user = (state = initialState, action) => {
+export const appUser = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.REQUIRED_AUTHORIZATION:
       return extend(state, {
