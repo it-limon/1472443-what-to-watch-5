@@ -3,13 +3,14 @@ import PropTypes from "prop-types";
 import Props from "../../props";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
+import {getMoviesByGenre} from "../../utils";
 
 const ShowMoreButton = (props) => {
-  const {filteredMovies, shownMoviesCount, onIncreaseShownMoviesCount} = props;
+  const {movies, shownMoviesCount, onIncreaseShownMoviesCount} = props;
 
   return (
     <div className="catalog__more">
-      {(shownMoviesCount < filteredMovies.length) &&
+      {(shownMoviesCount < movies.length) &&
         <button
           className="catalog__button" type="button"
           onClick={onIncreaseShownMoviesCount}
@@ -22,14 +23,14 @@ const ShowMoreButton = (props) => {
 };
 
 ShowMoreButton.propTypes = {
-  filteredMovies: PropTypes.arrayOf(Props.movie).isRequired,
+  movies: PropTypes.arrayOf(Props.movie).isRequired,
   shownMoviesCount: PropTypes.number.isRequired,
   onIncreaseShownMoviesCount: PropTypes.func.isRequired
 };
 
-const mapStateToProps = (state) => ({
-  filteredMovies: state.filteredMovies,
-  shownMoviesCount: state.shownMoviesCount
+const mapStateToProps = ({DATA, STATE}) => ({
+  movies: getMoviesByGenre(DATA.movies, STATE.currentGenre),
+  shownMoviesCount: STATE.shownMoviesCount
 });
 
 const mapDispatchToProps = (dispatch) => ({

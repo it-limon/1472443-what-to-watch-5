@@ -2,6 +2,8 @@ import React from "react";
 import Props from "../../props";
 import AddReviewForm from "../add-review-form/add-review-form";
 import {withReview} from "../../hocs/with-review/with-review";
+import {connect} from "react-redux";
+import {getMovieById} from "../../utils";
 
 const AddReviewFormWrapped = withReview(AddReviewForm);
 
@@ -12,7 +14,7 @@ const ReviewPage = (props) => {
     <section className="movie-card movie-card--full">
       <div className="movie-card__header">
         <div className="movie-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt={movie.name} />
+          <img src={movie.backgroundImage} alt={movie.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -45,7 +47,7 @@ const ReviewPage = (props) => {
         </header>
 
         <div className="movie-card__poster movie-card__poster--small">
-          <img src={movie.img} alt={`${movie.name} poster`} width="218" height="327" />
+          <img src={movie.posterImage} alt={`${movie.name} poster`} width="218" height="327" />
         </div>
       </div>
 
@@ -60,4 +62,9 @@ ReviewPage.propTypes = {
   movie: Props.movie
 };
 
-export default ReviewPage;
+const mapStateToProps = ({DATA}, props) => ({
+  movie: getMovieById(DATA.movies, parseInt(props.match.params.id, 10))
+});
+
+export {ReviewPage};
+export default connect(mapStateToProps)(ReviewPage);

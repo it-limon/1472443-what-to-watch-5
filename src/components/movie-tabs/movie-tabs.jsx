@@ -1,13 +1,13 @@
 import React, {Fragment} from "react";
 import PropTypes from "prop-types";
 import Props from "../../props";
-import {getReviewsPerColumns, getGenreNameByKey, getRatingNameByRating} from "../../utils";
+import {getReviewsPerColumns, getRatingName, getTimeFromMins} from "../../utils";
 
 const MovieTabs = (props) => {
 
   const _getTabByActiveIndex = (index) => {
-    const {key, genreKey, releaseYear, rating, votesCount, annotation, director, starring, runTime} = props.movie;
-    let reviews = props.reviews;
+    const {key, genre, released, rating, scoresCount, description, director, starring, runTime} = props.movie;
+    const reviews = props.reviews;
 
     switch (index) {
       case 0:
@@ -16,14 +16,14 @@ const MovieTabs = (props) => {
             <div className="movie-rating">
               <div className="movie-rating__score">{rating.toFixed(1)}</div>
               <p className="movie-rating__meta">
-                <span className="movie-rating__level">{getRatingNameByRating(rating)}</span>
-                <span className="movie-rating__count">{`${votesCount} ratings`}</span>
+                <span className="movie-rating__level">{getRatingName(rating)}</span>
+                <span className="movie-rating__count">{`${scoresCount} ratings`}</span>
               </p>
             </div>
 
             <div className="movie-card__text">
-              <p>{annotation}</p>
-              <p className="movie-card__director"><strong>{`Director: ${director.join(`, `)}`}</strong></p>
+              <p>{description}</p>
+              <p className="movie-card__director"><strong>{`Director: ${director}`}</strong></p>
 
               <p className="movie-card__starring"><strong>{`Starring: ${starring.join(`, `)}`}</strong></p>
             </div>
@@ -35,7 +35,7 @@ const MovieTabs = (props) => {
             <div className="movie-card__text-col">
               <p className="movie-card__details-item">
                 <strong className="movie-card__details-name">Director</strong>
-                <span className="movie-card__details-value">{director.join(`, `)}</span>
+                <span className="movie-card__details-value">{director}</span>
               </p>
               <p className="movie-card__details-item">
                 <strong className="movie-card__details-name">Starring</strong>
@@ -46,15 +46,15 @@ const MovieTabs = (props) => {
             <div className="movie-card__text-col">
               <p className="movie-card__details-item">
                 <strong className="movie-card__details-name">Run Time</strong>
-                <span className="movie-card__details-value">{runTime}</span>
+                <span className="movie-card__details-value">{getTimeFromMins(runTime)}</span>
               </p>
               <p className="movie-card__details-item">
                 <strong className="movie-card__details-name">Genre</strong>
-                <span className="movie-card__details-value">{getGenreNameByKey(genreKey)}</span>
+                <span className="movie-card__details-value">{genre}</span>
               </p>
               <p className="movie-card__details-item">
                 <strong className="movie-card__details-name">Released</strong>
-                <span className="movie-card__details-value">{releaseYear}</span>
+                <span className="movie-card__details-value">{released}</span>
               </p>
             </div>
           </div>

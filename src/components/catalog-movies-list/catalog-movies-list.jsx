@@ -14,7 +14,7 @@ const CatalogMoviesList = (props) => {
     <div className="catalog__movies-list">
       {movies.slice(0, shownMoviesCount).map((movie) => (
         <SmallMovieCardWrapped
-          key={movie.key}
+          key={movie.id}
           movie={movie}
         />
       ))}
@@ -27,8 +27,8 @@ CatalogMoviesList.propTypes = {
   shownMoviesCount: PropTypes.number.isRequired
 };
 
-const mapStateToProps = (state) => ({
-  shownMoviesCount: state.shownMoviesCount
+const mapStateToProps = ({STATE}) => ({
+  shownMoviesCount: STATE.shownMoviesCount
 });
 
 export {CatalogMoviesList};

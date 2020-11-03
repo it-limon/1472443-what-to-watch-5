@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import SmallMovieCard from "../small-movie-card/small-movie-card";
 import Props from "../../props";
 import {withActiveState} from "../../hocs/with-active-state/with-active-state";
+import {connect} from "react-redux";
 
 const SmallMovieCardWrapped = withActiveState(SmallMovieCard);
 
@@ -35,7 +36,7 @@ const MyListPage = (props) => {
         <div className="catalog__movies-list">
           {movies.map((movie) => (
             <SmallMovieCardWrapped
-              key={movie.key}
+              key={movie.id}
               movie={movie}
             />
           ))}
@@ -63,4 +64,9 @@ MyListPage.propTypes = {
   movies: PropTypes.arrayOf(Props.movie).isRequired
 };
 
-export default MyListPage;
+const mapStateToProps = ({DATA}) => ({
+  movies: DATA.movies
+});
+
+export {MyListPage};
+export default connect(mapStateToProps)(MyListPage);

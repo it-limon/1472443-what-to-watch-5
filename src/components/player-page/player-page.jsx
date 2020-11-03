@@ -2,7 +2,7 @@ import React, {Fragment} from "react";
 import PropTypes from "prop-types";
 import Props from "../../props";
 import VideoPlayer from "../video-player/video-player";
-import {getMovieByKey} from "../../utils";
+import {getMovieById} from "../../utils";
 import {connect} from "react-redux";
 
 const PlayerPage = (props) => {
@@ -12,8 +12,8 @@ const PlayerPage = (props) => {
     <div className="player">
       <VideoPlayer
         videoRef={videoRef}
-        src={movie.video}
-        poster="img/player-poster.jpg"
+        src={movie.videoLink}
+        poster={movie.previewImage}
         isPlaying={isPlaying}
       />
 
@@ -77,8 +77,8 @@ PlayerPage.propTypes = {
   onFullScreenButtonClick: PropTypes.func.isRequired
 };
 
-const mapStateToProps = (state, props) => ({
-  movie: getMovieByKey(state.filteredMovies, parseInt(props.match.params.id, 10)),
+const mapStateToProps = ({DATA}, props) => ({
+  movie: getMovieById(DATA.movies, parseInt(props.match.params.id, 10)),
 });
 
 export {PlayerPage};
