@@ -1,6 +1,6 @@
-import {extend} from "../../../utils";
-import {ActionType} from "../../action";
-import allReviews from "../../../mocks/reviews";
+import {extend} from "../../utils";
+import {DataActionType} from "../actions/data-action";
+import allReviews from "../../mocks/reviews";
 
 const initialState = {
   movies: [],
@@ -9,7 +9,7 @@ const initialState = {
 
 export const appData = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.LOAD_MOVIES:
+    case DataActionType.LOAD_MOVIES:
       return extend(state, {
         movies: action.payload
       });

@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import Props from "../../props";
 import MovieTabs from "../movie-tabs/movie-tabs";
-import CatalogMoviesList from "../catalog-movies-list/catalog-movies-list";
+import MoviesList from "../movies-list/movies-list";
 import {withActiveIndex} from "../../hocs/with-active-index/with-active-index";
 import {getReviewsByMovie} from "../../utils";
 import {Link} from "react-router-dom";
-import {getMovieById, getSimilarMovies} from "../../store/reducers/app-data/selector";
+import {getMovieById, getSimilarMovies} from "../../store/selectors/data-selector";
 
 const MovieTabsWrapped = withActiveIndex(MovieTabs);
 
@@ -16,7 +16,7 @@ const MoviePage = (props) => {
 
   return (
     <Fragment>
-      <section className="movie-card movie-card--full">
+      <section className="movie-card movie-card--full" style={{backgroundColor: movie.backgroundColor}}>
         <div className="movie-card__hero">
           <div className="movie-card__bg">
             <img src={movie.backgroundImage} alt={movie.name} />
@@ -88,7 +88,7 @@ const MoviePage = (props) => {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
-          <CatalogMoviesList
+          <MoviesList
             movies={movies}
           />
 
@@ -121,7 +121,7 @@ MoviePage.propTypes = {
 const mapStateToProps = (state, props) => ({
   movie: getMovieById(state, props.match.params.id),
   movies: getSimilarMovies(state, props.match.params.id),
-  reviews: getReviewsByMovie(state.APP_DATA.reviews, parseInt(props.match.params.id, 10)).sort((it1, it2) => it1.date - it2.date)
+  reviews: getReviewsByMovie(state.DATA.reviews, parseInt(props.match.params.id, 10)).sort((it1, it2) => it1.date - it2.date)
 });
 
 export {MoviePage};

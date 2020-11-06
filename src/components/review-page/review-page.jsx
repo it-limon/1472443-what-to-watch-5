@@ -3,7 +3,7 @@ import Props from "../../props";
 import AddReviewForm from "../add-review-form/add-review-form";
 import {withReview} from "../../hocs/with-review/with-review";
 import {connect} from "react-redux";
-import {getMovieById} from "../../store/reducers/app-data/selector";
+import {getMovieById} from "../../store/selectors/data-selector";
 
 const AddReviewFormWrapped = withReview(AddReviewForm);
 

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Props from "../../props";
 import VideoPlayer from "../video-player/video-player";
 import {connect} from "react-redux";
-import {getMovieById} from "../../store/reducers/app-data/selector";
+import {getMovieById} from "../../store/selectors/data-selector";
 
 const PlayerPage = (props) => {
   const {movie, isPlaying, elapsedTimePrc, timeLeft, videoRef, onPlaybackStatusChange, onExitButtonClick, onFullScreenButtonClick} = props;
