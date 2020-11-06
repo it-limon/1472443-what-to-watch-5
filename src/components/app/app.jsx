@@ -10,70 +10,93 @@ import Player from "../player-page/player-page";
 import Props from "../../props";
 import {withMovieVideo} from "../../hocs/with-movie-video/with-movie-video";
 import history from "../../browser-history";
+import {connect} from "react-redux";
+import LoaderPage from "../loader-page/loader-page";
+import {getLoadingStatus} from "../../store/reducers/app-state/selector";
 
 const PlayerPage = withMovieVideo(Player);
 
 const App = (props) => {
-  const {promoMovie, movies} = props;
+  const {isLoading} = props;
 
   return (
-    <BrowserRouter history={history}>
-      <Switch>
-        <Route exact
-          path="/"
-          render={({routeProps}) => (
-            <MainPage
-              promoMovie={promoMovie}
-              {...routeProps}
+    <Fragment>
+      {!isLoading
+        ?
+        <BrowserRouter history={history}>
+          <Switch>
+            <Route exact
+              path="/"
+              render={({routeProps}) => (
+                <MainPage
+                  {...routeProps}
+                />
+              )}
             />
-          )}
-        />
-        <Route exact path="/login">
-          <AuthPage />
-        </Route>
-        <Route exact path="/mylist">
-          <MyListPage movies={movies} />
-        </Route>
-        <Route exact
-          path="/films/:id"
-          render={(routeProps) =>
-            <MoviePage
-              {...routeProps}
+            <Route exact path="/login">
+              <AuthPage />
+            </Route>
+            <Route exact
+              path="/mylist"
+              render={(routeProps) =>
+                <MyListPage
+                  {...routeProps}
+                />
+              }
             />
-          }
-        />
-        <Route exact path="/films/:id/review">
-          <ReviewPage movie={movies[0]} />
-        </Route>
-        <Route exact
-          path="/player/:id"
-          render={(routeProps) =>
-            <PlayerPage
-              {...routeProps}
+            <Route exact
+              path="/films/:id"
+              render={(routeProps) =>
+                <MoviePage
+                  {...routeProps}
+                />
+              }
             />
-          }
-        />
-        <Route
-          render={() => (
-            <Fragment>
-              <h1>
-                404.
-                <br />
-                <small>Page not found</small>
-              </h1>
-              <Link to="/">Go to main page</Link>
-            </Fragment>
-          )}
-        />
-      </Switch>
-    </BrowserRouter>
+            <Route exact
+              path="/films/:id/review"
+              render={(routeProps) =>
+                <ReviewPage
+                  {...routeProps}
+                />
+              }
+            />
+            <Route exact
+              path="/player/:id"
+              render={(routeProps) =>
+                <PlayerPage
+                  {...routeProps}
+                />
+              }
+            />
+            <Route
+              render={() => (
+                <Fragment>
+                  <h1>
+                    404.
+                    <br />
+                    <small>Page not found</small>
+                  </h1>
+                  <Link to="/">Go to main page</Link>
+                </Fragment>
+              )}
+            />
+          </Switch>
+        </BrowserRouter>
+        :
+        <LoaderPage />
+      }
+    </Fragment>
   );
 };
 
 App.propTypes = {
-  promoMovie: Props.promoMovie,
-  movies: PropTypes.arrayOf(Props.movie).isRequired,
-  reviews: PropTypes.arrayOf(Props.review).isRequired
+  reviews: PropTypes.arrayOf(Props.review).isRequired,
+  isLoading: PropTypes.bool.isRequired
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  isLoading: getLoadingStatus(state)
+});
+
+export {App};
+export default connect(mapStateToProps)(App);

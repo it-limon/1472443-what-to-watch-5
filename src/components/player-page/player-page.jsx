@@ -2,8 +2,8 @@ import React, {Fragment} from "react";
 import PropTypes from "prop-types";
 import Props from "../../props";
 import VideoPlayer from "../video-player/video-player";
-import {getMovieByKey} from "../../utils";
 import {connect} from "react-redux";
+import {getMovieById} from "../../store/reducers/app-data/selector";
 
 const PlayerPage = (props) => {
   const {movie, isPlaying, elapsedTimePrc, timeLeft, videoRef, onPlaybackStatusChange, onExitButtonClick, onFullScreenButtonClick} = props;
@@ -12,8 +12,8 @@ const PlayerPage = (props) => {
     <div className="player">
       <VideoPlayer
         videoRef={videoRef}
-        src={movie.video}
-        poster="img/player-poster.jpg"
+        src={movie.videoLink}
+        poster={movie.previewImage}
         isPlaying={isPlaying}
       />
 
@@ -78,7 +78,7 @@ PlayerPage.propTypes = {
 };
 
 const mapStateToProps = (state, props) => ({
-  movie: getMovieByKey(state.filteredMovies, parseInt(props.match.params.id, 10)),
+  movie: getMovieById(state, parseInt(props.match.params.id, 10))
 });
 
 export {PlayerPage};

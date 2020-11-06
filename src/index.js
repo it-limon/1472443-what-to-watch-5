@@ -1,30 +1,39 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {createStore} from "redux";
+import {applyMiddleware, createStore} from "redux";
 import {Provider} from "react-redux";
 import App from "./components/app/app";
-import movies from "./mocks/movies";
 import reviews from "./mocks/reviews";
-import {reducer} from "./store/reducer";
+import rootReducer from "./store/root-reducer";
+import thunk from "redux-thunk";
+import {createAPI} from "./services/api";
+import {fetchMoviesList, checkAuth} from "./store/api-actions";
+import {ActionCreator} from "./store/action";
+import {AuthorizationStatus} from "./const";
+import {composeWithDevTools} from "redux-devtools-extension";
 
-const PromoMovie = {
-  name: `The Grand Budapest Hotel`,
-  genreKey: 4,
-  releaseYear: 2014
-};
+const api = createAPI(
+    () => store.dispatch(ActionCreator.requiredAuthorization(AuthorizationStatus.NO_AUTH))
+);
 
 const store = createStore(
-    reducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
+    rootReducer,
+    composeWithDevTools(
+        applyMiddleware(thunk.withExtraArgument(api))
+    )
 );
 
-ReactDOM.render(
-    <Provider store={store}>
-      <App
-        promoMovie={PromoMovie}
-        movies={movies}
-        reviews={reviews}
-      />
-    </Provider>,
-    document.querySelector(`#root`)
-);
+Promise.all([
+  store.dispatch(fetchMoviesList()),
+  store.dispatch(checkAuth())
+])
+.then(() => {
+  ReactDOM.render(
+      <Provider store={store}>
+        <App
+          reviews={reviews}
+        />
+      </Provider>,
+      document.querySelector(`#root`)
+  );
+});

@@ -13,14 +13,14 @@ const SmallMovieCard = (props) => {
   return (
     <article
       className="small-movie-card catalog__movies-card"
-      onMouseEnter={() => onChangeActiveState(!isPlaying)}
-      onMouseLeave={() => onChangeActiveState(!isPlaying)}
-      onClick={() => history.push(`/films/${movie.key}`)}
+      onMouseEnter={() => onChangeActiveState(true)}
+      onMouseLeave={() => onChangeActiveState(false)}
+      onClick={() => history.push(`/films/${movie.id}`)}
     >
       <div className="small-movie-card__image">
         <PreviewVideoPlayer
-          src={movie.video}
-          poster={movie.previewImg}
+          src={movie.previewVideoLink}
+          poster={movie.previewImage}
           isPlaying={isPlaying}
           isMuted={true}
         />

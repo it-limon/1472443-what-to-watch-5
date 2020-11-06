@@ -1,11 +1,8 @@
 import React, {Fragment} from "react";
 import ShowMoreButton from "../show-more-button/show-more-button";
 import GenresList from "../genres-list/genres-list";
-import Props from "../../props";
-import {getGenreNameByKey} from "../../utils";
 
-const MainPage = (props) => {
-  const {name: promoMovieName, genreKey: promoMovieGenreKey, releaseYear: promoMovieReleaseYear} = props.promoMovie;
+const MainPage = () => {
 
   return (
     <Fragment>
@@ -39,10 +36,10 @@ const MainPage = (props) => {
             </div>
 
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">{promoMovieName}</h2>
+              <h2 className="movie-card__title">name</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">{getGenreNameByKey(promoMovieGenreKey)}</span>
-                <span className="movie-card__year">{promoMovieReleaseYear}</span>
+                <span className="movie-card__genre">genre</span>
+                <span className="movie-card__year">released</span>
               </p>
 
               <div className="movie-card__buttons">
@@ -92,7 +89,6 @@ const MainPage = (props) => {
 };
 
 MainPage.propTypes = {
-  promoMovie: Props.promoMovie
 };
 
 export default MainPage;

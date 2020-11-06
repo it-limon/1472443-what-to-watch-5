@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import Props from "../../props";
 import SmallMovieCard from "../small-movie-card/small-movie-card";
 import {withActiveState} from "../../hocs/with-active-state/with-active-state";
+import {getShownMoviesCount} from "../../store/reducers/app-state/selector";
 
 const SmallMovieCardWrapped = withActiveState(SmallMovieCard);
 
@@ -14,7 +15,7 @@ const CatalogMoviesList = (props) => {
     <div className="catalog__movies-list">
       {movies.slice(0, shownMoviesCount).map((movie) => (
         <SmallMovieCardWrapped
-          key={movie.key}
+          key={movie.id}
           movie={movie}
         />
       ))}
@@ -28,7 +29,7 @@ CatalogMoviesList.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  shownMoviesCount: state.shownMoviesCount
+  shownMoviesCount: getShownMoviesCount(state)
 });
 
 export {CatalogMoviesList};

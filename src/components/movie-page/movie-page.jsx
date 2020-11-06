@@ -5,22 +5,21 @@ import Props from "../../props";
 import MovieTabs from "../movie-tabs/movie-tabs";
 import CatalogMoviesList from "../catalog-movies-list/catalog-movies-list";
 import {withActiveIndex} from "../../hocs/with-active-index/with-active-index";
-import {getGenreNameByKey, getReviewsByMovie} from "../../utils";
-import {DEFAULT_LIKE_MOVIES_COUNT} from "../../const";
-import {getMovieByKey} from "../../utils";
+import {getReviewsByMovie} from "../../utils";
 import {Link} from "react-router-dom";
+import {getMovieById, getSimilarMovies} from "../../store/reducers/app-data/selector";
 
 const MovieTabsWrapped = withActiveIndex(MovieTabs);
 
 const MoviePage = (props) => {
-  const {movie, filteredMovies, reviews} = props;
+  const {movie, movies, reviews} = props;
 
   return (
     <Fragment>
       <section className="movie-card movie-card--full">
         <div className="movie-card__hero">
           <div className="movie-card__bg">
-            <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+            <img src={movie.backgroundImage} alt={movie.name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -45,12 +44,12 @@ const MoviePage = (props) => {
             <div className="movie-card__desc">
               <h2 className="movie-card__title">{movie.name}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">{getGenreNameByKey(movie.genreKey)}</span>
-                <span className="movie-card__year">{movie.releaseYear}</span>
+                <span className="movie-card__genre">{movie.genre}</span>
+                <span className="movie-card__year">{movie.released}</span>
               </p>
 
               <div className="movie-card__buttons">
-                <Link to={`/player/${movie.key}`} className="btn btn--play movie-card__button" type="button">
+                <Link to={`/player/${movie.id}`} className="btn btn--play movie-card__button" type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
@@ -72,7 +71,7 @@ const MoviePage = (props) => {
         <div className="movie-card__wrap movie-card__translate-top">
           <div className="movie-card__info">
             <div className="movie-card__poster movie-card__poster--big">
-              <img src={movie.img} alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={movie.posterImage} alt={`${movie.name} poster`} width="218" height="327" />
             </div>
 
             <div className="movie-card__desc">
@@ -90,7 +89,7 @@ const MoviePage = (props) => {
           <h2 className="catalog__title">More like this</h2>
 
           <CatalogMoviesList
-            movies={filteredMovies.filter((currMovie) => (currMovie.key !== movie.key) && (currMovie.genreKey === movie.genreKey)).slice(0, DEFAULT_LIKE_MOVIES_COUNT)}
+            movies={movies}
           />
 
         </section>
@@ -115,14 +114,14 @@ const MoviePage = (props) => {
 
 MoviePage.propTypes = {
   movie: Props.movie,
-  filteredMovies: PropTypes.arrayOf(Props.movie).isRequired,
+  movies: PropTypes.arrayOf(Props.movie).isRequired,
   reviews: PropTypes.arrayOf(Props.review).isRequired
 };
 
 const mapStateToProps = (state, props) => ({
-  movie: getMovieByKey(state.filteredMovies, parseInt(props.match.params.id, 10)),
-  filteredMovies: state.filteredMovies,
-  reviews: getReviewsByMovie(state.reviews, parseInt(props.match.params.id, 10)).sort((it1, it2) => it1.date - it2.date)
+  movie: getMovieById(state, props.match.params.id),
+  movies: getSimilarMovies(state, props.match.params.id),
+  reviews: getReviewsByMovie(state.APP_DATA.reviews, parseInt(props.match.params.id, 10)).sort((it1, it2) => it1.date - it2.date)
 });
 
 export {MoviePage};

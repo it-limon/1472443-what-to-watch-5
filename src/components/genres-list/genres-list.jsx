@@ -4,51 +4,54 @@ import {connect} from "react-redux";
 import CatalogMoviesList from "../catalog-movies-list/catalog-movies-list";
 import Props from "../../props";
 import {ActionCreator} from "../../store/action";
-import genres from "../../genres";
+import {getGenres} from "../../store/reducers/app-data/selector";
+import {getMoviesByGenre, getGenre} from "../../store/reducers/app-state/selector";
 
 const GenresList = (props) => {
-  const {filteredMovies, currentMovieGenreKey, onChangeMovieGenre} = props;
+  const {movies, genres, currentGenre, onChangeMovieGenre} = props;
 
   return (
     <Fragment>
       <ul className="catalog__genres-list">
-        {genres.sort((a, b) => a.ord - b.ord).map((genre) => (
+        {genres.map((genre, i) => (
           <li
-            key={genre.key}
-            className={`catalog__genres-item ${(genre.key === currentMovieGenreKey) ? `catalog__genres-item--active` : ``}`}
+            key={i}
+            className={`catalog__genres-item ${(genre === currentGenre) ? `catalog__genres-item--active` : ``}`}
             onClick={(evt) => {
               evt.preventDefault();
-              if (genre.key !== currentMovieGenreKey) {
-                onChangeMovieGenre(genre.key);
+              if (genre !== currentGenre) {
+                onChangeMovieGenre(genre);
               }
             }}
           >
-            <a href="#" className="catalog__genres-link">{genre.filterName}</a>
+            <a href="#" className="catalog__genres-link">{genre}</a>
           </li>
         ))}
       </ul>
 
       <CatalogMoviesList
-        movies={filteredMovies}
+        movies={movies}
       />
     </Fragment>
   );
 };
 
 GenresList.propTypes = {
-  filteredMovies: PropTypes.arrayOf(Props.movie).isRequired,
-  currentMovieGenreKey: PropTypes.number.isRequired,
+  movies: PropTypes.arrayOf(Props.movie).isRequired,
+  genres: PropTypes.arrayOf(PropTypes.string).isRequired,
+  currentGenre: PropTypes.string.isRequired,
   onChangeMovieGenre: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  filteredMovies: state.filteredMovies,
-  currentMovieGenreKey: state.currentMovieGenreKey
+  movies: getMoviesByGenre(state),
+  genres: getGenres(state),
+  currentGenre: getGenre(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onChangeMovieGenre(genreKey) {
-    dispatch(ActionCreator.changeMovieGenre(genreKey));
+  onChangeMovieGenre(genre) {
+    dispatch(ActionCreator.changeMovieGenre(genre));
   }
 });
 

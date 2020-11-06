@@ -1,5 +1,4 @@
-import {MovieRating, MAX_REVIEWS_COLUMNS_COUNT, ALL_GENRES_KEY} from "./const";
-import genres from "../src/genres";
+import {MovieRating, MAX_REVIEWS_COLUMNS_COUNT} from "./const";
 
 export const extend = (a, b) => {
   return Object.assign({}, a, b);
@@ -29,27 +28,43 @@ export const getReviewsPerColumns = (reviews, movieKey) => {
   return reviewsPerColumns;
 };
 
-export const getGenreNameByKey = (genreKey) => {
-  return genres.filter((genre) => genre.key === genreKey).shift().name;
-};
-
-export const getMovieByKey = (movies, movieKey) => {
-  return movies.filter((movie) => movie.key === movieKey).shift();
-};
-
-export const getFilteredMoviesByGenre = (movies, genreKey) => {
-  if (genreKey === ALL_GENRES_KEY) {
-    return movies;
-  } else {
-    return movies.filter((currMovie) => currMovie.genreKey === genreKey);
-  }
-};
-
 export const getReviewsByMovie = (reviews, movieKey) => {
   return reviews.filter((currReview) => currReview.movieKey === movieKey);
 };
 
-export const getRatingNameByRating = (rating) => {
+export const toStandardKeys = (obj) => {
+  let newObj;
+
+  if (obj instanceof Array) {
+    return obj.map((it) => {
+      if (typeof it === `object`) {
+        it = toStandardKeys(it);
+      }
+
+      return it;
+    });
+  } else {
+    newObj = {};
+
+    for (let key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        const newKey = key.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (_m, chr) => chr.toUpperCase());
+
+        let value = obj[key];
+
+        if (value instanceof Array || (value !== null && value.constructor === Object)) {
+          value = toStandardKeys(value);
+        }
+
+        newObj[newKey] = value;
+      }
+    }
+  }
+
+  return newObj;
+};
+
+export const getRatingName = (rating) => {
   if (rating < 3) {
     return MovieRating.BAD;
   } else if (rating >= 3 && rating < 5) {
@@ -63,4 +78,11 @@ export const getRatingNameByRating = (rating) => {
   } else {
     return ``;
   }
+};
+
+export const getTimeFromMins = (mins) => {
+  let mm = mins % 60;
+  let hh = (mins - mm) / 60;
+
+  return hh + `h ` + mm + `m`;
 };
