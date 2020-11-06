@@ -34,6 +34,13 @@ const Props = {
     rating: PropTypes.number.isRequired,
     userName: PropTypes.string.isRequired,
     date: PropTypes.instanceOf(Date)
+  }).isRequired,
+
+  userInfo: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    email: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    avatarUrl: PropTypes.string.isRequired
   }).isRequired
 };
 

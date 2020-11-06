@@ -1,5 +1,6 @@
 import React, {PureComponent} from "react";
-import PropTypes from "prop-types";
+
+const MOUSE_ENTER_DELAY = 1000;
 
 export const withActiveState = (Component) => {
   class WithActiveState extends PureComponent {
@@ -7,14 +8,24 @@ export const withActiveState = (Component) => {
       super(props);
 
       this.state = {
-        isActive: props.isActive,
+        isActive: false,
       };
 
+      this.timer = null;
       this._handleActiveStateChange = this._handleActiveStateChange.bind(this);
     }
 
     _handleActiveStateChange(state) {
-      this.setState({isActive: state});
+      if (state) {
+        this.timer = setTimeout(() => this.setState({isActive: state}), MOUSE_ENTER_DELAY);
+      } else {
+        clearTimeout(this.timer);
+        this.setState({isActive: state});
+      }
+    }
+
+    componentWillUnmount() {
+      clearTimeout(this.timer);
     }
 
     render() {
@@ -27,14 +38,6 @@ export const withActiveState = (Component) => {
       );
     }
   }
-
-  WithActiveState.defaultProps = {
-    isActive: false
-  };
-
-  WithActiveState.propTypes = {
-    isActive: PropTypes.bool.isRequired
-  };
 
   return WithActiveState;
 };

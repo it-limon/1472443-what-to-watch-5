@@ -1,8 +1,8 @@
 import React, {Fragment} from "react";
-import {Route, Router as BrowserRouter, Switch, Link} from "react-router-dom";
+import {Route, Router as BrowserRouter, Switch, Link, Redirect} from "react-router-dom";
 import PropTypes from "prop-types";
 import MainPage from "../main-page/main-page";
-import AuthPage from "../auth-page/auth-page";
+import Auth from "../auth-page/auth-page";
 import MyListPage from "../my-list-page/my-list-page";
 import MoviePage from "../movie-page/movie-page";
 import ReviewPage from "../review-page/review-page";
@@ -12,12 +12,17 @@ import {withMovieVideo} from "../../hocs/with-movie-video/with-movie-video";
 import history from "../../browser-history";
 import {connect} from "react-redux";
 import LoaderPage from "../loader-page/loader-page";
-import {getLoadingStatus} from "../../store/reducers/app-state/selector";
+import {getLoadingStatus} from "../../store/selectors/state-selector";
+import {withAuth} from "../../hocs/with-auth/with-auth";
+import PrivateRoute from "../private-route/private-route";
+import {AuthorizationStatus} from "../../const";
+import {getAuthorizationStatus} from "../../store/selectors/user-selector";
 
 const PlayerPage = withMovieVideo(Player);
+const AuthPage = withAuth(Auth);
 
 const App = (props) => {
-  const {isLoading} = props;
+  const {isLoading, authorized} = props;
 
   return (
     <Fragment>
@@ -27,16 +32,26 @@ const App = (props) => {
           <Switch>
             <Route exact
               path="/"
-              render={({routeProps}) => (
+              render={(routeProps) => (
                 <MainPage
                   {...routeProps}
                 />
               )}
             />
-            <Route exact path="/login">
-              <AuthPage />
-            </Route>
             <Route exact
+              path="/login"
+              render={(routeProps) => (
+                <Fragment>
+                  {authorized ?
+                    <Redirect to="/" /> :
+                    <AuthPage
+                      {...routeProps}
+                    />
+                  }
+                </Fragment>
+              )}
+            />
+            <PrivateRoute exact
               path="/mylist"
               render={(routeProps) =>
                 <MyListPage
@@ -52,7 +67,7 @@ const App = (props) => {
                 />
               }
             />
-            <Route exact
+            <PrivateRoute exact
               path="/films/:id/review"
               render={(routeProps) =>
                 <ReviewPage
@@ -91,11 +106,13 @@ const App = (props) => {
 
 App.propTypes = {
   reviews: PropTypes.arrayOf(Props.review).isRequired,
-  isLoading: PropTypes.bool.isRequired
+  isLoading: PropTypes.bool.isRequired,
+  authorized: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  isLoading: getLoadingStatus(state)
+  isLoading: getLoadingStatus(state),
+  authorized: getAuthorizationStatus(state) === AuthorizationStatus.AUTH
 });
 
 export {App};

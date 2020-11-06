@@ -1,8 +1,8 @@
 import {createSelector} from "reselect";
-import {ALL_GENRES, SIMILAR_MOVIES_COUNT} from "../../../const";
-import {NameSpace} from "../../root-reducer";
+import {ALL_GENRES, SIMILAR_MOVIES_COUNT} from "../../const";
+import {NameSpace} from "../root-reducer";
 
-export const getMovies = (state) => state[NameSpace.APP_DATA].movies;
+export const getMovies = (state) => state[NameSpace.DATA].movies;
 export const getMovieId = (_, id) => parseInt(id, 10);
 
 export const getGenres = createSelector([getMovies], (movies) => {

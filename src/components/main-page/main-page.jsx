@@ -1,8 +1,14 @@
 import React, {Fragment} from "react";
-import ShowMoreButton from "../show-more-button/show-more-button";
-import GenresList from "../genres-list/genres-list";
+import Catalog from "../catalog/catalog";
+import {getAuthorizationStatus, getUserInfo} from "../../store/selectors/user-selector";
+import {connect} from "react-redux";
+import {AuthorizationStatus} from "../../const";
+import {Link} from "react-router-dom";
+import PropTypes from "prop-types";
+import Props from "../../props";
 
-const MainPage = () => {
+const MainPage = (props) => {
+  const {authorized, userInfo} = props;
 
   return (
     <Fragment>
@@ -23,9 +29,18 @@ const MainPage = () => {
           </div>
 
           <div className="user-block">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-            </div>
+            {authorized
+              ?
+              <Link to="/mylist">
+                <div className="user-block__avatar">
+                  <img src={userInfo.avatarUrl} alt={userInfo.name} width="63" height="63" />
+                </div>
+              </Link>
+              :
+              <Link to="/login" className="user-block__link">
+                Sign In
+              </Link>
+            }
           </div>
         </header>
 
@@ -62,13 +77,7 @@ const MainPage = () => {
       </section>
 
       <div className="page-content">
-        <section className="catalog">
-          <h2 className="catalog__title visually-hidden">Catalog</h2>
-
-          <GenresList />
-
-          <ShowMoreButton />
-        </section>
+        <Catalog />
 
         <footer className="page-footer">
           <div className="logo">
@@ -89,6 +98,14 @@ const MainPage = () => {
 };
 
 MainPage.propTypes = {
+  authorized: PropTypes.bool.isRequired,
+  userInfo: Props.userInfo
 };
 
-export default MainPage;
+const mapStateToProps = (state) => ({
+  authorized: getAuthorizationStatus(state) === AuthorizationStatus.AUTH,
+  userInfo: getUserInfo(state)
+});
+
+export {MainPage};
+export default connect(mapStateToProps)(MainPage);

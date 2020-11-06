@@ -2,9 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import Props from "../../props";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../store/action";
-import {getMoviesByGenre} from "../../store/reducers/app-state/selector";
-import {getShownMoviesCount} from "../../store/reducers/app-state/selector";
+import {StateActionCreator} from "../../store/actions/state-action";
+import {getMoviesByGenre, getShownMoviesCount} from "../../store/selectors/state-selector";
 
 const ShowMoreButton = (props) => {
   const {movies, shownMoviesCount, onIncreaseShownMoviesCount} = props;
@@ -36,7 +35,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onIncreaseShownMoviesCount() {
-    dispatch(ActionCreator.increaseShownMoviesCount());
+    dispatch(StateActionCreator.increaseShownMoviesCount());
   }
 });
 

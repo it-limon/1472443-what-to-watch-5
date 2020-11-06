@@ -4,11 +4,11 @@ import PropTypes from "prop-types";
 import Props from "../../props";
 import SmallMovieCard from "../small-movie-card/small-movie-card";
 import {withActiveState} from "../../hocs/with-active-state/with-active-state";
-import {getShownMoviesCount} from "../../store/reducers/app-state/selector";
+import {getShownMoviesCount} from "../../store/selectors/state-selector";
 
 const SmallMovieCardWrapped = withActiveState(SmallMovieCard);
 
-const CatalogMoviesList = (props) => {
+const MoviesList = (props) => {
   const {movies, shownMoviesCount} = props;
 
   return (
@@ -23,7 +23,7 @@ const CatalogMoviesList = (props) => {
   );
 };
 
-CatalogMoviesList.propTypes = {
+MoviesList.propTypes = {
   movies: PropTypes.arrayOf(Props.movie).isRequired,
   shownMoviesCount: PropTypes.number.isRequired
 };
@@ -32,5 +32,5 @@ const mapStateToProps = (state) => ({
   shownMoviesCount: getShownMoviesCount(state)
 });
 
-export {CatalogMoviesList};
-export default connect(mapStateToProps)(CatalogMoviesList);
+export {MoviesList};
+export default connect(mapStateToProps)(MoviesList);
