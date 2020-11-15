@@ -1,4 +1,4 @@
-export const MAX_REVIEWS_COLUMNS_COUNT = 2;
+export const MAX_COMMENTS_PER_COLUMN = 2;
 export const SIMILAR_MOVIES_COUNT = 4;
 export const DEFAULT_SHOWN_MOVIES_COUNT = 8;
 export const DEFAULT_REVIEW_RATING = 3;
@@ -19,6 +19,6 @@ export const AuthorizationStatus = {
 };
 
 export const LoadingStatus = {
-  COMPLETED: false,
-  NOT_COMPLETED: true
+  COMPLETED: `COMPLETED`,
+  NOT_COMPLETED: `NOT_COMPLETED`
 };

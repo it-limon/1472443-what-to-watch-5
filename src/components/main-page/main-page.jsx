@@ -1,15 +1,8 @@
 import React, {Fragment} from "react";
+import Header from "../header/header";
 import Catalog from "../catalog/catalog";
-import {getAuthorizationStatus, getUserInfo} from "../../store/selectors/user-selector";
-import {connect} from "react-redux";
-import {AuthorizationStatus} from "../../const";
-import {Link} from "react-router-dom";
-import PropTypes from "prop-types";
-import Props from "../../props";
 
-const MainPage = (props) => {
-  const {authorized, userInfo} = props;
-
+const MainPage = () => {
   return (
     <Fragment>
       <section className="movie-card">
@@ -19,30 +12,10 @@ const MainPage = (props) => {
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <header className="page-header movie-card__head">
-          <div className="logo">
-            <a className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <div className="user-block">
-            {authorized
-              ?
-              <Link to="/mylist">
-                <div className="user-block__avatar">
-                  <img src={userInfo.avatarUrl} alt={userInfo.name} width="63" height="63" />
-                </div>
-              </Link>
-              :
-              <Link to="/login" className="user-block__link">
-                Sign In
-              </Link>
-            }
-          </div>
-        </header>
+        <Header
+          headerClassName={`movie-card__head`}
+          withActiveMainLink={false}
+        />
 
         <div className="movie-card__wrap">
           <div className="movie-card__info">
@@ -97,15 +70,4 @@ const MainPage = (props) => {
   );
 };
 
-MainPage.propTypes = {
-  authorized: PropTypes.bool.isRequired,
-  userInfo: Props.userInfo
-};
-
-const mapStateToProps = (state) => ({
-  authorized: getAuthorizationStatus(state) === AuthorizationStatus.AUTH,
-  userInfo: getUserInfo(state)
-});
-
-export {MainPage};
-export default connect(mapStateToProps)(MainPage);
+export default MainPage;

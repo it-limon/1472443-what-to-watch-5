@@ -7,27 +7,25 @@ import MyListPage from "../my-list-page/my-list-page";
 import MoviePage from "../movie-page/movie-page";
 import ReviewPage from "../review-page/review-page";
 import Player from "../player-page/player-page";
-import Props from "../../props";
 import {withMovieVideo} from "../../hocs/with-movie-video/with-movie-video";
 import history from "../../browser-history";
 import {connect} from "react-redux";
-import LoaderPage from "../loader-page/loader-page";
-import {getLoadingStatus} from "../../store/selectors/state-selector";
 import {withAuth} from "../../hocs/with-auth/with-auth";
 import PrivateRoute from "../private-route/private-route";
-import {AuthorizationStatus} from "../../const";
+import {AuthorizationStatus, LoadingStatus} from "../../const";
 import {getAuthorizationStatus} from "../../store/selectors/user-selector";
+import LoaderPage from "../loader-page/loader-page";
+import {getLoadingStatus} from "../../store/selectors/state-selector";
 
 const PlayerPage = withMovieVideo(Player);
 const AuthPage = withAuth(Auth);
 
 const App = (props) => {
-  const {isLoading, authorized} = props;
+  const {authorized, loaded} = props;
 
   return (
     <Fragment>
-      {!isLoading
-        ?
+      {loaded ?
         <BrowserRouter history={history}>
           <Switch>
             <Route exact
@@ -96,8 +94,7 @@ const App = (props) => {
               )}
             />
           </Switch>
-        </BrowserRouter>
-        :
+        </BrowserRouter> :
         <LoaderPage />
       }
     </Fragment>
@@ -105,13 +102,12 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  reviews: PropTypes.arrayOf(Props.review).isRequired,
-  isLoading: PropTypes.bool.isRequired,
-  authorized: PropTypes.bool.isRequired
+  authorized: PropTypes.bool.isRequired,
+  loaded: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  isLoading: getLoadingStatus(state),
+  loaded: getLoadingStatus(state) === LoadingStatus.COMPLETED,
   authorized: getAuthorizationStatus(state) === AuthorizationStatus.AUTH
 });
 

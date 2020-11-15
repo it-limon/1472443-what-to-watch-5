@@ -27,13 +27,15 @@ const Props = {
     isFavorite: PropTypes.bool.isRequired
   }).isRequired,
 
-  review: PropTypes.shape({
-    key: PropTypes.number.isRequired,
-    movieKey: PropTypes.number.isRequired,
-    text: PropTypes.string.isRequired,
+  comment: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    user: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired
+    }).isRequired,
     rating: PropTypes.number.isRequired,
-    userName: PropTypes.string.isRequired,
-    date: PropTypes.instanceOf(Date)
+    comment: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired
   }).isRequired,
 
   userInfo: PropTypes.shape({

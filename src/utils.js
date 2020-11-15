@@ -1,35 +1,30 @@
-import {MovieRating, MAX_REVIEWS_COLUMNS_COUNT} from "./const";
+import {MovieRating, MAX_COMMENTS_PER_COLUMN} from "./const";
 
 export const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
 
 // Возвращает массив, где отызвы разбиты на подмассивы (колонки) для страницы отзывов фильма
-export const getReviewsPerColumns = (reviews, movieKey) => {
-  reviews = reviews.filter((review) => review.movieKey === movieKey);
-  reviews.sort((a, b) => a.date - b.date);
+export const getCommentsColumns = (comments) => {
+  comments.sort((a, b) => new Date(a.date) - new Date(b.date));
 
-  const reviewsCountInColumn = Math.ceil(reviews.length / MAX_REVIEWS_COLUMNS_COUNT);
-  const reviewsPerColumns = [];
+  const commentsPerColumn = Math.ceil(comments.length / MAX_COMMENTS_PER_COLUMN);
+  const commentsColumns = [];
   let j = 0;
 
-  for (let i = 0; i < MAX_REVIEWS_COLUMNS_COUNT; ++i) {
-    const column = reviews.slice(j, j + reviewsCountInColumn);
+  for (let i = 0; i < MAX_COMMENTS_PER_COLUMN; ++i) {
+    const column = comments.slice(j, j + commentsPerColumn);
 
     if (column.length > 0) {
-      reviewsPerColumns[i] = column;
+      commentsColumns[i] = column;
     } else {
       break;
     }
 
-    j = j + reviewsCountInColumn;
+    j = j + commentsPerColumn;
   }
 
-  return reviewsPerColumns;
-};
-
-export const getReviewsByMovie = (reviews, movieKey) => {
-  return reviews.filter((currReview) => currReview.movieKey === movieKey);
+  return commentsColumns;
 };
 
 export const toStandardKeys = (obj) => {
