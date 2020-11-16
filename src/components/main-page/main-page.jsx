@@ -1,6 +1,8 @@
 import React, {Fragment} from "react";
 import Header from "../header/header";
+import Footer from "../footer/footer";
 import Catalog from "../catalog/catalog";
+import {AppPages} from "../../const";
 
 const MainPage = () => {
   return (
@@ -13,8 +15,7 @@ const MainPage = () => {
         <h1 className="visually-hidden">WTW</h1>
 
         <Header
-          headerClassName={`movie-card__head`}
-          withActiveMainLink={false}
+          currentPage={AppPages.MAIN}
         />
 
         <div className="movie-card__wrap">
@@ -52,19 +53,9 @@ const MainPage = () => {
       <div className="page-content">
         <Catalog />
 
-        <footer className="page-footer">
-          <div className="logo">
-            <a className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
+        <Footer
+          currentPage={AppPages.MAIN}
+        />
       </div>
     </Fragment>
   );

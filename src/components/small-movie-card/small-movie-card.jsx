@@ -4,6 +4,7 @@ import Props from "../../props";
 import Player from "../video-player/video-player";
 import {withPreviewVideo} from "../../hocs/with-preview-video/with-preview-video";
 import history from "../../browser-history";
+import {AppRoute} from "../../const";
 
 const PreviewVideoPlayer = withPreviewVideo(Player);
 
@@ -15,7 +16,7 @@ const SmallMovieCard = (props) => {
       className="small-movie-card catalog__movies-card"
       onMouseEnter={() => onChangeActiveState(true)}
       onMouseLeave={() => onChangeActiveState(false)}
-      onClick={() => history.push(`/films/${movie.id}`)}
+      onClick={() => history.push(`${AppRoute.FILMS}/${movie.id}`)}
     >
       <div className="small-movie-card__image">
         <PreviewVideoPlayer

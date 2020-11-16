@@ -12,7 +12,7 @@ import history from "../../browser-history";
 import {connect} from "react-redux";
 import {withAuth} from "../../hocs/with-auth/with-auth";
 import PrivateRoute from "../private-route/private-route";
-import {AuthorizationStatus, LoadingStatus} from "../../const";
+import {AuthorizationStatus, LoadingStatus, AppRoute} from "../../const";
 import {getAuthorizationStatus} from "../../store/selectors/user-selector";
 import LoaderPage from "../loader-page/loader-page";
 import {getLoadingStatus} from "../../store/selectors/state-selector";
@@ -29,7 +29,7 @@ const App = (props) => {
         <BrowserRouter history={history}>
           <Switch>
             <Route exact
-              path="/"
+              path={AppRoute.MAIN}
               render={(routeProps) => (
                 <MainPage
                   {...routeProps}
@@ -37,11 +37,11 @@ const App = (props) => {
               )}
             />
             <Route exact
-              path="/login"
+              path={AppRoute.LOGIN}
               render={(routeProps) => (
                 <Fragment>
                   {authorized ?
-                    <Redirect to="/" /> :
+                    <Redirect to={AppRoute.MAIN} /> :
                     <AuthPage
                       {...routeProps}
                     />
@@ -50,7 +50,7 @@ const App = (props) => {
               )}
             />
             <PrivateRoute exact
-              path="/mylist"
+              path={AppRoute.MYLIST}
               render={(routeProps) =>
                 <MyListPage
                   {...routeProps}
@@ -58,7 +58,7 @@ const App = (props) => {
               }
             />
             <Route exact
-              path="/films/:id"
+              path={`${AppRoute.FILMS}/:id`}
               render={(routeProps) =>
                 <MoviePage
                   {...routeProps}
@@ -66,7 +66,7 @@ const App = (props) => {
               }
             />
             <PrivateRoute exact
-              path="/films/:id/review"
+              path={`${AppRoute.FILMS}/:id${AppRoute.REVIEW}`}
               render={(routeProps) =>
                 <ReviewPage
                   {...routeProps}
@@ -74,7 +74,7 @@ const App = (props) => {
               }
             />
             <Route exact
-              path="/player/:id"
+              path={`${AppRoute.PLAYER}/:id`}
               render={(routeProps) =>
                 <PlayerPage
                   {...routeProps}
@@ -89,7 +89,9 @@ const App = (props) => {
                     <br />
                     <small>Page not found</small>
                   </h1>
-                  <Link to="/">Go to main page</Link>
+                  <Link to={AppRoute.MAIN}>
+                    Go to main page
+                  </Link>
                 </Fragment>
               )}
             />

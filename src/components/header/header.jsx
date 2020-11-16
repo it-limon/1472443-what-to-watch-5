@@ -1,13 +1,22 @@
 import React, {Fragment} from "react";
 import PropTypes from "prop-types";
-import Props from "../../props";
 import {getAuthorizationStatus, getUserInfo} from "../../store/selectors/user-selector";
 import {connect} from "react-redux";
-import {AuthorizationStatus} from "../../const";
+import {AuthorizationStatus, AppPages, AppRoute} from "../../const";
 import {Link} from "react-router-dom";
+import Breadcrumbs from "../breadcrumbs/breadcrumbs";
+import Props from "../../props";
 
 const Header = (props) => {
-  const {authorized, userInfo, headerClassName, withActiveMainLink} = props;
+  const {authorized, userInfo, currentPage} = props;
+
+  const withActiveLink = (currentPage !== AppPages.MAIN);
+  const withBreadcrumbs = (currentPage === AppPages.REVIEW);
+  const withHeaderText = (currentPage === AppPages.AUTH) || (currentPage === AppPages.MYLIST);
+  const withUserBlock = currentPage !== AppPages.AUTH;
+  const withActiveUserLink = currentPage !== AppPages.MYLIST;
+
+  const logoClassName = withHeaderText ? `user-page__head` : `movie-card__head`;
 
   const logoLetter = () => (
     <Fragment>
@@ -17,46 +26,96 @@ const Header = (props) => {
     </Fragment>
   );
 
-  return (
-    <header className={`page-header ${headerClassName}`}>
-      <div className="logo">
-        <Fragment>
-          {withActiveMainLink ?
-            <Link className="logo__link" to="/">
-              {logoLetter()}
-            </Link> :
-            <div className="logo__link">
-              {logoLetter()}
-            </div>
-          }
-        </Fragment>
-      </div>
+  const logoBlock = () => {
+    if (withActiveLink) {
+      return (
+        <Link className="logo__link" to={AppRoute.MAIN}>
+          {logoLetter()}
+        </Link>
+      )
+    } else {
+      return (
+        <div className="logo__link">
+          {logoLetter()}
+        </div>
+      )
+    }
+  };
 
-      <div className="user-block">
-        {authorized ?
-          <Link to="/mylist">
-            <div className="user-block__avatar">
-              <img src={userInfo.avatarUrl} alt={userInfo.name} width="63" height="63" />
-            </div>
-          </Link> :
-          <Link to="/login" className="user-block__link">
+  const breadcrumbsBlock = () => {
+    if (withBreadcrumbs && props.breadcrumbsMovieId !== -1) {
+      return (
+        <Breadcrumbs
+          movieId={props.breadcrumbsMovieId}
+        />
+      )
+    }
+  };
+
+  const headerBlock = () => {
+    if (withHeaderText) {
+      return (
+        <h1 className="page-title user-page__title">{(currentPage === AppPages.AUTH) ? `Sign in` : `My list`}</h1>
+      )
+    }
+  };
+
+  const user = () => {
+    return (
+      <div className="user-block__avatar">
+        <img src={userInfo.avatarUrl} alt={userInfo.name} width="63" height="63" />
+      </div>
+    );
+  };
+
+  const userBlock = () => {
+    if (withUserBlock) {
+      if (authorized) {
+          if (withActiveUserLink) {
+            return (
+              <Link to={AppRoute.MYLIST}>
+                {user()}
+              </Link>
+            )
+          } else {
+            return user();
+        }
+      } else {
+        return (
+          <Link to={AppRoute.LOGIN} className="user-block__link">
             Sign In
           </Link>
-        }
+        )
+      }
+    }
+  };
+
+  return (
+    <header className={`page-header ${logoClassName}`}>
+      <div className="logo">
+        {logoBlock()}
+      </div>
+
+      {breadcrumbsBlock()}
+
+      {headerBlock()} 
+        
+      <div className="user-block">
+        {userBlock()}
       </div>
     </header>
   );
 };
 
 Header.defaultProps = {
-  withActiveMainLink: true
-};
+  breadcrumbsMovieId: -1
+}
 
 Header.propTypes = {
   authorized: PropTypes.bool.isRequired,
   userInfo: Props.userInfo,
-  headerClassName: PropTypes.string.isRequired,
-  withActiveMainLink: PropTypes.bool.isRequired
+  currentPage: PropTypes.string.isRequired,
+  breadcrumbsMovieId: PropTypes.number.isRequired
 };
 
 const mapStateToProps = (state) => ({
