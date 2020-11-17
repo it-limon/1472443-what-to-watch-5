@@ -66,8 +66,8 @@ const MovieTabs = (props) => {
           <div className="movie-card__reviews movie-card__row">
             {getCommentsColumns(comments).map((colIt, i) => (
               <div key={i} className="movie-card__reviews-col">
-                {colIt.map((it, j) => (
-                  <div key={j} className="review">
+                {colIt.map((it) => (
+                  <div key={it.id} className="review">
                     <blockquote className="review__quote">
                       <p className="review__text">{it.comment}</p>
 
@@ -124,7 +124,7 @@ MovieTabs.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  comments: getComments(state),
+  comments: getComments(state)
 });
 
 export {MovieTabs};

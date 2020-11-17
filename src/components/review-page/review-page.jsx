@@ -13,7 +13,7 @@ const ReviewPage = (props) => {
   const movie = props.movie;
 
   return (
-    <section className="movie-card movie-card--full">
+    <section className="movie-card movie-card--full" style={{backgroundColor: movie.backgroundColor}}>
       <div className="movie-card__header">
         <div className="movie-card__bg">
           <img src={movie.backgroundImage} alt={movie.name} />
@@ -32,7 +32,9 @@ const ReviewPage = (props) => {
       </div>
 
       <div className="add-review">
-        <AddReviewFormWrapped />
+        <AddReviewFormWrapped
+          movieId={movie.id}
+        />
       </div>
     </section>
   );

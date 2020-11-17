@@ -22,7 +22,7 @@ const Breadcrumbs = (props) => {
         </li>
       </ul>
     </nav>
-  )
+  );
 };
 
 Breadcrumbs.propTypes = {

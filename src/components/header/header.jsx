@@ -32,13 +32,13 @@ const Header = (props) => {
         <Link className="logo__link" to={AppRoute.MAIN}>
           {logoLetter()}
         </Link>
-      )
+      );
     } else {
       return (
         <div className="logo__link">
           {logoLetter()}
         </div>
-      )
+      );
     }
   };
 
@@ -48,7 +48,9 @@ const Header = (props) => {
         <Breadcrumbs
           movieId={props.breadcrumbsMovieId}
         />
-      )
+      );
+    } else {
+      return null;
     }
   };
 
@@ -56,7 +58,9 @@ const Header = (props) => {
     if (withHeaderText) {
       return (
         <h1 className="page-title user-page__title">{(currentPage === AppPages.AUTH) ? `Sign in` : `My list`}</h1>
-      )
+      );
+    } else {
+      return null;
     }
   };
 
@@ -71,22 +75,24 @@ const Header = (props) => {
   const userBlock = () => {
     if (withUserBlock) {
       if (authorized) {
-          if (withActiveUserLink) {
-            return (
-              <Link to={AppRoute.MYLIST}>
-                {user()}
-              </Link>
-            )
-          } else {
-            return user();
+        if (withActiveUserLink) {
+          return (
+            <Link to={AppRoute.MYLIST}>
+              {user()}
+            </Link>
+          );
+        } else {
+          return user();
         }
       } else {
         return (
           <Link to={AppRoute.LOGIN} className="user-block__link">
             Sign In
           </Link>
-        )
+        );
       }
+    } else {
+      return null;
     }
   };
 
@@ -98,8 +104,8 @@ const Header = (props) => {
 
       {breadcrumbsBlock()}
 
-      {headerBlock()} 
-        
+      {headerBlock()}
+
       <div className="user-block">
         {userBlock()}
       </div>
@@ -109,7 +115,7 @@ const Header = (props) => {
 
 Header.defaultProps = {
   breadcrumbsMovieId: -1
-}
+};
 
 Header.propTypes = {
   authorized: PropTypes.bool.isRequired,

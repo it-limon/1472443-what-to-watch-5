@@ -5,9 +5,9 @@ import {Link} from "react-router-dom";
 
 const Footer = (props) => {
   const {currentPage} = props;
-  
+
   const withActiveLink = (currentPage !== AppPages.MAIN);
-  
+
   const logoLetter = () => (
     <Fragment>
       <span className="logo__letter logo__letter--1">W</span>

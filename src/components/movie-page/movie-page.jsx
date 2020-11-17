@@ -11,12 +11,13 @@ import LoaderPage from "../loader-page/loader-page";
 import {loadCommentsList} from "../../store/api-actions";
 import Header from "../header/header";
 import Footer from "../footer/footer";
-import {AppPages, AppRoute} from "../../const";
+import {AuthorizationStatus, AppPages, AppRoute} from "../../const";
+import {getAuthorizationStatus} from "../../store/selectors/user-selector";
 
 const MovieTabsWrapped = withActiveIndex(MovieTabs);
 
 const MoviePage = (props) => {
-  const {movie, similarMovies, onLoadCommentsList} = props;
+  const {movie, similarMovies, onLoadCommentsList, authorized} = props;
 
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -62,7 +63,12 @@ const MoviePage = (props) => {
                       </svg>
                       <span>My list</span>
                     </button>
-                    <a href="add-review.html" className="btn movie-card__button">Add review</a>
+                    {authorized ?
+                      <Link to={`${AppRoute.FILMS}/${movie.id}${AppRoute.REVIEW}`} className="btn movie-card__button">
+                        Add review
+                      </Link> :
+                      null
+                    }
                   </div>
                 </div>
               </div>
@@ -105,12 +111,14 @@ const MoviePage = (props) => {
 MoviePage.propTypes = {
   movie: Props.movie,
   similarMovies: PropTypes.arrayOf(Props.movie).isRequired,
+  authorized: PropTypes.bool.isRequired,
   onLoadCommentsList: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, props) => ({
   movie: getMovieById(state, props.match.params.id),
   similarMovies: getSimilarMovies(state, props.match.params.id),
+  authorized: getAuthorizationStatus(state) === AuthorizationStatus.AUTH
 });
 
 const mapDispatchToProps = (dispatch) => ({

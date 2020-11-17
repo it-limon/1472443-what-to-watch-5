@@ -29,7 +29,6 @@ const store = createStore(
     )
 );
 
-
 Promise.all([
   store.dispatch(loadMoviesList()),
   store.dispatch(checkAuth())
