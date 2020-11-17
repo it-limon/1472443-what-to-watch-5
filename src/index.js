@@ -8,7 +8,7 @@ import {createAPI} from "./services/api";
 import {composeWithDevTools} from "redux-devtools-extension";
 import {redirect} from "./store/middlewares/redirect";
 
-import {loadMoviesList, checkAuth} from "./store/api-actions";
+import {loadMoviesList, loadPromoMovie, checkAuth} from "./store/api-actions";
 
 import {UserActionCreator} from "./store/actions/user-action";
 import {StateActionCreator} from "./store/actions/state-action";
@@ -31,6 +31,7 @@ const store = createStore(
 
 Promise.all([
   store.dispatch(loadMoviesList()),
+  store.dispatch(loadPromoMovie()),
   store.dispatch(checkAuth())
 ])
 .then(() => store.dispatch(StateActionCreator.setLoadingStatus(LoadingStatus.COMPLETED)));

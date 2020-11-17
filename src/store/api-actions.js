@@ -6,6 +6,13 @@ import {AuthorizationStatus, AppRoute, APIRoute} from "../const";
 export const loadMoviesList = () => (dispatch, _getState, api) => (
   api.get(`${APIRoute.FILMS}`)
     .then(({data}) => dispatch(DataActionCreator.loadMovies(data)))
+    .catch(() => {})
+);
+
+export const loadPromoMovie = () => (dispatch, _getState, api) => (
+  api.get(`${APIRoute.PROMO_MOVIE}`)
+    .then(({data}) => dispatch(DataActionCreator.loadPromoMovie(data)))
+    .catch(() => {})
 );
 
 export const loadCommentsList = (movieId, setIsLoading) => (dispatch, _getState, api) => (
@@ -41,4 +48,5 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
   api.post(`${APIRoute.LOGIN}`, {email, password})
     .then(({data}) => dispatch(UserActionCreator.setUserInfo(data)))
     .then(() => dispatch(UserActionCreator.requiredAuthorization(AuthorizationStatus.AUTH)))
+    .catch(() => {})
 );

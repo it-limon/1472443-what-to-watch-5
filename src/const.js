@@ -1,4 +1,5 @@
 export const MAX_COMMENTS_PER_COLUMN = 2;
+export const MAX_GENRES_COUNT = 9;
 export const SIMILAR_MOVIES_COUNT = 4;
 export const DEFAULT_SHOWN_MOVIES_COUNT = 8;
 export const DEFAULT_REVIEW_RATING = 3;
@@ -44,6 +45,7 @@ export const AppRoute = {
 
 export const APIRoute = {
   FILMS: `/films`,
+  PROMO_MOVIE: `/films/promo`,
   COMMENTS: `/comments`,
   LOGIN: `/login`
 };
