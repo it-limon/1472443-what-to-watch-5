@@ -7,31 +7,29 @@ import MyListPage from "../my-list-page/my-list-page";
 import MoviePage from "../movie-page/movie-page";
 import ReviewPage from "../review-page/review-page";
 import Player from "../player-page/player-page";
-import Props from "../../props";
 import {withMovieVideo} from "../../hocs/with-movie-video/with-movie-video";
 import history from "../../browser-history";
 import {connect} from "react-redux";
-import LoaderPage from "../loader-page/loader-page";
-import {getLoadingStatus} from "../../store/selectors/state-selector";
 import {withAuth} from "../../hocs/with-auth/with-auth";
 import PrivateRoute from "../private-route/private-route";
-import {AuthorizationStatus} from "../../const";
+import {AuthorizationStatus, LoadingStatus, AppRoute} from "../../const";
 import {getAuthorizationStatus} from "../../store/selectors/user-selector";
+import LoaderPage from "../loader-page/loader-page";
+import {getLoadingStatus} from "../../store/selectors/state-selector";
 
 const PlayerPage = withMovieVideo(Player);
 const AuthPage = withAuth(Auth);
 
 const App = (props) => {
-  const {isLoading, authorized} = props;
+  const {authorized, loaded} = props;
 
   return (
     <Fragment>
-      {!isLoading
-        ?
+      {loaded ?
         <BrowserRouter history={history}>
           <Switch>
             <Route exact
-              path="/"
+              path={AppRoute.MAIN}
               render={(routeProps) => (
                 <MainPage
                   {...routeProps}
@@ -39,11 +37,11 @@ const App = (props) => {
               )}
             />
             <Route exact
-              path="/login"
+              path={AppRoute.LOGIN}
               render={(routeProps) => (
                 <Fragment>
                   {authorized ?
-                    <Redirect to="/" /> :
+                    <Redirect to={AppRoute.MAIN} /> :
                     <AuthPage
                       {...routeProps}
                     />
@@ -52,7 +50,7 @@ const App = (props) => {
               )}
             />
             <PrivateRoute exact
-              path="/mylist"
+              path={AppRoute.MYLIST}
               render={(routeProps) =>
                 <MyListPage
                   {...routeProps}
@@ -60,7 +58,7 @@ const App = (props) => {
               }
             />
             <Route exact
-              path="/films/:id"
+              path={`${AppRoute.FILMS}/:id`}
               render={(routeProps) =>
                 <MoviePage
                   {...routeProps}
@@ -68,7 +66,7 @@ const App = (props) => {
               }
             />
             <PrivateRoute exact
-              path="/films/:id/review"
+              path={`${AppRoute.FILMS}/:id${AppRoute.REVIEW}`}
               render={(routeProps) =>
                 <ReviewPage
                   {...routeProps}
@@ -76,7 +74,7 @@ const App = (props) => {
               }
             />
             <Route exact
-              path="/player/:id"
+              path={`${AppRoute.PLAYER}/:id`}
               render={(routeProps) =>
                 <PlayerPage
                   {...routeProps}
@@ -91,13 +89,14 @@ const App = (props) => {
                     <br />
                     <small>Page not found</small>
                   </h1>
-                  <Link to="/">Go to main page</Link>
+                  <Link to={AppRoute.MAIN}>
+                    Go to main page
+                  </Link>
                 </Fragment>
               )}
             />
           </Switch>
-        </BrowserRouter>
-        :
+        </BrowserRouter> :
         <LoaderPage />
       }
     </Fragment>
@@ -105,13 +104,12 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  reviews: PropTypes.arrayOf(Props.review).isRequired,
-  isLoading: PropTypes.bool.isRequired,
-  authorized: PropTypes.bool.isRequired
+  authorized: PropTypes.bool.isRequired,
+  loaded: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  isLoading: getLoadingStatus(state),
+  loaded: getLoadingStatus(state) === LoadingStatus.COMPLETED,
   authorized: getAuthorizationStatus(state) === AuthorizationStatus.AUTH
 });
 

@@ -4,6 +4,9 @@ import SmallMovieCard from "../small-movie-card/small-movie-card";
 import Props from "../../props";
 import {withActiveState} from "../../hocs/with-active-state/with-active-state";
 import {connect} from "react-redux";
+import {AppPages} from "../../const";
+import Header from "../header/header";
+import Footer from "../footer/footer";
 
 const SmallMovieCardWrapped = withActiveState(SmallMovieCard);
 
@@ -12,23 +15,9 @@ const MyListPage = (props) => {
 
   return (
     <div className="user-page">
-      <header className="page-header user-page__head">
-        <div className="logo">
-          <a href="main.html" className="logo__link">
-            <span className="logo__letter logo__letter--1">W</span>
-            <span className="logo__letter logo__letter--2">T</span>
-            <span className="logo__letter logo__letter--3">W</span>
-          </a>
-        </div>
-
-        <h1 className="page-title user-page__title">My list</h1>
-
-        <div className="user-block">
-          <div className="user-block__avatar">
-            <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-          </div>
-        </div>
-      </header>
+      <Header
+        currentPage={AppPages.MYLIST}
+      />
 
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
@@ -43,19 +32,9 @@ const MyListPage = (props) => {
         </div>
       </section>
 
-      <footer className="page-footer">
-        <div className="logo">
-          <a href="main.html" className="logo__link logo__link--light">
-            <span className="logo__letter logo__letter--1">W</span>
-            <span className="logo__letter logo__letter--2">T</span>
-            <span className="logo__letter logo__letter--3">W</span>
-          </a>
-        </div>
-
-        <div className="copyright">
-          <p>© 2019 What to watch Ltd.</p>
-        </div>
-      </footer>
+      <Footer
+        currentPage={AppPages.MYLIST}
+      />
     </div>
   );
 };

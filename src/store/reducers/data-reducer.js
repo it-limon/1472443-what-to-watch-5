@@ -1,10 +1,9 @@
 import {extend} from "../../utils";
 import {DataActionType} from "../actions/data-action";
-import allReviews from "../../mocks/reviews";
 
 const initialState = {
   movies: [],
-  reviews: allReviews
+  comments: []
 };
 
 export const appData = (state = initialState, action) => {
@@ -12,6 +11,10 @@ export const appData = (state = initialState, action) => {
     case DataActionType.LOAD_MOVIES:
       return extend(state, {
         movies: action.payload
+      });
+    case DataActionType.LOAD_COMMENTS:
+      return extend(state, {
+        comments: action.payload
       });
   }
 

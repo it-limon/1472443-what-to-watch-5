@@ -1,13 +1,15 @@
 import React, {Fragment} from "react";
 import PropTypes from "prop-types";
 import Props from "../../props";
-import {getReviewsPerColumns, getRatingName, getTimeFromMins} from "../../utils";
+import {getCommentsColumns, getRatingName, getTimeFromMins} from "../../utils";
+import {connect} from "react-redux";
+import {getComments} from "../../store/selectors/data-selector";
 
 const MovieTabs = (props) => {
 
   const _getTabByActiveIndex = (index) => {
-    const {key, genre, released, rating, scoresCount, description, director, starring, runTime} = props.movie;
-    const reviews = props.reviews;
+    const {genre, released, rating, scoresCount, description, director, starring, runTime} = props.movie;
+    const comments = props.comments;
 
     switch (index) {
       case 0:
@@ -62,22 +64,22 @@ const MovieTabs = (props) => {
       case 2:
         return (
           <div className="movie-card__reviews movie-card__row">
-            {getReviewsPerColumns(reviews, key).map((colum, i) => (
+            {getCommentsColumns(comments).map((colIt, i) => (
               <div key={i} className="movie-card__reviews-col">
-                {colum.map((review) => (
-                  <div key={review.key} className="review">
+                {colIt.map((it) => (
+                  <div key={it.id} className="review">
                     <blockquote className="review__quote">
-                      <p className="review__text">{review.text}</p>
+                      <p className="review__text">{it.comment}</p>
 
                       <footer className="review__details">
-                        <cite className="review__author">{review.userName}</cite>
-                        <time className="review__date" dateTime={`${review.date.getFullYear()}-${review.date.getMonth() + 1}-${review.date.getDate()}`}>
-                          {review.date.toLocaleDateString(`en-US`, {year: `numeric`, month: `long`, day: `numeric`})}
+                        <cite className="review__author">{it.user.name}</cite>
+                        <time className="review__date" dateTime={it.date}>
+                          {new Date(it.date).toLocaleDateString(`en-US`, {year: `numeric`, month: `long`, day: `numeric`})}
                         </time>
                       </footer>
                     </blockquote>
 
-                    <div className="review__rating">{review.rating.toFixed(1)}</div>
+                    <div className="review__rating">{it.rating.toFixed(1)}</div>
                   </div>
                 ))}
               </div>
@@ -116,9 +118,14 @@ const MovieTabs = (props) => {
 
 MovieTabs.propTypes = {
   movie: Props.movie,
+  comments: PropTypes.arrayOf(Props.comment).isRequired,
   activeIndex: PropTypes.number.isRequired,
   onChangeActiveIndex: PropTypes.func.isRequired,
-  reviews: PropTypes.arrayOf(Props.review).isRequired
 };
 
-export default MovieTabs;
+const mapStateToProps = (state) => ({
+  comments: getComments(state)
+});
+
+export {MovieTabs};
+export default connect(mapStateToProps)(MovieTabs);
