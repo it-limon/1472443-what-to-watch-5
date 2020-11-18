@@ -10,7 +10,7 @@ const ShowMoreButton = (props) => {
 
   return (
     <div className="catalog__more">
-      {(shownMoviesCount < movies.length) &&
+      {(shownMoviesCount <= movies.length) &&
         <button
           className="catalog__button" type="button"
           onClick={onIncreaseShownMoviesCount}

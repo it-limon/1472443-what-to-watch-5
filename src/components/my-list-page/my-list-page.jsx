@@ -1,51 +1,62 @@
-import React from "react";
+import React, {Fragment, useEffect, useState} from "react";
 import PropTypes from "prop-types";
-import SmallMovieCard from "../small-movie-card/small-movie-card";
 import Props from "../../props";
-import {withActiveState} from "../../hocs/with-active-state/with-active-state";
 import {connect} from "react-redux";
 import {AppPages} from "../../const";
 import Header from "../header/header";
 import Footer from "../footer/footer";
-
-const SmallMovieCardWrapped = withActiveState(SmallMovieCard);
+import MoviesList from "../movies-list/movies-list";
+import LoaderPage from "../loader-page/loader-page";
+import {loadFavoriteMoviesList} from "../../store/api-actions";
 
 const MyListPage = (props) => {
-  const movies = props.movies;
+  const {favoriteMovies, onLoadFavoriteMoviesList} = props;
+
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    onLoadFavoriteMoviesList(setIsLoading);
+  }, []);
 
   return (
-    <div className="user-page">
-      <Header
-        currentPage={AppPages.MYLIST}
-      />
+    <Fragment>
+      {isLoading ?
+        <LoaderPage /> :
+        <div className="user-page">
+          <Header
+            currentPage={AppPages.MYLIST}
+          />
 
-      <section className="catalog">
-        <h2 className="catalog__title visually-hidden">Catalog</h2>
+          <section className="catalog">
+            <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-        <div className="catalog__movies-list">
-          {movies.map((movie) => (
-            <SmallMovieCardWrapped
-              key={movie.id}
-              movie={movie}
+            <MoviesList
+              movies={favoriteMovies}
             />
-          ))}
-        </div>
-      </section>
+          </section>
 
-      <Footer
-        currentPage={AppPages.MYLIST}
-      />
-    </div>
+          <Footer
+            currentPage={AppPages.MYLIST}
+          />
+        </div>
+      }
+    </Fragment>
   );
 };
 
 MyListPage.propTypes = {
-  movies: PropTypes.arrayOf(Props.movie).isRequired
+  onLoadFavoriteMoviesList: PropTypes.func.isRequired,
+  favoriteMovies: PropTypes.arrayOf(Props.movie).isRequired
 };
 
 const mapStateToProps = ({DATA}) => ({
-  movies: DATA.movies
+  favoriteMovies: DATA.favoriteMovies
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onLoadFavoriteMoviesList(setIsLoading) {
+    dispatch(loadFavoriteMoviesList(setIsLoading));
+  }
 });
 
 export {MyListPage};
-export default connect(mapStateToProps)(MyListPage);
+export default connect(mapStateToProps, mapDispatchToProps)(MyListPage);

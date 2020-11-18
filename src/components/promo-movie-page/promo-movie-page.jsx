@@ -3,9 +3,11 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import Props from "../../props";
 import Header from "../header/header";
-import {AuthorizationStatus, AppPages} from "../../const";
+import {AuthorizationStatus, AppPages, AppRoute} from "../../const";
 import {getAuthorizationStatus} from "../../store/selectors/user-selector";
 import {getPromoMovie} from "../../store/selectors/data-selector";
+import {Link} from "react-router-dom";
+import MyListButton from "../my-list-button/my-list-button";
 
 const PromoMoviePage = (props) => {
   const {promoMovie, authorized} = props;
@@ -36,18 +38,13 @@ const PromoMoviePage = (props) => {
             </p>
 
             <div className="movie-card__buttons">
-              <button className="btn btn--play movie-card__button" type="button">
+              <Link to={`${AppRoute.PLAYER}/${promoMovie.id}`} className="btn btn--play movie-card__button" type="button">
                 <svg viewBox="0 0 19 19" width="19" height="19">
                   <use xlinkHref="#play-s"></use>
                 </svg>
                 <span>Play</span>
-              </button>
-              <button className="btn btn--list movie-card__button" type="button">
-                <svg viewBox="0 0 19 20" width="19" height="20">
-                  <use xlinkHref="#add"></use>
-                </svg>
-                <span>My list</span>
-              </button>
+              </Link>
+              {authorized ? <MyListButton movie={promoMovie} /> : null}
             </div>
           </div>
         </div>
@@ -65,12 +62,6 @@ const mapStateToProps = (state) => ({
   promoMovie: getPromoMovie(state),
   authorized: getAuthorizationStatus(state) === AuthorizationStatus.AUTH
 });
-
-//const mapDispatchToProps = (dispatch) => ({
-  //onLoadCommentsList(movieId, setIsLoading) {
-  //  dispatch(loadCommentsList(movieId, setIsLoading));
-  //}
-//});
 
 export {PromoMoviePage};
 export default connect(mapStateToProps)(PromoMoviePage);

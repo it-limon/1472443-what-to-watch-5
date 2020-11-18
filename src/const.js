@@ -1,3 +1,4 @@
+export const UNKNOWN_MOVIE_ID = -1;
 export const MAX_COMMENTS_PER_COLUMN = 2;
 export const MAX_GENRES_COUNT = 9;
 export const SIMILAR_MOVIES_COUNT = 4;
@@ -20,11 +21,6 @@ export const AuthorizationStatus = {
   NO_AUTH: `NO_AUTH`
 };
 
-export const LoadingStatus = {
-  COMPLETED: `COMPLETED`,
-  NOT_COMPLETED: `NOT_COMPLETED`
-};
-
 export const AppPages = {
   MAIN: `MAIN`,
   AUTH: `AUTH`,
@@ -45,6 +41,7 @@ export const AppRoute = {
 
 export const APIRoute = {
   FILMS: `/films`,
+  FAVORITE_FILMS: `/favorite`,
   PROMO_MOVIE: `/films/promo`,
   COMMENTS: `/comments`,
   LOGIN: `/login`

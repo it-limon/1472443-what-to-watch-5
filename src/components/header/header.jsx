@@ -18,7 +18,7 @@ const Header = (props) => {
 
   const logoClassName = withHeaderText ? `user-page__head` : `movie-card__head`;
 
-  const logoLetter = () => (
+  const logoLetter = (
     <Fragment>
       <span className="logo__letter logo__letter--1">W</span>
       <span className="logo__letter logo__letter--2">T</span>
@@ -30,13 +30,13 @@ const Header = (props) => {
     if (withActiveLink) {
       return (
         <Link className="logo__link" to={AppRoute.MAIN}>
-          {logoLetter()}
+          {logoLetter}
         </Link>
       );
     } else {
       return (
         <div className="logo__link">
-          {logoLetter()}
+          {logoLetter}
         </div>
       );
     }
@@ -47,6 +47,7 @@ const Header = (props) => {
       return (
         <Breadcrumbs
           movieId={props.breadcrumbsMovieId}
+          movieName={props.breadcrumbsMovieName}
         />
       );
     } else {
@@ -64,13 +65,11 @@ const Header = (props) => {
     }
   };
 
-  const user = () => {
-    return (
-      <div className="user-block__avatar">
-        <img src={userInfo.avatarUrl} alt={userInfo.name} width="63" height="63" />
-      </div>
-    );
-  };
+  const user = (
+    <div className="user-block__avatar">
+      <img src={userInfo.avatarUrl} alt={userInfo.name} width="63" height="63" />
+    </div>
+  );
 
   const userBlock = () => {
     if (withUserBlock) {
@@ -78,11 +77,11 @@ const Header = (props) => {
         if (withActiveUserLink) {
           return (
             <Link to={AppRoute.MYLIST}>
-              {user()}
+              {user}
             </Link>
           );
         } else {
-          return user();
+          return user;
         }
       } else {
         return (
@@ -114,14 +113,16 @@ const Header = (props) => {
 };
 
 Header.defaultProps = {
-  breadcrumbsMovieId: -1
+  breadcrumbsMovieId: -1,
+  breadcrumbsMovieName: ``
 };
 
 Header.propTypes = {
   authorized: PropTypes.bool.isRequired,
   userInfo: Props.userInfo,
   currentPage: PropTypes.string.isRequired,
-  breadcrumbsMovieId: PropTypes.number.isRequired
+  breadcrumbsMovieId: PropTypes.number.isRequired,
+  breadcrumbsMovieName: PropTypes.string.isRequired
 };
 
 const mapStateToProps = (state) => ({

@@ -8,7 +8,7 @@ const Footer = (props) => {
 
   const withActiveLink = (currentPage !== AppPages.MAIN);
 
-  const logoLetter = () => (
+  const logoLetter = (
     <Fragment>
       <span className="logo__letter logo__letter--1">W</span>
       <span className="logo__letter logo__letter--2">T</span>
@@ -20,10 +20,10 @@ const Footer = (props) => {
     <footer>
       {withActiveLink ?
         <Link className="logo__link logo__link--light" to={AppRoute.MAIN}>
-          {logoLetter()}
+          {logoLetter}
         </Link> :
         <div className="logo__link logo__link--light">
-          {logoLetter()}
+          {logoLetter}
         </div>
       }
       <div className="copyright">

@@ -27,7 +27,7 @@ const Catalog = (props) => {
 };
 
 Catalog.propTypes = {
-  movies: PropTypes.arrayOf(Props.movie).isRequired,
+  movies: PropTypes.arrayOf(Props.movie).isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -36,5 +36,3 @@ const mapStateToProps = (state) => ({
 
 export {Catalog};
 export default connect(mapStateToProps)(Catalog);
-
-
