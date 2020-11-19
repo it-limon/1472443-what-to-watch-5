@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render PageNotFound Render PageNotFound 1`] = `
+<h1>
+  404.
+  <br />
+  <small>
+    Page not found
+  </small>
+</h1>
+`;
