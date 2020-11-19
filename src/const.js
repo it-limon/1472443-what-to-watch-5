@@ -1,4 +1,3 @@
-export const UNKNOWN_MOVIE_ID = -1;
 export const MAX_COMMENTS_PER_COLUMN = 2;
 export const MAX_GENRES_COUNT = 9;
 export const SIMILAR_MOVIES_COUNT = 4;

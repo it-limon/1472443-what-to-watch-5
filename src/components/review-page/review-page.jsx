@@ -6,15 +6,15 @@ import {withReview} from "../../hocs/with-review/with-review";
 import {connect} from "react-redux";
 import {loadMovie} from "../../store/api-actions";
 import Header from "../header/header";
-import {UNKNOWN_MOVIE_ID, AppPages} from "../../const";
+import {AppPages} from "../../const";
 import LoaderPage from "../loader-page/loader-page";
-import {getLastActiveMovie} from "../../store/selectors/state-selector";
-import UnknownPage from "../unknown-page/unknown-page";
+import {getLastActiveMovie, getIsPageNotFound} from "../../store/selectors/state-selector";
+import PageNotFound from "../page-not-found/page-not-found";
 
 const AddReviewFormWrapped = withReview(AddReviewForm);
 
 const ReviewPage = (props) => {
-  const {newMovieId, movie, onLoadMovie} = props;
+  const {newMovieId, movie, onLoadMovie, isPageNotFound} = props;
 
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -26,8 +26,8 @@ const ReviewPage = (props) => {
       {isLoading ?
         <LoaderPage /> :
         <Fragment>
-          {movie.id === UNKNOWN_MOVIE_ID ?
-            <UnknownPage /> :
+          {isPageNotFound ?
+            <PageNotFound /> :
             <section className="movie-card movie-card--full" style={{backgroundColor: movie.backgroundColor}}>
               <div className="movie-card__header">
                 <div className="movie-card__bg">
@@ -63,12 +63,14 @@ const ReviewPage = (props) => {
 ReviewPage.propTypes = {
   newMovieId: PropTypes.number.isRequired,
   movie: Props.movie,
-  onLoadMovie: PropTypes.func.isRequired
+  onLoadMovie: PropTypes.func.isRequired,
+  isPageNotFound: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state, props) => ({
   newMovieId: parseInt(props.match.params.id, 10),
-  movie: getLastActiveMovie(state)
+  movie: getLastActiveMovie(state),
+  isPageNotFound: getIsPageNotFound(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

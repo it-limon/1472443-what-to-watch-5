@@ -7,13 +7,15 @@ import PromoMoviePage from "../promo-movie-page/promo-movie-page";
 import {connect} from "react-redux";
 import {loadMainPage} from "../../store/api-actions";
 import LoaderPage from "../loader-page/loader-page";
+import {getIsPageNotFound} from "../../store/selectors/state-selector";
+import PageNotFound from "../page-not-found/page-not-found";
 
 const MainPage = (props) => {
-  const {onloadMainPage} = props;
+  const {onLoadMainPage, isPageNotFound} = props;
 
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    onloadMainPage(setIsLoading);
+    onLoadMainPage(setIsLoading);
   }, []);
 
   return (
@@ -21,14 +23,19 @@ const MainPage = (props) => {
       {isLoading ?
         <LoaderPage /> :
         <Fragment>
-          <PromoMoviePage />
+          {isPageNotFound ?
+            <PageNotFound fromMainPage={true}/> :
+            <Fragment>
+              <PromoMoviePage />
 
-          <div className="page-content">
-            <Catalog />
+              <div className="page-content">
+                <Catalog />
 
-            <Footer currentPage={AppPages.MAIN} />
-          </div>
+                <Footer currentPage={AppPages.MAIN} />
+              </div>
 
+            </Fragment>
+          }
         </Fragment>
       }
     </Fragment>
@@ -36,14 +43,19 @@ const MainPage = (props) => {
 };
 
 MainPage.propTypes = {
-  onloadMainPage: PropTypes.func.isRequired
+  onLoadMainPage: PropTypes.func.isRequired,
+  isPageNotFound: PropTypes.bool.isRequired
 };
 
+const mapStateToProps = (state) => ({
+  isPageNotFound: getIsPageNotFound(state)
+});
+
 const mapDispatchToProps = (dispatch) => ({
-  onloadMainPage(setIsLoading) {
+  onLoadMainPage(setIsLoading) {
     dispatch(loadMainPage(setIsLoading));
   }
 });
 
 export {MainPage};
-export default connect(null, mapDispatchToProps)(MainPage);
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage);

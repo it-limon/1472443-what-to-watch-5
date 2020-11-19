@@ -3,21 +3,31 @@ import PropTypes from "prop-types";
 import Props from "../../props";
 import VideoPlayer from "../video-player/video-player";
 import {connect} from "react-redux";
-import {getLastActiveMovie} from "../../store/selectors/state-selector";
-import {UNKNOWN_MOVIE_ID} from "../../const";
-import UnknownPage from "../unknown-page/unknown-page";
+import {getLastActiveMovie, getIsPageNotFound} from "../../store/selectors/state-selector";
+import PageNotFound from "../page-not-found/page-not-found";
 import LoaderPage from "../loader-page/loader-page";
 
 const PlayerPage = (props) => {
-  const {movie, isLoading, isPlaying, elapsedTimePrc, timeLeft, videoRef, onPlaybackStatusChange, onExitButtonClick, onFullScreenButtonClick} = props;
+  const {
+    movie,
+    isLoading,
+    isPlaying,
+    elapsedTimePrc,
+    timeLeft,
+    videoRef,
+    onPlaybackStatusChange,
+    onExitButtonClick,
+    onFullScreenButtonClick,
+    isPageNotFound
+  } = props;
 
   return (
     <Fragment>
       {isLoading ?
         <LoaderPage /> :
         <Fragment>
-          {movie.id === UNKNOWN_MOVIE_ID ?
-            <UnknownPage /> :
+          {isPageNotFound ?
+            <PageNotFound /> :
             <div className="player">
               <VideoPlayer
                 videoRef={videoRef}
@@ -87,11 +97,13 @@ PlayerPage.propTypes = {
   onPlaybackStatusChange: PropTypes.func.isRequired,
   onExitButtonClick: PropTypes.func.isRequired,
   onFullScreenButtonClick: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired
+  isLoading: PropTypes.bool.isRequired,
+  isPageNotFound: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  movie: getLastActiveMovie(state)
+  movie: getLastActiveMovie(state),
+  isPageNotFound: getIsPageNotFound(state)
 });
 
 export {PlayerPage};

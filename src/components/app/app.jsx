@@ -11,8 +11,7 @@ import history from "../../browser-history";
 import {withAuth} from "../../hocs/with-auth/with-auth";
 import PrivateRoute from "../private-route/private-route";
 import {AppRoute} from "../../const";
-
-import UnknownPage from "../unknown-page/unknown-page";
+import PageNotFound from "../page-not-found/page-not-found";
 
 const PlayerPage = withMovieVideo(Player);
 const AuthPage = withAuth(Auth);
@@ -71,7 +70,7 @@ const App = () => {
         />
         <Route
           render={() => (
-            <UnknownPage />
+            <PageNotFound />
           )}
         />
       </Switch>

@@ -6,6 +6,7 @@ const initialState = {
   currentGenre: ALL_GENRES,
   shownMoviesCount: DEFAULT_SHOWN_MOVIES_COUNT,
   url: ``,
+  isPageNotFound: false,
   lastActiveMovie: {
     id: -1,
     name: ``,
@@ -45,6 +46,10 @@ export const appState = (state = initialState, action) => {
     case StateActionType.SET_LAST_ACTIVE_MOVIE:
       return extend(state, {
         lastActiveMovie: action.payload
+      });
+    case StateActionType.SET_IS_PAGE_NOT_FOUND:
+      return extend(state, {
+        isPageNotFound: action.payload
       });
   }
 

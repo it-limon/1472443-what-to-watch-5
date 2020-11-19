@@ -9,18 +9,18 @@ import {Link} from "react-router-dom";
 import {getSimilarMovies} from "../../store/selectors/data-selector";
 import Header from "../header/header";
 import Footer from "../footer/footer";
-import {UNKNOWN_MOVIE_ID, AuthorizationStatus, AppPages, AppRoute} from "../../const";
+import {AuthorizationStatus, AppPages, AppRoute} from "../../const";
 import {getAuthorizationStatus} from "../../store/selectors/user-selector";
-import {getLastActiveMovie} from "../../store/selectors/state-selector";
+import {getLastActiveMovie, getIsPageNotFound} from "../../store/selectors/state-selector";
 import {loadMoviePage} from "../../store/api-actions";
 import LoaderPage from "../loader-page/loader-page";
-import UnknownPage from "../unknown-page/unknown-page";
+import PageNotFound from "../page-not-found/page-not-found";
 import MyListButton from "../my-list-button/my-list-button";
 
 const MovieTabsWrapped = withActiveIndex(MovieTabs);
 
 const MoviePage = (props) => {
-  const {newMovieId, movie, onLoadMoviePage, similarMovies, authorized} = props;
+  const {newMovieId, movie, onLoadMoviePage, similarMovies, authorized, isPageNotFound} = props;
 
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -32,8 +32,8 @@ const MoviePage = (props) => {
       {isLoading ?
         <LoaderPage /> :
         <Fragment>
-          {movie.id === UNKNOWN_MOVIE_ID ?
-            <UnknownPage /> :
+          {isPageNotFound ?
+            <PageNotFound /> :
             <Fragment>
               <section className="movie-card movie-card--full" style={{backgroundColor: movie.backgroundColor}}>
                 <div className="movie-card__hero">
@@ -118,14 +118,16 @@ MoviePage.propTypes = {
   movie: Props.movie,
   similarMovies: PropTypes.arrayOf(Props.movie).isRequired,
   authorized: PropTypes.bool.isRequired,
-  onLoadMoviePage: PropTypes.func.isRequired
+  onLoadMoviePage: PropTypes.func.isRequired,
+  isPageNotFound: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state, props) => ({
   newMovieId: parseInt(props.match.params.id, 10),
   movie: getLastActiveMovie(state),
   similarMovies: getSimilarMovies(state, props.match.params.id),
-  authorized: getAuthorizationStatus(state) === AuthorizationStatus.AUTH
+  authorized: getAuthorizationStatus(state) === AuthorizationStatus.AUTH,
+  isPageNotFound: getIsPageNotFound(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

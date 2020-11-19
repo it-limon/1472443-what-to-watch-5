@@ -82,5 +82,5 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
   api.post(`${APIRoute.LOGIN}`, {email, password})
     .then(({data}) => dispatch(UserActionCreator.setUserInfo(data)))
     .then(() => dispatch(UserActionCreator.requiredAuthorization(AuthorizationStatus.AUTH)))
-    .catch(() => {})
+    .catch(() => dispatch(StateActionCreator.redirectToRoute(`${AppRoute.MAIN}`)))
 );

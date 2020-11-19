@@ -18,5 +18,5 @@ export const getMovieById = createSelector([getMovies, getMovieId], (movies, mov
 });
 
 export const getSimilarMovies = createSelector(([getMovies, getMovieById]), (movies, movie) => {
-  return movies.filter((it) => (it.id !== movie.id) && (it.genre === movie.genre)).slice(0, SIMILAR_MOVIES_COUNT);
+  return !movie ? [] : movies.filter((it) => (it.id !== movie.id) && (it.genre === movie.genre)).slice(0, SIMILAR_MOVIES_COUNT);
 });

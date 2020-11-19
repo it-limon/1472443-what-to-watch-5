@@ -11,13 +11,15 @@ import {redirect} from "./store/middlewares/redirect";
 import {checkAuth} from "./store/api-actions";
 
 import {UserActionCreator} from "./store/actions/user-action";
+import {StateActionCreator} from "./store/actions/state-action";
 
 import rootReducer from "./store/root-reducer";
 
 import {AuthorizationStatus} from "./const";
 
 const api = createAPI(
-    () => store.dispatch(UserActionCreator.requiredAuthorization(AuthorizationStatus.NO_AUTH))
+    () => store.dispatch(UserActionCreator.requiredAuthorization(AuthorizationStatus.NO_AUTH)),
+    (status) => store.dispatch(StateActionCreator.setIsPageNotFound(status))
 );
 
 const store = createStore(
