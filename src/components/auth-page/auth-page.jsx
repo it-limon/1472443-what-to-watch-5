@@ -15,14 +15,11 @@ const AuthPage = (props) => {
 
       <div className="sign-in user-page__content">
         <form action="#" className="sign-in__form">
-          <Fragment>
-            {isInvalidLogin || isInvalidPassword ?
-              <div className="sign-in__message">
-                <p>{isInvalidLogin && `Please enter a valid email address`}</p>
-                <p>{isInvalidPassword && `Please enter a valid password`}</p>
-              </div>
-              : null}
-          </Fragment>
+          {(isInvalidLogin || isInvalidPassword) &&
+            <div className="sign-in__message">
+              <p>{isInvalidLogin && `Please enter a valid email address`}</p>
+              <p>{isInvalidPassword && `Please enter a valid password`}</p>
+            </div>}
           <div className="sign-in__fields">
             <div className={`sign-in__field ${isInvalidLogin ? `sign-in__field--error` : ``}`}>
               <input className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email" ref={loginRef} autoFocus />

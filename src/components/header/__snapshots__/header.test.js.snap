@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render Header Render Header (authorized/without breadcrumbs/with active user block) 1`] = `
+<header
+  className="page-header movie-card__head"
+>
+  <div
+    className="logo"
+  >
+    <div
+      className="logo__link"
+    >
+      <span
+        className="logo__letter logo__letter--1"
+      >
+        W
+      </span>
+      <span
+        className="logo__letter logo__letter--2"
+      >
+        T
+      </span>
+      <span
+        className="logo__letter logo__letter--3"
+      >
+        W
+      </span>
+    </div>
+  </div>
+  <div
+    className="user-block"
+  >
+    <a
+      href="/mylist"
+      onClick={[Function]}
+    >
+      <div
+        className="user-block__avatar"
+      >
+        <img
+          alt="User Name"
+          height="63"
+          src="https://avatars.dicebear.com/api/human/1.svg"
+          width="63"
+        />
+      </div>
+    </a>
+  </div>
+</header>
+`;
+
+exports[`Render Header Render Header (not authorized) 1`] = `
+<header
+  className="page-header movie-card__head"
+>
+  <div
+    className="logo"
+  >
+    <div
+      className="logo__link"
+    >
+      <span
+        className="logo__letter logo__letter--1"
+      >
+        W
+      </span>
+      <span
+        className="logo__letter logo__letter--2"
+      >
+        T
+      </span>
+      <span
+        className="logo__letter logo__letter--3"
+      >
+        W
+      </span>
+    </div>
+  </div>
+  <div
+    className="user-block"
+  >
+    <a
+      className="user-block__link"
+      href="/login"
+      onClick={[Function]}
+    >
+      Sign In
+    </a>
+  </div>
+</header>
+`;

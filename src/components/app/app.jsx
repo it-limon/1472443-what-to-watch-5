@@ -20,6 +20,54 @@ const App = () => {
   return (
     <BrowserRouter history={history}>
       <Switch>
+        <Route exact
+          path={AppRoute.MAIN}
+          render={(routeProps) => (
+            <MainPage
+              {...routeProps}
+            />
+          )}
+        />
+        <Route exact
+          path={AppRoute.LOGIN}
+          render={(routeProps) => (
+            <AuthPage
+              {...routeProps}
+            />
+          )}
+        />
+        <PrivateRoute exact
+          path={AppRoute.MYLIST}
+          render={(routeProps) =>
+            <MyListPage
+              {...routeProps}
+            />
+          }
+        />
+        <Route exact
+          path={`${AppRoute.FILMS}/:id`}
+          render={(routeProps) =>
+            <MoviePage
+              {...routeProps}
+            />
+          }
+        />
+        <PrivateRoute exact
+          path={`${AppRoute.FILMS}/:id${AppRoute.REVIEW}`}
+          render={(routeProps) =>
+            <ReviewPage
+              {...routeProps}
+            />
+          }
+        />
+        <Route exact
+          path={`${AppRoute.PLAYER}/:id`}
+          render={(routeProps) =>
+            <PlayerPage
+              {...routeProps}
+            />
+          }
+        />
         <Route
           render={() => (
             <PageNotFound />
