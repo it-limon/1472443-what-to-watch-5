@@ -27,8 +27,8 @@ export const testMovies = [
     backgroundColor: `#000000`,
     videoLink: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     previewVideoLink: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-    description: `When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, 
-                  Batman must accept one of the greatest psychological and physical tests of his ability 
+    description: `When the menace known as the Joker wreaks havoc and chaos on the people of Gotham,
+                  Batman must accept one of the greatest psychological and physical tests of his ability
                   to fight injustice.`,
     rating: 9,
     scoresCount: 2271245,

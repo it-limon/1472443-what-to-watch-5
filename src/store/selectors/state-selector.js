@@ -8,7 +8,7 @@ export const getShownMoviesCount = (state) => state[NameSpace.STATE].shownMovies
 export const getLastActiveMovie = (state) => state[NameSpace.STATE].lastActiveMovie;
 export const getIsPageNotFound = (state) => state[NameSpace.STATE].isPageNotFound;
 
-export const getTotalMoviesByGenre = createSelector([getMovies, getCurrentGenre, getShownMoviesCount], (movies, genre, shownMoviesCount) => {
+export const getTotalMoviesByGenre = createSelector([getMovies, getCurrentGenre, getShownMoviesCount], (movies, genre) => {
   if (genre === ALL_GENRES) {
     return movies;
   } else {

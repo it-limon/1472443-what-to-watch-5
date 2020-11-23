@@ -19,13 +19,13 @@ describe(`Render Breadcrumbs`, () => {
     });
 
     breadcrumbsComponent = renderer.create(
-      <Provider store={store}>
-        <BrowserRouter>
-          <Route>
-            <Breadcrumbs />
-          </Route>
-        </BrowserRouter>
-      </Provider>
+        <Provider store={store}>
+          <BrowserRouter>
+            <Route>
+              <Breadcrumbs />
+            </Route>
+          </BrowserRouter>
+        </Provider>
     );
   });
 

@@ -18,12 +18,12 @@ describe(`Render MyListButton`, () => {
     store.dispatch = jest.fn();
 
     myListButtonComponent = renderer.create(
-      <Provider store={store}>
-        <MyListButton
-          movie={testMovie}
-          onSetFavoriteMovie={noop}
-        />
-      </Provider>
+        <Provider store={store}>
+          <MyListButton
+            movie={testMovie}
+            onSetFavoriteMovie={noop}
+          />
+        </Provider>
     );
   });
 

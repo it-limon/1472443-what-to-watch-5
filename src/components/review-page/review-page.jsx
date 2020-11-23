@@ -14,9 +14,9 @@ import PageNotFound from "../page-not-found/page-not-found";
 const AddReviewFormWrapped = withReview(AddReviewForm);
 
 const ReviewPage = (props) => {
-  const {newMovieId, movie, onLoadMovie, isPageNotFound} = props;
+  const {withLoader, newMovieId, movie, onLoadMovie, isPageNotFound} = props;
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(withLoader);
   useEffect(() => {
     onLoadMovie(newMovieId, setIsLoading);
   }, []);
@@ -56,11 +56,16 @@ const ReviewPage = (props) => {
   );
 };
 
+ReviewPage.defaultProps = {
+  withLoader: true
+};
+
 ReviewPage.propTypes = {
   newMovieId: PropTypes.number.isRequired,
   movie: Props.movie,
   onLoadMovie: PropTypes.func.isRequired,
-  isPageNotFound: PropTypes.bool.isRequired
+  isPageNotFound: PropTypes.bool.isRequired,
+  withLoader: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state, props) => ({

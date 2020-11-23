@@ -18,9 +18,9 @@ const store = mockStore({
 describe(`Render UserBlock`, () => {
   it(`Render UserBlock without link`, () => {
     const tree = renderer.create(
-      <Provider store={store}>
-        <UserBlock currentPage={AppPages.MYLIST}/>
-      </Provider>
+        <Provider store={store}>
+          <UserBlock currentPage={AppPages.MYLIST}/>
+        </Provider>
     ).toJSON();
 
     expect(tree).toMatchSnapshot();
@@ -28,13 +28,13 @@ describe(`Render UserBlock`, () => {
 
   it(`Render UserBlock with link`, () => {
     const tree = renderer.create(
-      <Provider store={store}>
-        <BrowserRouter>
-          <Route>
-            <UserBlock currentPage={AppPages.MOVIE}/>
-          </Route>
-        </BrowserRouter>
-      </Provider>
+        <Provider store={store}>
+          <BrowserRouter>
+            <Route>
+              <UserBlock currentPage={AppPages.MOVIE}/>
+            </Route>
+          </BrowserRouter>
+        </Provider>
     ).toJSON();
 
     expect(tree).toMatchSnapshot();

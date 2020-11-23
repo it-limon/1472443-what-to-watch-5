@@ -9,13 +9,13 @@ describe(`Render Footer`, () => {
   it(`Render Footer with active link`, () => {
     const tree = renderer
       .create(
-        <BrowserRouter>
-          <Route>
-            <Footer
-              currentPage={AppPages.MOVIE}
-            />
-          </Route>
-        </BrowserRouter>
+          <BrowserRouter>
+            <Route>
+              <Footer
+                currentPage={AppPages.MOVIE}
+              />
+            </Route>
+          </BrowserRouter>
       )
       .toJSON();
 
@@ -25,9 +25,9 @@ describe(`Render Footer`, () => {
   it(`Render Footer without active link`, () => {
     const tree = renderer
       .create(
-        <Footer
-          currentPage={AppPages.MAIN}
-        />
+          <Footer
+            currentPage={AppPages.MAIN}
+          />
       )
       .toJSON();
 

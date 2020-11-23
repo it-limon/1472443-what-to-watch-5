@@ -62,7 +62,7 @@ const Header = (props) => {
   const userBlock = () => {
     if (withUserBlock) {
       if (authorized) {
-        return <UserBlock currentPage={currentPage} />
+        return <UserBlock currentPage={currentPage} />;
       } else {
         return (
           <Link to={AppRoute.LOGIN} className="user-block__link">

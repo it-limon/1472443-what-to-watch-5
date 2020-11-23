@@ -6,7 +6,7 @@ describe(`Render LoaderPage`, () => {
   it(`Render LoaderPage`, () => {
     const tree = renderer
       .create(
-        <LoaderPage />
+          <LoaderPage />
       )
       .toJSON();
 

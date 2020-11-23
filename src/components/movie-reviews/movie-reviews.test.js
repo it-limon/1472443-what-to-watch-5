@@ -7,14 +7,14 @@ import {testComments} from "../../test-dataset/test-comments";
 const noop = () => {};
 
 describe(`Render MovieReviews`, () => {
-  
+
   it(`Render MovieReviews with 3 comments`, () => {
     const tree = renderer.create(
-      <MovieReviews
-        movie={testMovie}
-        comments={testComments}
-        onLoadCommentsList={noop}
-      />
+        <MovieReviews
+          movie={testMovie}
+          comments={testComments}
+          onLoadCommentsList={noop}
+        />
     ).toJSON();
 
     expect(tree).toMatchSnapshot();
@@ -22,11 +22,11 @@ describe(`Render MovieReviews`, () => {
 
   it(`Render MovieReviews with 0 comments`, () => {
     const tree = renderer.create(
-      <MovieReviews
-        movie={testMovie}
-        comments={[]}
-        onLoadCommentsList={noop}
-      />
+        <MovieReviews
+          movie={testMovie}
+          comments={[]}
+          onLoadCommentsList={noop}
+        />
     ).toJSON();
 
     expect(tree).toMatchSnapshot();

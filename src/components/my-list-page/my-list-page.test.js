@@ -1,13 +1,12 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import configureStore from "redux-mock-store";
-import MoviePage from "./movie-page";
+import MyListPage from "./my-list-page";
 import {Provider} from "react-redux";
 import {AuthorizationStatus} from "../../const";
 import {Route, BrowserRouter} from "react-router-dom";
 import {createAPI} from "../../services/api";
 import thunk from "redux-thunk";
-import {testMovie} from "../../test-dataset/test-movie";
 import {testMovies} from "../../test-dataset/test-movies";
 import {testUser} from "../../test-dataset/test-user";
 
@@ -19,17 +18,13 @@ let store = null;
 const api = createAPI(() => {}, () => {});
 let middlewares = [thunk.withExtraArgument(api)];
 
-describe(`Render MoviePage`, () => {
+describe(`Render MyListPage`, () => {
 
-  it(`Render MoviePage`, () => {
+  it(`Render MyListPage with 2 favorite movies`, () => {
     mockStore = configureStore(middlewares);
     store = mockStore({
       DATA: {
-        movies: testMovies
-      },
-      STATE: {
-        lastActiveMovie: testMovie,
-        isPageNotFound: false
+        favoriteMovies: testMovies
       },
       USER: {
         authorizationStatus: AuthorizationStatus.AUTH,
@@ -40,15 +35,12 @@ describe(`Render MoviePage`, () => {
     const tree = renderer.create(
         <Provider store={store}>
           <BrowserRouter>
-            <Route
-              render={(routeProps) => (
-                <MoviePage
-                  {...routeProps}
-                  withLoader={false}
-                  onLoadMoviePage={noop}
-                />
-              )}
-            />
+            <Route>
+              <MyListPage
+                withLoader={false}
+                onLoadFavoriteMoviesList={noop}
+              />
+            </Route>
           </BrowserRouter>
         </Provider>
     ).toJSON();
@@ -56,37 +48,32 @@ describe(`Render MoviePage`, () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it(`Render MoviePage (no auth)`, () => {
+  it(`Render MyListPage without favorite movies`, () => {
     mockStore = configureStore(middlewares);
     store = mockStore({
       DATA: {
-        movies: testMovies
-      },
-      STATE: {
-        lastActiveMovie: testMovie,
-        isPageNotFound: false
+        favoriteMovies: []
       },
       USER: {
-        authorizationStatus: AuthorizationStatus.NO_AUTH
+        authorizationStatus: AuthorizationStatus.AUTH,
+        userInfo: testUser
       }
     });
 
     const tree = renderer.create(
         <Provider store={store}>
           <BrowserRouter>
-            <Route
-              render={(routeProps) => (
-                <MoviePage
-                  {...routeProps}
-                  withLoader={false}
-                  onLoadMoviePage={noop}
-                />
-              )}
-            />
+            <Route>
+              <MyListPage
+                withLoader={false}
+                onLoadFavoriteMoviesList={noop}
+              />
+            </Route>
           </BrowserRouter>
         </Provider>
     ).toJSON();
 
     expect(tree).toMatchSnapshot();
   });
+
 });

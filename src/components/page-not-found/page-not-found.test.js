@@ -8,7 +8,7 @@ describe(`Render PageNotFound`, () => {
   it(`Render PageNotFound without link to Main`, () => {
     const tree = renderer
       .create(
-        <PageNotFound fromMainPage={true}/>
+          <PageNotFound fromMainPage={true}/>
       )
       .toJSON();
 
@@ -18,11 +18,11 @@ describe(`Render PageNotFound`, () => {
   it(`Render PageNotFound with link to Main`, () => {
     const tree = renderer
       .create(
-        <BrowserRouter>
-          <Route>
-            <PageNotFound />
-          </Route>
-        </BrowserRouter>
+          <BrowserRouter>
+            <Route>
+              <PageNotFound />
+            </Route>
+          </BrowserRouter>
       )
       .toJSON();
 

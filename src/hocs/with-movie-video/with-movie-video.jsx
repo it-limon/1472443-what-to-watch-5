@@ -3,6 +3,8 @@ import history from "../../browser-history";
 import {connect} from "react-redux";
 import {loadMovie} from "../../store/api-actions";
 import PropTypes from "prop-types";
+import Props from "../../props";
+import {getLastActiveMovie, getIsPageNotFound} from "../../store/selectors/state-selector";
 
 export const withMovieVideo = (Component) => {
   class WithMovieVideo extends PureComponent {
@@ -99,6 +101,7 @@ export const withMovieVideo = (Component) => {
       return (
         <Component
           {...this.props}
+          movie={this.props.movie}
           videoRef={this._videoRef}
           isPlaying={this.state.isPlaying}
           onPlaybackStatusChange={this._handlePlaybackStatusChange}
@@ -107,6 +110,7 @@ export const withMovieVideo = (Component) => {
           elapsedTimePrc={elapsedTimePrc}
           timeLeft={timeLeft}
           isLoading={this.state.isLoading}
+          isPageNotFound={this.props.isPageNotFound}
         />
       );
     }
@@ -118,11 +122,18 @@ export const withMovieVideo = (Component) => {
         id: PropTypes.string.isRequired
       })
     }),
-    onLoadMovie: PropTypes.func.isRequired
+    movie: Props.movie,
+    onLoadMovie: PropTypes.func.isRequired,
+    isPageNotFound: PropTypes.bool.isRequired
   };
 
-  return connect(null, mapDispatchToProps)(WithMovieVideo);
+  return connect(mapStateToProps, mapDispatchToProps)(WithMovieVideo);
 };
+
+const mapStateToProps = (state) => ({
+  movie: getLastActiveMovie(state),
+  isPageNotFound: getIsPageNotFound(state)
+});
 
 const mapDispatchToProps = (dispatch) => ({
   onLoadMovie(movieId, setIsLoading) {

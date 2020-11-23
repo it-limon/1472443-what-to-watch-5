@@ -293,3 +293,13 @@ Array [
   </div>,
 ]
 `;
+
+exports[`Render MainPage Render MainPage not found 1`] = `
+<h1>
+  404.
+  <br />
+  <small>
+    Page not found
+  </small>
+</h1>
+`;

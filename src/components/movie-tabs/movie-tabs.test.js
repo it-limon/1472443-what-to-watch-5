@@ -12,14 +12,14 @@ let store = null;
 const noop = () => {};
 
 describe(`Render MovieTabs`, () => {
-  
+
   it(`Render MovieTabs with first active tab`, () => {
     const tree = renderer.create(
-      <MovieTabs 
-        movie={testMovie}
-        activeIndex={0}
-        onChangeActiveIndex={noop}
-      />
+        <MovieTabs
+          movie={testMovie}
+          activeIndex={0}
+          onChangeActiveIndex={noop}
+        />
     ).toJSON();
 
     expect(tree).toMatchSnapshot();
@@ -27,11 +27,11 @@ describe(`Render MovieTabs`, () => {
 
   it(`Render MovieTabs with second active tab`, () => {
     const tree = renderer.create(
-      <MovieTabs 
-        movie={testMovie}
-        activeIndex={1}
-        onChangeActiveIndex={noop}
-      />
+        <MovieTabs
+          movie={testMovie}
+          activeIndex={1}
+          onChangeActiveIndex={noop}
+        />
     ).toJSON();
 
     expect(tree).toMatchSnapshot();
@@ -46,13 +46,13 @@ describe(`Render MovieTabs`, () => {
     });
 
     const tree = renderer.create(
-      <Provider store={store}>
-        <MovieTabs
-          movie={testMovie}
-          activeIndex={2}
-          onChangeActiveIndex={noop}
-        />
-      </Provider>
+        <Provider store={store}>
+          <MovieTabs
+            movie={testMovie}
+            activeIndex={2}
+            onChangeActiveIndex={noop}
+          />
+        </Provider>
     ).toJSON();
 
     expect(tree).toMatchSnapshot();

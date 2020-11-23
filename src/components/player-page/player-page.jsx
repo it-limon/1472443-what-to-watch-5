@@ -2,8 +2,6 @@ import React, {Fragment} from "react";
 import PropTypes from "prop-types";
 import Props from "../../props";
 import VideoPlayer from "../video-player/video-player";
-import {connect} from "react-redux";
-import {getLastActiveMovie, getIsPageNotFound} from "../../store/selectors/state-selector";
 import PageNotFound from "../page-not-found/page-not-found";
 import LoaderPage from "../loader-page/loader-page";
 
@@ -101,10 +99,4 @@ PlayerPage.propTypes = {
   isPageNotFound: PropTypes.bool.isRequired
 };
 
-const mapStateToProps = (state) => ({
-  movie: getLastActiveMovie(state),
-  isPageNotFound: getIsPageNotFound(state)
-});
-
-export {PlayerPage};
-export default connect(mapStateToProps)(PlayerPage);
+export default PlayerPage;

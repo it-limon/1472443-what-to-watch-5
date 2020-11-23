@@ -3,6 +3,7 @@ import {ALL_GENRES, SIMILAR_MOVIES_COUNT, MAX_GENRES_COUNT} from "../../const";
 import {NameSpace} from "../root-reducer";
 
 export const getMovies = (state) => state[NameSpace.DATA].movies;
+export const getFavoriteMovies = (state) => state[NameSpace.DATA].favoriteMovies;
 export const getPromoMovie = (state) => state[NameSpace.DATA].promoMovie;
 export const getComments = (state) => state[NameSpace.DATA].comments;
 export const getMovieId = (_, id) => parseInt(id, 10);

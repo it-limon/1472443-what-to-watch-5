@@ -7,7 +7,7 @@ describe(`Render MoviesList`, () => {
 
   it(`With 2 movies`, () => {
     const tree = renderer.create(
-      <MoviesList movies={testMovies}/>
+        <MoviesList movies={testMovies}/>
     ).toJSON();
 
     expect(tree).toMatchSnapshot();
@@ -15,7 +15,7 @@ describe(`Render MoviesList`, () => {
 
   it(`With 0 movies`, () => {
     const tree = renderer.create(
-      <MoviesList movies={[]}/>
+        <MoviesList movies={[]}/>
     ).toJSON();
 
     expect(tree).toMatchSnapshot();

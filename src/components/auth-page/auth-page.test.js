@@ -20,21 +20,21 @@ describe(`Render AuthPage`, () => {
         authorizationStatus: AuthorizationStatus.NO_AUTH
       }
     });
-    
+
     authPageComponent = renderer.create(
-      <Provider store={store}>
-        <BrowserRouter>
-          <Route>
-            <AuthPage
-              loginRef={ref}
-              passwordRef={ref}
-              isInvalidLogin={true}
-              isInvalidPassword={true}
-              onSubmit={noop}
-            />
-          </Route>
-        </BrowserRouter>
-      </Provider>
+        <Provider store={store}>
+          <BrowserRouter>
+            <Route>
+              <AuthPage
+                loginRef={ref}
+                passwordRef={ref}
+                isInvalidLogin={true}
+                isInvalidPassword={true}
+                onSubmit={noop}
+              />
+            </Route>
+          </BrowserRouter>
+        </Provider>
     );
   });
 

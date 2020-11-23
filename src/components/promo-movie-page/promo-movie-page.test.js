@@ -12,7 +12,7 @@ let mockStore = null;
 let store = null;
 
 describe(`Render PromoMoviePage`, () => {
-  
+
   it(`Render PromoMoviePage (no auth)`, () => {
     mockStore = configureStore([]);
     store = mockStore({
@@ -28,13 +28,13 @@ describe(`Render PromoMoviePage`, () => {
     });
 
     const tree = renderer.create(
-      <Provider store={store}>
-        <BrowserRouter>
-          <Route>
-            <PromoMoviePage />
-          </Route>
-        </BrowserRouter>
-      </Provider>
+        <Provider store={store}>
+          <BrowserRouter>
+            <Route>
+              <PromoMoviePage />
+            </Route>
+          </BrowserRouter>
+        </Provider>
     ).toJSON();
 
     expect(tree).toMatchSnapshot();
@@ -56,13 +56,13 @@ describe(`Render PromoMoviePage`, () => {
     });
 
     const tree = renderer.create(
-      <Provider store={store}>
-        <BrowserRouter>
-          <Route>
-            <PromoMoviePage />
-          </Route>
-        </BrowserRouter>
-      </Provider>
+        <Provider store={store}>
+          <BrowserRouter>
+            <Route>
+              <PromoMoviePage />
+            </Route>
+          </BrowserRouter>
+        </Provider>
     ).toJSON();
 
     expect(tree).toMatchSnapshot();

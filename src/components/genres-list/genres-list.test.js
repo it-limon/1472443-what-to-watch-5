@@ -25,9 +25,9 @@ describe(`Render GenresList`, () => {
     store.dispatch = jest.fn();
 
     genresListComponent = renderer.create(
-      <Provider store={store}>
-        <GenresList onChangeMovieGenre={noop}/>
-      </Provider>
+        <Provider store={store}>
+          <GenresList onChangeMovieGenre={noop}/>
+        </Provider>
     );
   });
 
@@ -37,7 +37,7 @@ describe(`Render GenresList`, () => {
 
   it(`Should call dispatch when button click`, () => {
     renderer.act(() => {
-      genresListComponent.root.findAllByProps({className: "catalog__genres-item"})[0].props.onClick();
+      genresListComponent.root.findAllByProps({className: `catalog__genres-item`})[0].props.onClick();
     });
 
     expect(store.dispatch).toHaveBeenCalledTimes(1);

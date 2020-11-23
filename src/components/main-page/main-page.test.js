@@ -4,35 +4,25 @@ import configureStore from "redux-mock-store";
 import MainPage from "./main-page";
 import {Provider} from "react-redux";
 import {Route, BrowserRouter} from "react-router-dom";
-import {APIRoute, AuthorizationStatus} from "../../const";
+import {AuthorizationStatus} from "../../const";
 import {testMovie} from "../../test-dataset/test-movie";
 import {testMovies} from "../../test-dataset/test-movies";
 import {testUser} from "../../test-dataset/test-user";
-import MockAdapter from "axios-mock-adapter";
-import {loadMainPage} from "../../store/api-actions";
 import {createAPI} from "../../services/api";
 import thunk from "redux-thunk";
-import {applyMiddleware} from "redux";
+
+const noop = () => {};
 
 let mockStore = null;
 let store = null;
 
-const noop = () => {};
-
-const api = createAPI(() => {});
-
-const apiMock = new MockAdapter(api);
-const dispatch = jest.fn();
-const mainPageLoader = loadMainPage(noop);
-
-apiMock
-  .onGet(APIRoute.PROMO_MOVIE)
-  .reply(200, [{fake: true}]);
+const api = createAPI(() => {}, () => {});
+let middlewares = [thunk.withExtraArgument(api)];
 
 describe(`Render MainPage`, () => {
-  
   it(`Render MainPage loaded`, () => {
-    mockStore = configureStore({middlewares: thunk.withExtraArgument(api)});
+    mockStore = configureStore(middlewares);
+
     store = mockStore({
       DATA: {
         movies: testMovies,
@@ -51,24 +41,24 @@ describe(`Render MainPage`, () => {
     });
 
     const tree = renderer.create(
-      <Provider store={store}>
-        <BrowserRouter>
-          <Route>
-            <MainPage
-              withLoader={false}
-              onLoadMainPage={mainPageLoader}
-            />
-          </Route>
-        </BrowserRouter>
-      </Provider>
+        <Provider store={store}>
+          <BrowserRouter>
+            <Route>
+              <MainPage
+                withLoader={false}
+                onLoadMainPage={noop}
+              />
+            </Route>
+          </BrowserRouter>
+        </Provider>
     ).toJSON();
 
-    return mainPageLoader(dispatch, () => {}, api)
-      .then(() => expect(tree).toMatchSnapshot());
+    expect(tree).toMatchSnapshot();
   });
 
   it(`Render MainPage not found`, () => {
-    mockStore = configureStore({middlewares: thunk.withExtraArgument(api)});
+    mockStore = configureStore(middlewares);
+
     store = mockStore({
       DATA: {
         movies: testMovies,
@@ -87,19 +77,18 @@ describe(`Render MainPage`, () => {
     });
 
     const tree = renderer.create(
-      <Provider store={store}>
-        <BrowserRouter>
-          <Route>
-            <MainPage
-              withLoader={false}
-              onLoadMainPage={mainPageLoader}
-            />
-          </Route>
-        </BrowserRouter>
-      </Provider>
+        <Provider store={store}>
+          <BrowserRouter>
+            <Route>
+              <MainPage
+                withLoader={false}
+                onLoadMainPage={noop}
+              />
+            </Route>
+          </BrowserRouter>
+        </Provider>
     ).toJSON();
 
-    return mainPageLoader(dispatch, () => {}, api)
-      .then(() => expect(tree).toMatchSnapshot());
+    expect(tree).toMatchSnapshot();
   });
 });

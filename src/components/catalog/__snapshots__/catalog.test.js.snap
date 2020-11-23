@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Render Catalog Render Catalog with 0 shown movie Should Catalog render correctly 1`] = `
+exports[`Render Catalog with 0 shown movie Should Catalog render correctly 1`] = `
 <section
   className="catalog"
 >
@@ -34,7 +34,7 @@ exports[`Render Catalog Render Catalog with 0 shown movie Should Catalog render 
 </section>
 `;
 
-exports[`Render Catalog Render Catalog with 1 shown movie Should Catalog render correctly 1`] = `
+exports[`Render Catalog with 1 shown movie Should Catalog render correctly 1`] = `
 <section
   className="catalog"
 >
@@ -129,7 +129,7 @@ exports[`Render Catalog Render Catalog with 1 shown movie Should Catalog render 
 </section>
 `;
 
-exports[`Render Catalog Render Catalog with 2 shown movies Should Catalog render correctly 1`] = `
+exports[`Render Catalog with 2 shown movies Should Catalog render correctly 1`] = `
 <section
   className="catalog"
 >

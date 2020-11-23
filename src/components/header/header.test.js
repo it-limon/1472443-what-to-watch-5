@@ -12,7 +12,7 @@ let mockStore = null;
 let store = null;
 
 describe(`Render Header`, () => {
-  
+
   it(`Render Header (no auth)`, () => {
     mockStore = configureStore([]);
     store = mockStore({
@@ -22,13 +22,13 @@ describe(`Render Header`, () => {
     });
 
     const tree = renderer.create(
-      <Provider store={store}>
-        <BrowserRouter>
-          <Route>
-            <Header currentPage={AppPages.MAIN}/>
-          </Route>
-        </BrowserRouter>
-      </Provider>
+        <Provider store={store}>
+          <BrowserRouter>
+            <Route>
+              <Header currentPage={AppPages.MAIN}/>
+            </Route>
+          </BrowserRouter>
+        </Provider>
     ).toJSON();
 
     expect(tree).toMatchSnapshot();
@@ -47,13 +47,13 @@ describe(`Render Header`, () => {
     });
 
     const tree = renderer.create(
-      <Provider store={store}>
-        <BrowserRouter>
-          <Route>
-            <Header currentPage={AppPages.REVIEW}/>
-          </Route>
-        </BrowserRouter>
-      </Provider>
+        <Provider store={store}>
+          <BrowserRouter>
+            <Route>
+              <Header currentPage={AppPages.REVIEW}/>
+            </Route>
+          </BrowserRouter>
+        </Provider>
     ).toJSON();
 
     expect(tree).toMatchSnapshot();

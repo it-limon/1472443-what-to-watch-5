@@ -8,11 +8,12 @@ import Footer from "../footer/footer";
 import MoviesList from "../movies-list/movies-list";
 import LoaderPage from "../loader-page/loader-page";
 import {loadFavoriteMoviesList} from "../../store/api-actions";
+import {getFavoriteMovies} from "../../store/selectors/data-selector";
 
 const MyListPage = (props) => {
-  const {favoriteMovies, onLoadFavoriteMoviesList} = props;
+  const {withLoader, favoriteMovies, onLoadFavoriteMoviesList} = props;
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(withLoader);
   useEffect(() => {
     onLoadFavoriteMoviesList(setIsLoading);
   }, []);
@@ -43,13 +44,18 @@ const MyListPage = (props) => {
   );
 };
 
+MyListPage.defaultProps = {
+  withLoader: true
+};
+
 MyListPage.propTypes = {
+  withLoader: PropTypes.bool.isRequired,
   onLoadFavoriteMoviesList: PropTypes.func.isRequired,
   favoriteMovies: PropTypes.arrayOf(Props.movie).isRequired
 };
 
-const mapStateToProps = ({DATA}) => ({
-  favoriteMovies: DATA.favoriteMovies
+const mapStateToProps = (state) => ({
+  favoriteMovies: getFavoriteMovies(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
