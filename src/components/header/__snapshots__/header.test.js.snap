@@ -1,14 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Render Header Render Header (authorized/without breadcrumbs/with active user block) 1`] = `
+exports[`Render Header Render Header (auth) 1`] = `
 <header
   className="page-header movie-card__head"
 >
   <div
     className="logo"
   >
-    <div
+    <a
       className="logo__link"
+      href="/"
+      onClick={[Function]}
     >
       <span
         className="logo__letter logo__letter--1"
@@ -25,8 +27,36 @@ exports[`Render Header Render Header (authorized/without breadcrumbs/with active
       >
         W
       </span>
-    </div>
+    </a>
   </div>
+  <nav
+    className="breadcrumbs"
+  >
+    <ul
+      className="breadcrumbs__list"
+    >
+      <li
+        className="breadcrumbs__item"
+      >
+        <a
+          className="breadcrumbs__link"
+          href="/films/1"
+          onClick={[Function]}
+        >
+          El Camino: A Breaking Bad Movie
+        </a>
+      </li>
+      <li
+        className="breadcrumbs__item"
+      >
+        <a
+          className="breadcrumbs__link"
+        >
+          Add review
+        </a>
+      </li>
+    </ul>
+  </nav>
   <div
     className="user-block"
   >
@@ -40,7 +70,7 @@ exports[`Render Header Render Header (authorized/without breadcrumbs/with active
         <img
           alt="User Name"
           height="63"
-          src="https://avatars.dicebear.com/api/human/1.svg"
+          src="https://cdn.pixabay.com/photo/2017/06/23/08/13/china-2433891_960_720.png"
           width="63"
         />
       </div>
@@ -49,7 +79,7 @@ exports[`Render Header Render Header (authorized/without breadcrumbs/with active
 </header>
 `;
 
-exports[`Render Header Render Header (not authorized) 1`] = `
+exports[`Render Header Render Header (no auth) 1`] = `
 <header
   className="page-header movie-card__head"
 >

@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render UserBlock Render UserBlock with link 1`] = `
+<a
+  href="/mylist"
+  onClick={[Function]}
+>
+  <div
+    className="user-block__avatar"
+  >
+    <img
+      alt="User Name"
+      height="63"
+      src="https://cdn.pixabay.com/photo/2017/06/23/08/13/china-2433891_960_720.png"
+      width="63"
+    />
+  </div>
+</a>
+`;
+
+exports[`Render UserBlock Render UserBlock without link 1`] = `
+<div
+  className="user-block__avatar"
+>
+  <img
+    alt="User Name"
+    height="63"
+    src="https://cdn.pixabay.com/photo/2017/06/23/08/13/china-2433891_960_720.png"
+    width="63"
+  />
+</div>
+`;

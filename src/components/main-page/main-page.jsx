@@ -11,9 +11,9 @@ import {getIsPageNotFound} from "../../store/selectors/state-selector";
 import PageNotFound from "../page-not-found/page-not-found";
 
 const MainPage = (props) => {
-  const {onLoadMainPage, isPageNotFound} = props;
+  const {withLoader, onLoadMainPage, isPageNotFound} = props;
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(withLoader);
   useEffect(() => {
     onLoadMainPage(setIsLoading);
   }, []);
@@ -42,7 +42,12 @@ const MainPage = (props) => {
   );
 };
 
+MainPage.defaultProps = {
+  withLoader: true
+};
+
 MainPage.propTypes = {
+  withLoader: PropTypes.bool.isRequired,
   onLoadMainPage: PropTypes.func.isRequired,
   isPageNotFound: PropTypes.bool.isRequired
 };

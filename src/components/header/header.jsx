@@ -1,20 +1,19 @@
 import React, {Fragment} from "react";
 import PropTypes from "prop-types";
-import {getAuthorizationStatus, getUserInfo} from "../../store/selectors/user-selector";
+import {getAuthorizationStatus} from "../../store/selectors/user-selector";
 import {connect} from "react-redux";
 import {AuthorizationStatus, AppPages, AppRoute} from "../../const";
 import {Link} from "react-router-dom";
 import Breadcrumbs from "../breadcrumbs/breadcrumbs";
-import Props from "../../props";
+import UserBlock from "../user-block/user-block";
 
 const Header = (props) => {
-  const {authorized, userInfo, currentPage} = props;
+  const {authorized, currentPage} = props;
 
   const withActiveLink = (currentPage !== AppPages.MAIN);
   const withBreadcrumbs = (currentPage === AppPages.REVIEW);
   const withHeaderText = (currentPage === AppPages.AUTH) || (currentPage === AppPages.MYLIST);
   const withUserBlock = currentPage !== AppPages.AUTH;
-  const withActiveUserLink = currentPage !== AppPages.MYLIST;
 
   const logoClassName = withHeaderText ? `user-page__head` : `movie-card__head`;
 
@@ -43,13 +42,8 @@ const Header = (props) => {
   };
 
   const breadcrumbsBlock = () => {
-    if (withBreadcrumbs && props.breadcrumbsMovieId !== -1) {
-      return (
-        <Breadcrumbs
-          movieId={props.breadcrumbsMovieId}
-          movieName={props.breadcrumbsMovieName}
-        />
-      );
+    if (withBreadcrumbs) {
+      return <Breadcrumbs />;
     } else {
       return null;
     }
@@ -65,24 +59,10 @@ const Header = (props) => {
     }
   };
 
-  const user = (
-    <div className="user-block__avatar">
-      <img src={userInfo.avatarUrl} alt={userInfo.name} width="63" height="63" />
-    </div>
-  );
-
   const userBlock = () => {
     if (withUserBlock) {
       if (authorized) {
-        if (withActiveUserLink) {
-          return (
-            <Link to={AppRoute.MYLIST}>
-              {user}
-            </Link>
-          );
-        } else {
-          return user;
-        }
+        return <UserBlock currentPage={currentPage} />
       } else {
         return (
           <Link to={AppRoute.LOGIN} className="user-block__link">
@@ -112,22 +92,13 @@ const Header = (props) => {
   );
 };
 
-Header.defaultProps = {
-  breadcrumbsMovieId: -1,
-  breadcrumbsMovieName: ``
-};
-
 Header.propTypes = {
   authorized: PropTypes.bool.isRequired,
-  userInfo: Props.userInfo,
-  currentPage: PropTypes.string.isRequired,
-  breadcrumbsMovieId: PropTypes.number.isRequired,
-  breadcrumbsMovieName: PropTypes.string.isRequired
+  currentPage: PropTypes.string.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  authorized: getAuthorizationStatus(state) === AuthorizationStatus.AUTH,
-  userInfo: getUserInfo(state)
+  authorized: getAuthorizationStatus(state) === AuthorizationStatus.AUTH
 });
 
 export {Header};

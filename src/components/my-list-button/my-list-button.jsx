@@ -28,10 +28,6 @@ MyListButton.propTypes = {
   onSetFavoriteMovie: PropTypes.func.isRequired
 };
 
-const mapStateToProps = () => ({
-  onSetFavoriteMovie: PropTypes.func.isRequired
-});
-
 const mapDispatchToProps = (dispatch) => ({
   onSetFavoriteMovie(movieId, status) {
     dispatch(setFavoriteMovie(movieId, status));
@@ -39,4 +35,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {MyListButton};
-export default connect(mapStateToProps, mapDispatchToProps)(MyListButton);
+export default connect(null, mapDispatchToProps)(MyListButton);

@@ -13,15 +13,14 @@ const GenresList = (props) => {
       {genres.map((genre, i) => (
         <li
           key={i}
-          className={`catalog__genres-item ${(genre === currentGenre) ? `catalog__genres-item--active` : ``}`}
-          onClick={(evt) => {
-            evt.preventDefault();
+          className={`catalog__genres-item${(genre === currentGenre) ? ` catalog__genres-item--active` : ``}`}
+          onClick={() => {
             if (genre !== currentGenre) {
               onChangeMovieGenre(genre);
             }
           }}
         >
-          <a href="#" className="catalog__genres-link">{genre}</a>
+          <a href="#" className="catalog__genres-link" onClick={(evt) => evt.preventDefault()}>{genre}</a>
         </li>
       ))}
     </ul>

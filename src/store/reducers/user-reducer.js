@@ -4,12 +4,7 @@ import {UserActionType} from "../actions/user-action";
 
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
-  userInfo: {
-    id: -1,
-    email: ``,
-    name: ``,
-    avatarUrl: ``
-  }
+  userInfo: {}
 };
 
 export const appUser = (state = initialState, action) => {

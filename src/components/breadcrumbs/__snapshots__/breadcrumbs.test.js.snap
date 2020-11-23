@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Render Breadcrumbs Render Breadcrumbs 1`] = `
+exports[`Render Breadcrumbs Should Breadcrumbs to store render correctly 1`] = `
 <nav
   className="breadcrumbs"
 >
@@ -15,7 +15,7 @@ exports[`Render Breadcrumbs Render Breadcrumbs 1`] = `
         href="/films/1"
         onClick={[Function]}
       >
-        name
+        El Camino: A Breaking Bad Movie
       </a>
     </li>
     <li

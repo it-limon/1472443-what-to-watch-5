@@ -8,7 +8,15 @@ export const getShownMoviesCount = (state) => state[NameSpace.STATE].shownMovies
 export const getLastActiveMovie = (state) => state[NameSpace.STATE].lastActiveMovie;
 export const getIsPageNotFound = (state) => state[NameSpace.STATE].isPageNotFound;
 
-export const getMoviesByGenre = createSelector([getMovies, getCurrentGenre, getShownMoviesCount], (movies, genre, shownMoviesCount) => {
+export const getTotalMoviesByGenre = createSelector([getMovies, getCurrentGenre, getShownMoviesCount], (movies, genre, shownMoviesCount) => {
+  if (genre === ALL_GENRES) {
+    return movies;
+  } else {
+    return movies.filter((currMovie) => currMovie.genre === genre);
+  }
+});
+
+export const getShownMoviesByGenre = createSelector([getMovies, getCurrentGenre, getShownMoviesCount], (movies, genre, shownMoviesCount) => {
   if (genre === ALL_GENRES) {
     return movies.slice(0, shownMoviesCount);
   } else {

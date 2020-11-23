@@ -1,16 +1,15 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import App from "./app";
+import LoaderPage from "./loader-page";
 
-describe(`Render App`, () => {
-  it(`Render App`, () => {
+describe(`Render LoaderPage`, () => {
+  it(`Render LoaderPage`, () => {
     const tree = renderer
       .create(
-          <App />
+        <LoaderPage />
       )
       .toJSON();
 
     expect(tree).toMatchSnapshot();
   });
 });
-

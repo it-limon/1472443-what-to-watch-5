@@ -20,9 +20,10 @@ import MyListButton from "../my-list-button/my-list-button";
 const MovieTabsWrapped = withActiveIndex(MovieTabs);
 
 const MoviePage = (props) => {
-  const {newMovieId, movie, onLoadMoviePage, similarMovies, authorized, isPageNotFound} = props;
+  const {withLoader, newMovieId, movie, onLoadMoviePage, similarMovies, authorized, isPageNotFound} = props;
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(withLoader);
+
   useEffect(() => {
     onLoadMoviePage(newMovieId, setIsLoading);
   }, [newMovieId]);
@@ -85,7 +86,8 @@ const MoviePage = (props) => {
 
                     <div className="movie-card__desc">
                       <MovieTabsWrapped
-                        movie={movie} />
+                        movie={movie} 
+                      />
                     </div>
                   </div>
                 </div>
@@ -113,7 +115,12 @@ const MoviePage = (props) => {
   );
 };
 
+MoviePage.defaultProps = {
+  withLoader: true
+};
+
 MoviePage.propTypes = {
+  withLoader: PropTypes.bool.isRequired,
   newMovieId: PropTypes.number.isRequired,
   movie: Props.movie,
   similarMovies: PropTypes.arrayOf(Props.movie).isRequired,

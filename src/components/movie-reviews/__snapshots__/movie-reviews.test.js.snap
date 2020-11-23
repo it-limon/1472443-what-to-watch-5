@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render MovieReviews Render MovieReviews with 0 comments 1`] = `
+<div
+  className="movie-card__reviews movie-card__row"
+/>
+`;
+
+exports[`Render MovieReviews Render MovieReviews with 3 comments 1`] = `
+<div
+  className="movie-card__reviews movie-card__row"
+>
+  <div
+    className="movie-card__reviews-col"
+  >
+    <div
+      className="review"
+    >
+      <blockquote
+        className="review__quote"
+      >
+        <p
+          className="review__text"
+        >
+          Comment 1
+        </p>
+        <footer
+          className="review__details"
+        >
+          <cite
+            className="review__author"
+          >
+            User 1
+          </cite>
+          <time
+            className="review__date"
+            dateTime="1995-12-17T03:24:00"
+          >
+            December 17, 1995
+          </time>
+        </footer>
+      </blockquote>
+      <div
+        className="review__rating"
+      >
+        8.0
+      </div>
+    </div>
+    <div
+      className="review"
+    >
+      <blockquote
+        className="review__quote"
+      >
+        <p
+          className="review__text"
+        >
+          Comment 2
+        </p>
+        <footer
+          className="review__details"
+        >
+          <cite
+            className="review__author"
+          >
+            User 2
+          </cite>
+          <time
+            className="review__date"
+            dateTime="1996-12-17T03:24:00"
+          >
+            December 17, 1996
+          </time>
+        </footer>
+      </blockquote>
+      <div
+        className="review__rating"
+      >
+        7.0
+      </div>
+    </div>
+  </div>
+  <div
+    className="movie-card__reviews-col"
+  >
+    <div
+      className="review"
+    >
+      <blockquote
+        className="review__quote"
+      >
+        <p
+          className="review__text"
+        >
+          Comment 3
+        </p>
+        <footer
+          className="review__details"
+        >
+          <cite
+            className="review__author"
+          >
+            User 3
+          </cite>
+          <time
+            className="review__date"
+            dateTime="1997-12-17T03:24:00"
+          >
+            December 17, 1997
+          </time>
+        </footer>
+      </blockquote>
+      <div
+        className="review__rating"
+      >
+        5.0
+      </div>
+    </div>
+  </div>
+</div>
+`;

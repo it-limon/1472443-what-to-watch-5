@@ -36,11 +36,7 @@ const ReviewPage = (props) => {
 
                 <h1 className="visually-hidden">WTW</h1>
 
-                <Header
-                  currentPage={AppPages.REVIEW}
-                  breadcrumbsMovieId={movie.id}
-                  breadcrumbsMovieName={movie.name}
-                />
+                <Header currentPage={AppPages.REVIEW} />
 
                 <div className="movie-card__poster movie-card__poster--small">
                   <img src={movie.posterImage} alt={`${movie.name} poster`} width="218" height="327" />

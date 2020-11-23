@@ -1,21 +1,27 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import configureStore from "redux-mock-store";
-import Header from "./header";
+import PromoMoviePage from "./promo-movie-page";
 import {Provider} from "react-redux";
 import {Route, BrowserRouter} from "react-router-dom";
-import {AuthorizationStatus, AppPages} from "../../const";
+import {AuthorizationStatus} from "../../const";
 import {testMovie} from "../../test-dataset/test-movie";
 import {testUser} from "../../test-dataset/test-user";
 
 let mockStore = null;
 let store = null;
 
-describe(`Render Header`, () => {
+describe(`Render PromoMoviePage`, () => {
   
-  it(`Render Header (no auth)`, () => {
+  it(`Render PromoMoviePage (no auth)`, () => {
     mockStore = configureStore([]);
     store = mockStore({
+      DATA: {
+        promoMovie: testMovie
+      },
+      STATE: {
+        lastActiveMovie: testMovie
+      },
       USER: {
         authorizationStatus: AuthorizationStatus.NO_AUTH
       }
@@ -25,7 +31,7 @@ describe(`Render Header`, () => {
       <Provider store={store}>
         <BrowserRouter>
           <Route>
-            <Header currentPage={AppPages.MAIN}/>
+            <PromoMoviePage />
           </Route>
         </BrowserRouter>
       </Provider>
@@ -34,9 +40,12 @@ describe(`Render Header`, () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it(`Render Header (auth)`, () => {
+  it(`Render PromoMoviePage (auth)`, () => {
     mockStore = configureStore([]);
     store = mockStore({
+      DATA: {
+        promoMovie: testMovie
+      },
       STATE: {
         lastActiveMovie: testMovie
       },
@@ -50,7 +59,7 @@ describe(`Render Header`, () => {
       <Provider store={store}>
         <BrowserRouter>
           <Route>
-            <Header currentPage={AppPages.REVIEW}/>
+            <PromoMoviePage />
           </Route>
         </BrowserRouter>
       </Provider>
@@ -58,4 +67,5 @@ describe(`Render Header`, () => {
 
     expect(tree).toMatchSnapshot();
   });
+
 });

@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render MoviesList With 0 movies 1`] = `
+<div
+  className="catalog__movies-list"
+/>
+`;
+
+exports[`Render MoviesList With 2 movies 1`] = `
+<div
+  className="catalog__movies-list"
+>
+  <article
+    className="small-movie-card catalog__movies-card"
+    onClick={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <div
+      className="small-movie-card__image"
+    >
+      <video
+        className="player__video"
+        muted={true}
+        poster="https://cdn.pixabay.com/photo/2020/11/16/16/13/trees-5749406_960_720.jpg"
+        src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
+      />
+    </div>
+    <h3
+      className="small-movie-card__title"
+    >
+      <a
+        className="small-movie-card__link"
+        href="#"
+        onClick={[Function]}
+      >
+        El Camino: A Breaking Bad Movie
+      </a>
+    </h3>
+  </article>
+  <article
+    className="small-movie-card catalog__movies-card"
+    onClick={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <div
+      className="small-movie-card__image"
+    >
+      <video
+        className="player__video"
+        muted={true}
+        poster="https://cdn.pixabay.com/photo/2020/11/16/16/13/trees-5749406_960_720.jpg"
+        src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
+      />
+    </div>
+    <h3
+      className="small-movie-card__title"
+    >
+      <a
+        className="small-movie-card__link"
+        href="#"
+        onClick={[Function]}
+      >
+        The Dark Knight
+      </a>
+    </h3>
+  </article>
+</div>
+`;
