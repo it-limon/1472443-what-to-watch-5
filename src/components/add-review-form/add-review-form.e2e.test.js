@@ -7,22 +7,22 @@ configure({adapter: new Adapter()});
 
 const noop = () => {};
 
-it(`Form sent`, () => {
+it(`AddReviewForm sent`, () => {
   const onSubmit = jest.fn();
 
   const addReviewForm = shallow(
-        <AddReviewForm
-          movieId={1}
-          rating={2}
-          onSubmit={onSubmit}
-          onCommentChange={noop}
-          onRatingChange={noop}
-          commentIsDisabled={false}
-          ratingIsDisabled={false}
-          btnPostIsDisabled={false}
-          errorMessage={``}
-        />
-    );
+      <AddReviewForm
+        movieId={1}
+        rating={2}
+        onSubmit={onSubmit}
+        onCommentChange={noop}
+        onRatingChange={noop}
+        commentIsDisabled={false}
+        ratingIsDisabled={false}
+        btnPostIsDisabled={false}
+        errorMessage={``}
+      />
+  );
 
   const form = addReviewForm.find(`form`);
   form.simulate(`submit`);
