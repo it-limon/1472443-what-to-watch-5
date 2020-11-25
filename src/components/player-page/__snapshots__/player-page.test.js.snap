@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render PlayerPage Render PlayerPage 1`] = `
+<div
+  className="player"
+>
+  <video
+    className="player__video"
+    muted={false}
+    poster="https://cdn.pixabay.com/photo/2020/11/16/16/13/trees-5749406_960_720.jpg"
+    src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
+  />
+  <button
+    className="player__exit"
+    onClick={[Function]}
+    type="button"
+  >
+    Exit
+  </button>
+  <div
+    className="player__controls"
+  >
+    <div
+      className="player__controls-row"
+    >
+      <div
+        className="player__time"
+      >
+        <progress
+          className="player__progress"
+          max="100"
+          value="54"
+        />
+        <div
+          className="player__toggler"
+          style={
+            Object {
+              "left": "54%",
+            }
+          }
+        >
+          Toggler
+        </div>
+      </div>
+      <div
+        className="player__time-value"
+      >
+        2:45:12
+      </div>
+    </div>
+    <div
+      className="player__controls-row"
+    >
+      <button
+        className="player__play"
+        onClick={[Function]}
+        type="button"
+      >
+        <svg
+          height="21"
+          viewBox="0 0 14 21"
+          width="14"
+        >
+          <use
+            xlinkHref="#pause"
+          />
+        </svg>
+        <span>
+          Pause
+        </span>
+        <span>
+          Play
+        </span>
+      </button>
+      <div
+        className="player__name"
+      >
+        El Camino: A Breaking Bad Movie
+      </div>
+      <button
+        className="player__full-screen"
+        onClick={[Function]}
+        type="button"
+      >
+        <svg
+          height="27"
+          viewBox="0 0 27 27"
+          width="27"
+        >
+          <use
+            xlinkHref="#full-screen"
+          />
+        </svg>
+        <span>
+          Full screen
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+`;

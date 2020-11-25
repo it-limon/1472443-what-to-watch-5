@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render GenresList Should GenresList connected to store render correctly 1`] = `
+<ul
+  className="catalog__genres-list"
+>
+  <li
+    className="catalog__genres-item"
+    onClick={[Function]}
+  >
+    <a
+      className="catalog__genres-link"
+      href="#"
+      onClick={[Function]}
+    >
+      All genres
+    </a>
+  </li>
+  <li
+    className="catalog__genres-item"
+    onClick={[Function]}
+  >
+    <a
+      className="catalog__genres-link"
+      href="#"
+      onClick={[Function]}
+    />
+  </li>
+</ul>
+`;

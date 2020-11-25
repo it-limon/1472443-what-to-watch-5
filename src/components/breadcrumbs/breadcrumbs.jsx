@@ -1,20 +1,19 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import {getMovieById} from "../../store/selectors/data-selector";
-import PropTypes from "prop-types";
-import Props from "../../props";
-import {connect} from "react-redux";
 import {AppRoute} from "../../const";
+import {getLastActiveMovie} from "../../store/selectors/state-selector";
+import {connect} from "react-redux";
+import Props from "../../props";
 
 const Breadcrumbs = (props) => {
-  const {id, name} = props.movie;
+  const {movie} = props;
 
   return (
     <nav className="breadcrumbs">
       <ul className="breadcrumbs__list">
         <li className="breadcrumbs__item">
-          <Link to={`${AppRoute.FILMS}/${id}`} className="breadcrumbs__link">
-            {name}
+          <Link to={`${AppRoute.FILMS}/${movie.id}`} className="breadcrumbs__link">
+            {movie.name}
           </Link>
         </li>
         <li className="breadcrumbs__item">
@@ -26,12 +25,11 @@ const Breadcrumbs = (props) => {
 };
 
 Breadcrumbs.propTypes = {
-  movie: Props.movie,
-  movieId: PropTypes.number.isRequired
+  movie: Props.movie
 };
 
-const mapStateToProps = (state, props) => ({
-  movie: getMovieById(state, props.movieId)
+const mapStateToProps = (state) => ({
+  movie: getLastActiveMovie(state)
 });
 
 export {Breadcrumbs};

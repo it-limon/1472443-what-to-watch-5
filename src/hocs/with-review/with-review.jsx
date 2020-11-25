@@ -70,8 +70,8 @@ export const withReview = (Component) => {
           {...this.props}
           rating={parseInt(this.state.rating, 10)}
           onSubmit={this._handleSubmit}
-          commentChange={this._handleCommentChange}
-          ratingChange={this._handleRatingChange}
+          onCommentChange={this._handleCommentChange}
+          onRatingChange={this._handleRatingChange}
           btnPostIsDisabled={this.state.btnPostIsDisabled}
           commentIsDisabled={this.state.commentIsDisabled}
           ratingIsDisabled={this.state.ratingIsDisabled}

@@ -1,7 +1,10 @@
 import React, {PureComponent, createRef} from "react";
+import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {login as userLogin} from "../../store/api-actions";
+import {AuthorizationStatus, AppRoute} from "../../const";
+import {getAuthorizationStatus} from "../../store/selectors/user-selector";
 
 export const withAuth = (Component) => {
   class WithAuth extends PureComponent {
@@ -50,25 +53,34 @@ export const withAuth = (Component) => {
     }
 
     render() {
+      const {authorized} = this.props;
+
       return (
-        <Component
-          {...this.props}
-          loginRef={this._loginRef}
-          passwordRef={this._passwordRef}
-          isInvalidLogin={this.state._isInvalidLogin}
-          isInvalidPassword={this.state._isInvalidPassword}
-          onSubmit={this._handleSubmit}
-        />
+        authorized ?
+          <Redirect to={AppRoute.MAIN} /> :
+          <Component
+            {...this.props}
+            loginRef={this._loginRef}
+            passwordRef={this._passwordRef}
+            isInvalidLogin={this.state._isInvalidLogin}
+            isInvalidPassword={this.state._isInvalidPassword}
+            onSubmit={this._handleSubmit}
+          />
       );
     }
   }
 
   WithAuth.propTypes = {
+    authorized: PropTypes.bool.isRequired,
     onUserLogin: PropTypes.func.isRequired
   };
 
-  return connect(null, mapDispatchToProps)(WithAuth);
+  return connect(mapStateToProps, mapDispatchToProps)(WithAuth);
 };
+
+const mapStateToProps = (state) => ({
+  authorized: getAuthorizationStatus(state) === AuthorizationStatus.AUTH
+});
 
 const mapDispatchToProps = (dispatch) => ({
   onUserLogin(userInfo) {

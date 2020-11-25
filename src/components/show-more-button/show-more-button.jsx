@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Props from "../../props";
 import {connect} from "react-redux";
 import {StateActionCreator} from "../../store/actions/state-action";
-import {getMoviesByGenre, getShownMoviesCount} from "../../store/selectors/state-selector";
+import {getTotalMoviesByGenre, getShownMoviesCount} from "../../store/selectors/state-selector";
 
 const ShowMoreButton = (props) => {
   const {movies, shownMoviesCount, onIncreaseShownMoviesCount} = props;
@@ -29,7 +29,7 @@ ShowMoreButton.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  movies: getMoviesByGenre(state),
+  movies: getTotalMoviesByGenre(state),
   shownMoviesCount: getShownMoviesCount(state)
 });
 

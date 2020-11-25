@@ -1,12 +1,31 @@
 import {extend} from "../../utils";
 import {StateActionType} from "../actions/state-action";
-import {ALL_GENRES, DEFAULT_SHOWN_MOVIES_COUNT, LoadingStatus} from "../../const";
+import {ALL_GENRES, DEFAULT_SHOWN_MOVIES_COUNT} from "../../const";
 
 const initialState = {
   currentGenre: ALL_GENRES,
   shownMoviesCount: DEFAULT_SHOWN_MOVIES_COUNT,
-  isLoading: LoadingStatus.NOT_COMPLETED,
   url: ``,
+  isPageNotFound: false,
+  lastActiveMovie: {
+    id: -1,
+    name: ``,
+    posterImage: ``,
+    previewImage: ``,
+    backgroundImage: ``,
+    backgroundColor: ``,
+    videoLink: ``,
+    previewVideoLink: ``,
+    description: ``,
+    rating: 0,
+    scoresCount: 0,
+    director: ``,
+    starring: [],
+    runTime: 0,
+    genre: ``,
+    released: 0,
+    isFavorite: false
+  }
 };
 
 export const appState = (state = initialState, action) => {
@@ -20,13 +39,17 @@ export const appState = (state = initialState, action) => {
       return extend(state, {
         shownMoviesCount: state.shownMoviesCount + action.payload
       });
-    case StateActionType.SET_LOADING_STATUS:
-      return extend(state, {
-        isLoading: action.payload
-      });
     case StateActionType.REDIRECT_TO_ROUTE:
       return extend(state, {
         url: action.payload
+      });
+    case StateActionType.SET_LAST_ACTIVE_MOVIE:
+      return extend(state, {
+        lastActiveMovie: action.payload
+      });
+    case StateActionType.SET_IS_PAGE_NOT_FOUND:
+      return extend(state, {
+        isPageNotFound: action.payload
       });
   }
 

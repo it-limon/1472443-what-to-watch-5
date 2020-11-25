@@ -1,15 +1,13 @@
 import React, {Fragment} from "react";
 import PropTypes from "prop-types";
 import Props from "../../props";
-import {getCommentsColumns, getRatingName, getTimeFromMins} from "../../utils";
-import {connect} from "react-redux";
-import {getComments} from "../../store/selectors/data-selector";
+import {getRatingName, getTimeFromMins} from "../../utils";
+import MovieReviews from "../movie-reviews/movie-reviews";
 
 const MovieTabs = (props) => {
 
   const _getTabByActiveIndex = (index) => {
     const {genre, released, rating, scoresCount, description, director, starring, runTime} = props.movie;
-    const comments = props.comments;
 
     switch (index) {
       case 0:
@@ -63,28 +61,7 @@ const MovieTabs = (props) => {
         );
       case 2:
         return (
-          <div className="movie-card__reviews movie-card__row">
-            {getCommentsColumns(comments).map((colIt, i) => (
-              <div key={i} className="movie-card__reviews-col">
-                {colIt.map((it) => (
-                  <div key={it.id} className="review">
-                    <blockquote className="review__quote">
-                      <p className="review__text">{it.comment}</p>
-
-                      <footer className="review__details">
-                        <cite className="review__author">{it.user.name}</cite>
-                        <time className="review__date" dateTime={it.date}>
-                          {new Date(it.date).toLocaleDateString(`en-US`, {year: `numeric`, month: `long`, day: `numeric`})}
-                        </time>
-                      </footer>
-                    </blockquote>
-
-                    <div className="review__rating">{it.rating.toFixed(1)}</div>
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
+          <MovieReviews movie={props.movie}/>
         );
       default: return null;
     }
@@ -118,14 +95,8 @@ const MovieTabs = (props) => {
 
 MovieTabs.propTypes = {
   movie: Props.movie,
-  comments: PropTypes.arrayOf(Props.comment).isRequired,
   activeIndex: PropTypes.number.isRequired,
   onChangeActiveIndex: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  comments: getComments(state)
-});
-
-export {MovieTabs};
-export default connect(mapStateToProps)(MovieTabs);
+export default MovieTabs;

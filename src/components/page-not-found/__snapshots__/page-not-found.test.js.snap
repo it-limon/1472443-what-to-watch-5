@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render PageNotFound Render PageNotFound with link to Main 1`] = `
+Array [
+  <h1>
+    404.
+    <br />
+    <small>
+      Page not found
+    </small>
+  </h1>,
+  <a
+    href="/"
+    onClick={[Function]}
+  >
+    Go to main page
+  </a>,
+]
+`;
+
+exports[`Render PageNotFound Render PageNotFound without link to Main 1`] = `
+<h1>
+  404.
+  <br />
+  <small>
+    Page not found
+  </small>
+</h1>
+`;

@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import Props from "../../props";
-import {getMoviesByGenre} from "../../store/selectors/state-selector";
+import {getShownMoviesByGenre} from "../../store/selectors/state-selector";
 
 import GenresList from "../genres-list/genres-list";
 import MoviesList from "../movies-list/movies-list";
@@ -27,14 +27,12 @@ const Catalog = (props) => {
 };
 
 Catalog.propTypes = {
-  movies: PropTypes.arrayOf(Props.movie).isRequired,
+  movies: PropTypes.arrayOf(Props.movie).isRequired
 };
 
 const mapStateToProps = (state) => ({
-  movies: getMoviesByGenre(state)
+  movies: getShownMoviesByGenre(state)
 });
 
 export {Catalog};
 export default connect(mapStateToProps)(Catalog);
-
-

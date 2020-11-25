@@ -1,64 +1,66 @@
-import React, {Fragment} from "react";
-import Header from "../header/header";
+import React, {Fragment, useState, useEffect} from "react";
+import PropTypes from "prop-types";
 import Footer from "../footer/footer";
 import Catalog from "../catalog/catalog";
 import {AppPages} from "../../const";
+import PromoMoviePage from "../promo-movie-page/promo-movie-page";
+import {connect} from "react-redux";
+import {loadMainPage} from "../../store/api-actions";
+import LoaderPage from "../loader-page/loader-page";
+import {getIsPageNotFound} from "../../store/selectors/state-selector";
+import PageNotFound from "../page-not-found/page-not-found";
 
-const MainPage = () => {
+const MainPage = (props) => {
+  const {withLoader, onLoadMainPage, isPageNotFound} = props;
+
+  const [isLoading, setIsLoading] = useState(withLoader);
+  useEffect(() => {
+    onLoadMainPage(setIsLoading);
+  }, []);
+
   return (
     <Fragment>
-      <section className="movie-card">
-        <div className="movie-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
-        </div>
+      {isLoading ?
+        <LoaderPage /> :
+        <Fragment>
+          {isPageNotFound ?
+            <PageNotFound fromMainPage={true}/> :
+            <Fragment>
+              <PromoMoviePage />
 
-        <h1 className="visually-hidden">WTW</h1>
+              <div className="page-content">
+                <Catalog />
 
-        <Header
-          currentPage={AppPages.MAIN}
-        />
-
-        <div className="movie-card__wrap">
-          <div className="movie-card__info">
-            <div className="movie-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
-            </div>
-
-            <div className="movie-card__desc">
-              <h2 className="movie-card__title">name</h2>
-              <p className="movie-card__meta">
-                <span className="movie-card__genre">genre</span>
-                <span className="movie-card__year">released</span>
-              </p>
-
-              <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
-                <button className="btn btn--list movie-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
+                <Footer currentPage={AppPages.MAIN} />
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      <div className="page-content">
-        <Catalog />
-
-        <Footer
-          currentPage={AppPages.MAIN}
-        />
-      </div>
+            </Fragment>
+          }
+        </Fragment>
+      }
     </Fragment>
   );
 };
 
-export default MainPage;
+MainPage.defaultProps = {
+  withLoader: true
+};
+
+MainPage.propTypes = {
+  withLoader: PropTypes.bool.isRequired,
+  onLoadMainPage: PropTypes.func.isRequired,
+  isPageNotFound: PropTypes.bool.isRequired
+};
+
+const mapStateToProps = (state) => ({
+  isPageNotFound: getIsPageNotFound(state)
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onLoadMainPage(setIsLoading) {
+    dispatch(loadMainPage(setIsLoading));
+  }
+});
+
+export {MainPage};
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
