@@ -6,22 +6,22 @@ import {testMovie} from "../../test-dataset/test-movie";
 
 configure({adapter: new Adapter()});
 
-jest.mock('react', () => ({
-  ...jest.requireActual('react'),
+jest.mock(`react`, () => ({
+  ...jest.requireActual(`react`),
   useState: jest.fn(),
-}))
+}));
 
-describe('<MovieTabs />', () => {
+describe(`<MovieTabs />`, () => {
   let wrapper;
   const setState = jest.fn();
-  
+
   beforeEach(() => {
-    useStateMock.mockImplementation(init => [init, setState]);
+    useStateMock.mockImplementation((init) => [init, setState]);
 
     wrapper = shallow(
-      <MovieTabs
-        movie={testMovie}
-      />
+        <MovieTabs
+          movie={testMovie}
+        />
     );
   });
 

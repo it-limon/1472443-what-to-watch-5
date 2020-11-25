@@ -16,7 +16,7 @@ class PlayerPage extends PureComponent {
       isPlaying: true,
       duration: 0,
       elapsedTime: 0,
-      isLoading: true
+      isLoading: props.withLoader
     };
 
     this.videoRef = createRef();
@@ -116,7 +116,7 @@ class PlayerPage extends PureComponent {
                   poster={movie.previewImage}
                 />
                 <button type="button" className="player__exit" onClick={this._handleExitButtonClick}>Exit</button>
-  
+
                 <div className="player__controls">
                   <div className="player__controls-row">
                     <div className="player__time">
@@ -125,7 +125,7 @@ class PlayerPage extends PureComponent {
                     </div>
                     <div className="player__time-value">{timeLeft}</div>
                   </div>
-  
+
                   <div className="player__controls-row">
                     <button
                       type="button"
@@ -151,7 +151,7 @@ class PlayerPage extends PureComponent {
                       <span>Play</span>
                     </button>
                     <div className="player__name">{movie.name}</div>
-  
+
                     <button type="button" className="player__full-screen" onClick={this._handleFullScreenButtonClick}>
                       <svg viewBox="0 0 27 27" width="27" height="27">
                         <use xlinkHref="#full-screen"></use>
@@ -169,6 +169,10 @@ class PlayerPage extends PureComponent {
   }
 }
 
+PlayerPage.defaultProps = {
+  withLoader: true
+};
+
 PlayerPage.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
@@ -177,7 +181,8 @@ PlayerPage.propTypes = {
   }),
   movie: Props.movie,
   onLoadMovie: PropTypes.func.isRequired,
-  isPageNotFound: PropTypes.bool.isRequired
+  isPageNotFound: PropTypes.bool.isRequired,
+  withLoader: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state) => ({

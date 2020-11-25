@@ -1,10 +1,9 @@
-import React, {createRef} from "react";
+import React from "react";
 import renderer from "react-test-renderer";
-import PlayerPage from "./player-page";
+import {PlayerPage} from "./player-page";
 import {testMovie} from "../../test-dataset/test-movie";
 
 const noop = () => {};
-const ref = createRef();
 
 describe(`Render PlayerPage`, () => {
 
@@ -13,15 +12,10 @@ describe(`Render PlayerPage`, () => {
       .create(
           <PlayerPage
             movie={testMovie}
-            isLoading={false}
-            isPlaying={true}
-            elapsedTimePrc={54}
-            timeLeft={`2:45:12`}
-            videoRef={ref}
-            onPlaybackStatusChange={noop}
-            onExitButtonClick={noop}
-            onFullScreenButtonClick={noop}
+            onLoadMovie={noop}
             isPageNotFound={false}
+            withLoader={false}
+            match={{params: {id: `1`}}}
           />
       )
       .toJSON();

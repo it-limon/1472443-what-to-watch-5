@@ -1,4 +1,4 @@
-import React, {createRef} from "react";
+import React from "react";
 import renderer from "react-test-renderer";
 import configureStore from "redux-mock-store";
 import AuthPage from "./auth-page";
@@ -7,7 +7,6 @@ import {Route, BrowserRouter} from "react-router-dom";
 import {AuthorizationStatus} from "../../const";
 
 const noop = () => {};
-const ref = createRef();
 
 describe(`Render AuthPage`, () => {
   const mockStore = configureStore([]);
@@ -26,11 +25,7 @@ describe(`Render AuthPage`, () => {
           <BrowserRouter>
             <Route>
               <AuthPage
-                loginRef={ref}
-                passwordRef={ref}
-                isInvalidLogin={true}
-                isInvalidPassword={true}
-                onSubmit={noop}
+                onUserLogin={noop}
               />
             </Route>
           </BrowserRouter>

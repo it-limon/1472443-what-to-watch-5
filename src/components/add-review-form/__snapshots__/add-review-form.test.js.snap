@@ -15,7 +15,7 @@ exports[`Render AddReviewForm Render AddReviewForm 1`] = `
       <input
         checked={false}
         className="rating__input"
-        disabled={true}
+        disabled={false}
         id="star-1"
         name="rating"
         onChange={[Function]}
@@ -29,9 +29,9 @@ exports[`Render AddReviewForm Render AddReviewForm 1`] = `
         Rating 1
       </label>
       <input
-        checked={true}
+        checked={false}
         className="rating__input"
-        disabled={true}
+        disabled={false}
         id="star-2"
         name="rating"
         onChange={[Function]}
@@ -45,9 +45,9 @@ exports[`Render AddReviewForm Render AddReviewForm 1`] = `
         Rating 2
       </label>
       <input
-        checked={false}
+        checked={true}
         className="rating__input"
-        disabled={true}
+        disabled={false}
         id="star-3"
         name="rating"
         onChange={[Function]}
@@ -63,7 +63,7 @@ exports[`Render AddReviewForm Render AddReviewForm 1`] = `
       <input
         checked={false}
         className="rating__input"
-        disabled={true}
+        disabled={false}
         id="star-4"
         name="rating"
         onChange={[Function]}
@@ -79,7 +79,7 @@ exports[`Render AddReviewForm Render AddReviewForm 1`] = `
       <input
         checked={false}
         className="rating__input"
-        disabled={true}
+        disabled={false}
         id="star-5"
         name="rating"
         onChange={[Function]}
@@ -99,7 +99,7 @@ exports[`Render AddReviewForm Render AddReviewForm 1`] = `
   >
     <textarea
       className="add-review__textarea"
-      disabled={true}
+      disabled={false}
       id="review-text"
       name="commentText"
       onChange={[Function]}
@@ -108,26 +108,9 @@ exports[`Render AddReviewForm Render AddReviewForm 1`] = `
     <div
       className="add-review__submit"
     >
-      <div
-        style={
-          Object {
-            "width": "100%",
-          }
-        }
-      >
-        <p
-          style={
-            Object {
-              "color": "red",
-            }
-          }
-        >
-          error msg
-        </p>
-      </div>
       <button
         className="add-review__btn"
-        disabled={true}
+        disabled={false}
         type="submit"
       >
         Post

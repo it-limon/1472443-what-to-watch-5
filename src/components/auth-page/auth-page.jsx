@@ -1,4 +1,4 @@
-import React, {Fragment, useRef, useState} from "react";
+import React, {Fragment, useState} from "react";
 import PropTypes from "prop-types";
 import {AppPages} from "../../const";
 import Header from "../header/header";
@@ -7,45 +7,39 @@ import {connect} from "react-redux";
 import {AuthorizationStatus, AppRoute} from "../../const";
 import {getAuthorizationStatus} from "../../store/selectors/user-selector";
 import {login as userLogin} from "../../store/api-actions";
+import {Redirect} from "react-router-dom";
 
 const AuthPage = (props) => {
   const {authorized, onUserLogin} = props;
 
-  const loginRef = useRef(null);
-  const passwordRef = useRef(null);
-  
+  const [login, setLogin] = useState(``);
+  const [password, setPassword] = useState(``);
   const [isInvalidLogin, setIsInvalidLogin] = useState(false);
   const [isInvalidPassword, setIsInvalidPassword] = useState(false);
 
   const _handleSubmit = (evt) => {
     evt.preventDefault();
 
-    const loginInput = loginRef.current;
-    const login = loginInput.value;
-
-    const passwordInput = passwordRef.current;
-    const password = passwordInput.value;
-
     const regex = RegExp(/^[\w]{1}[\w-\.]*@[\w-]+\.[a-z]{2,4}$/i);
 
-    const isInvalidLogin = !login || !regex.test(login);
-    const isInvalidPassword = !password;
+    const invalidLogin = !login || !regex.test(login);
+    const invalidPassword = !password;
 
-    if (isInvalidLogin) {
-      loginInput.focus();
-    }
+    setIsInvalidLogin(invalidLogin);
+    setIsInvalidPassword(invalidPassword);
 
-    if (isInvalidPassword && !isInvalidLogin) {
-      passwordInput.focus();
-    }
-
-    setIsInvalidLogin(isInvalidLogin);
-    setIsInvalidPassword(isInvalidPassword);
-
-    if (!isInvalidLogin && !isInvalidPassword) {
+    if (!invalidLogin && !invalidPassword) {
       onUserLogin({login, password});
     }
-  }
+  };
+
+  const _handleChangeLogin = (evt) => {
+    setLogin(evt.target.value);
+  };
+
+  const _handleChangePassword = (evt) => {
+    setPassword(evt.target.value);
+  };
 
   return (
     <Fragment>
@@ -65,16 +59,16 @@ const AuthPage = (props) => {
                 </div>}
               <div className="sign-in__fields">
                 <div className={`sign-in__field ${isInvalidLogin ? `sign-in__field--error` : ``}`}>
-                  <input className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email" ref={loginRef} autoFocus />
+                  <input className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email" onChange={_handleChangeLogin} autoFocus />
                   <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
                 </div>
                 <div className={`sign-in__field ${isInvalidPassword ? `sign-in__field--error` : ``}`}>
-                  <input className="sign-in__input" type="password" placeholder="Password" name="user-password" id="user-password" ref={passwordRef} />
+                  <input className="sign-in__input" type="password" placeholder="Password" name="user-password" id="user-password" onChange={_handleChangePassword} />
                   <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
                 </div>
               </div>
               <div className="sign-in__submit">
-                <button className="sign-in__btn" type="submit" onClick={(evt) => _handleSubmit(evt)}>Sign in</button>
+                <button className="sign-in__btn" type="submit" onClick={_handleSubmit}>Sign in</button>
               </div>
             </form>
           </div>

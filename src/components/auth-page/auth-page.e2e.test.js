@@ -1,27 +1,25 @@
-import React, {createRef} from "react";
-import AuthPage from "./auth-page";
+import React from "react";
+import {AuthPage} from "./auth-page";
 import {configure, shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
 configure({adapter: new Adapter()});
 
-const ref = createRef();
-
 it(`AuthPage sent`, () => {
-  const onSubmit = jest.fn();
+  const onUserLogin = jest.fn();
+  const formSendPrevention = jest.fn();
 
   const wrapper = shallow(
       <AuthPage
-        loginRef={ref}
-        passwordRef={ref}
-        isInvalidLogin={false}
-        isInvalidPassword={false}
-        onSubmit={onSubmit}
+        authorized={false}
+        onUserLogin={onUserLogin}
       />
   );
 
   const btnSubmit = wrapper.find(`button.sign-in__btn`);
-  btnSubmit.simulate(`click`);
+  btnSubmit.simulate(`click`, {
+    preventDefault: formSendPrevention
+  });
 
-  expect(onSubmit).toHaveBeenCalledTimes(1);
+  expect(onUserLogin).toHaveBeenCalledTimes(0);
 });

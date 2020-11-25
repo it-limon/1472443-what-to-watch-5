@@ -224,7 +224,7 @@ exports[`Render ReviewPage Render ReviewPage 1`] = `
         >
           <button
             className="add-review__btn"
-            disabled={true}
+            disabled={false}
             type="submit"
           >
             Post

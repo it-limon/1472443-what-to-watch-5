@@ -6,7 +6,6 @@ exports[`Render PlayerPage Render PlayerPage 1`] = `
 >
   <video
     className="player__video"
-    muted={false}
     poster="https://cdn.pixabay.com/photo/2020/11/16/16/13/trees-5749406_960_720.jpg"
     src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
   />
@@ -29,13 +28,13 @@ exports[`Render PlayerPage Render PlayerPage 1`] = `
         <progress
           className="player__progress"
           max="100"
-          value="54"
+          value="NaN"
         />
         <div
           className="player__toggler"
           style={
             Object {
-              "left": "54%",
+              "left": "NaN%",
             }
           }
         >
@@ -45,7 +44,7 @@ exports[`Render PlayerPage Render PlayerPage 1`] = `
       <div
         className="player__time-value"
       >
-        2:45:12
+        0:00:00
       </div>
     </div>
     <div

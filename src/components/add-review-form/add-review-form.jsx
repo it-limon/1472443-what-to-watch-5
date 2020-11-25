@@ -16,44 +16,44 @@ const AddReviewForm = (props) => {
   const [ratingIsDisabled, setRatingIsDisabled] = useState(false);
   const [btnPostIsDisabled, setBtnPostIsDisabled] = useState(false);
 
-  const _handleSubmit = (evt, movieId) => {
+  const _handleSubmit = (evt) => {
     evt.preventDefault();
 
     setErrorMessage(``);
     _handleDisableUI(true);
 
     onSendComment(movieId, {movieRating: rating, movieComment: commentText}, _handleSetErrorMsg);
-  }
-
-  const _handleDisableUI = (disabled) => {
-      setCommentIsDisabled(disabled);
-      setRatingIsDisabled(disabled);
-      setBtnPostIsDisabled(disabled);
-  }
-
-  const _handleSetErrorMsg = (errMsg) => {
-    setErrorMessage(errMsg);
-    _handleDisableUI(false);
-  }
+  };
 
   const _handleCommentChange = (evt) => {
     const {value} = evt.target;
 
     setBtnPostIsDisabled(value.length < MIN_COMMENT_LENGTH || value.length > MAX_COMMENT_LENGTH);
     setCommentText(value);
-  }
+  };
 
   const _handleRatingChange = (evt) => {
     setRating(parseInt(evt.target.value, 10));
-  }
+  };
+
+  const _handleDisableUI = (disabled) => {
+    setCommentIsDisabled(disabled);
+    setRatingIsDisabled(disabled);
+    setBtnPostIsDisabled(disabled);
+  };
+
+  const _handleSetErrorMsg = (errMsg) => {
+    setErrorMessage(errMsg);
+    _handleDisableUI(false);
+  };
 
   return (
-    <form action="#" className="add-review__form" onSubmit={(evt) => _handleSubmit(evt, movieId)}>
+    <form action="#" className="add-review__form" onSubmit={_handleSubmit}>
       <div className="rating">
         <div className="rating__stars">
           {ratings.map((it) => (
             <Fragment key={it}>
-              <input className="rating__input" id={`star-${it}`} type="radio" name="rating" value={it} onChange={(evt) =>_handleRatingChange(evt)} checked={rating === it} disabled={ratingIsDisabled}/>
+              <input className="rating__input" id={`star-${it}`} type="radio" name="rating" value={it} onChange={_handleRatingChange} checked={rating === it} disabled={ratingIsDisabled}/>
               <label className="rating__label" htmlFor={`star-${it}`}>{`Rating ${it}`}</label>
             </Fragment>
           ))}
@@ -61,7 +61,7 @@ const AddReviewForm = (props) => {
       </div>
 
       <div className="add-review__text">
-        <textarea className="add-review__textarea" name="commentText" id="review-text" placeholder="Review text" onChange={(evt) => _handleCommentChange(evt)} disabled={commentIsDisabled}></textarea>
+        <textarea className="add-review__textarea" name="commentText" id="review-text" placeholder="Review text" onChange={_handleCommentChange} disabled={commentIsDisabled}></textarea>
         <div className="add-review__submit">
           {errorMessage ? <div style={{width: `100%`}}><p style={{color: `red`}}>{errorMessage}</p></div> : null}
           <button className="add-review__btn" type="submit" disabled={btnPostIsDisabled}>Post</button>

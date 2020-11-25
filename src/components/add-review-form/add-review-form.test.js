@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import AddReviewForm from "./add-review-form";
+import {AddReviewForm} from "./add-review-form";
 
 const noop = () => {};
 
@@ -11,14 +11,7 @@ describe(`Render AddReviewForm`, () => {
       .create(
           <AddReviewForm
             movieId={1}
-            rating={2}
-            onSubmit={noop}
-            onCommentChange={noop}
-            onRatingChange={noop}
-            commentIsDisabled={true}
-            ratingIsDisabled={true}
-            btnPostIsDisabled={true}
-            errorMessage={`error msg`}
+            onSendComment={noop}
           />
       )
       .toJSON();
