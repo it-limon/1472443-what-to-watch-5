@@ -4,7 +4,6 @@ import {connect} from "react-redux";
 import Props from "../../props";
 import MovieTabs from "../movie-tabs/movie-tabs";
 import MoviesList from "../movies-list/movies-list";
-import {withActiveIndex} from "../../hocs/with-active-index/with-active-index";
 import {Link} from "react-router-dom";
 import {getSimilarMovies} from "../../store/selectors/data-selector";
 import Header from "../header/header";
@@ -16,8 +15,6 @@ import {loadMoviePage} from "../../store/api-actions";
 import LoaderPage from "../loader-page/loader-page";
 import PageNotFound from "../page-not-found/page-not-found";
 import MyListButton from "../my-list-button/my-list-button";
-
-const MovieTabsWrapped = withActiveIndex(MovieTabs);
 
 const MoviePage = (props) => {
   const {withLoader, newMovieId, movie, onLoadMoviePage, similarMovies, authorized, isPageNotFound} = props;
@@ -85,7 +82,7 @@ const MoviePage = (props) => {
                     </div>
 
                     <div className="movie-card__desc">
-                      <MovieTabsWrapped
+                      <MovieTabs
                         movie={movie}
                       />
                     </div>

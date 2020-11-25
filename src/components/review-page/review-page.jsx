@@ -2,7 +2,6 @@ import React, {Fragment, useState, useEffect} from "react";
 import PropTypes from "prop-types";
 import Props from "../../props";
 import AddReviewForm from "../add-review-form/add-review-form";
-import {withReview} from "../../hocs/with-review/with-review";
 import {connect} from "react-redux";
 import {loadMovie} from "../../store/api-actions";
 import Header from "../header/header";
@@ -10,8 +9,6 @@ import {AppPages} from "../../const";
 import LoaderPage from "../loader-page/loader-page";
 import {getLastActiveMovie, getIsPageNotFound} from "../../store/selectors/state-selector";
 import PageNotFound from "../page-not-found/page-not-found";
-
-const AddReviewFormWrapped = withReview(AddReviewForm);
 
 const ReviewPage = (props) => {
   const {withLoader, newMovieId, movie, onLoadMovie, isPageNotFound} = props;
@@ -44,7 +41,7 @@ const ReviewPage = (props) => {
               </div>
 
               <div className="add-review">
-                <AddReviewFormWrapped
+                <AddReviewForm
                   movieId={movie.id}
                 />
               </div>

@@ -1,28 +1,26 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, {useState} from "react";
 import Props from "../../props";
-import Player from "../video-player/video-player";
-import {withPreviewVideo} from "../../hocs/with-preview-video/with-preview-video";
+import PreviewVideoPlayer from "../preview-video-player/preview-video-player";
 import history from "../../browser-history";
 import {AppRoute} from "../../const";
 
-const PreviewVideoPlayer = withPreviewVideo(Player);
-
 const SmallMovieCard = (props) => {
-  const {movie, isActive: isPlaying, onChangeActiveState} = props;
+  const {movie} = props;
+
+  const [isActive, setIsActive] = useState(false);
 
   return (
     <article
       className="small-movie-card catalog__movies-card"
-      onMouseEnter={() => onChangeActiveState(true)}
-      onMouseLeave={() => onChangeActiveState(false)}
+      onMouseEnter={() => setIsActive(true)}
+      onMouseLeave={() => setIsActive(false)}
       onClick={() => history.push(`${AppRoute.FILMS}/${movie.id}`)}
     >
       <div className="small-movie-card__image">
         <PreviewVideoPlayer
           src={movie.previewVideoLink}
           poster={movie.previewImage}
-          isPlaying={isPlaying}
+          isPlaying={isActive}
           isMuted={true}
         />
       </div>
@@ -42,9 +40,7 @@ const SmallMovieCard = (props) => {
 };
 
 SmallMovieCard.propTypes = {
-  movie: Props.movie,
-  isActive: PropTypes.bool.isRequired,
-  onChangeActiveState: PropTypes.func.isRequired
+  movie: Props.movie
 };
 
 export default SmallMovieCard;

@@ -1,10 +1,10 @@
-import React, {Fragment} from "react";
-import PropTypes from "prop-types";
+import React, {Fragment, useState} from "react";
 import Props from "../../props";
 import {getRatingName, getTimeFromMins} from "../../utils";
 import MovieReviews from "../movie-reviews/movie-reviews";
 
 const MovieTabs = (props) => {
+  const [activeIndex, setActiveIndex] = useState(0);
 
   const _getTabByActiveIndex = (index) => {
     const {genre, released, rating, scoresCount, description, director, starring, runTime} = props.movie;
@@ -67,7 +67,6 @@ const MovieTabs = (props) => {
     }
   };
 
-  const {activeIndex, onChangeActiveIndex} = props;
   const movieTabs = [`Overview`, `Details`, `Reviews`];
 
   return (
@@ -81,7 +80,7 @@ const MovieTabs = (props) => {
                 className="movie-nav__link"
                 onClick={(evt) => {
                   evt.preventDefault();
-                  onChangeActiveIndex(i);
+                  setActiveIndex(i);
                 }}
               >{tab}</a>
             </li>
@@ -94,9 +93,7 @@ const MovieTabs = (props) => {
 };
 
 MovieTabs.propTypes = {
-  movie: Props.movie,
-  activeIndex: PropTypes.number.isRequired,
-  onChangeActiveIndex: PropTypes.func.isRequired,
+  movie: Props.movie
 };
 
 export default MovieTabs;
