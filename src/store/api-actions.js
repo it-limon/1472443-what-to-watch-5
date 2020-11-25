@@ -5,13 +5,6 @@ import {AuthorizationStatus, AppRoute, APIRoute} from "../const";
 import {getPromoMovie} from "./selectors/data-selector";
 import {getLastActiveMovie} from "./selectors/state-selector";
 
-export const loadMovie = (movieId, setIsLoading) => (dispatch, _getState, api) => (
-  api.get(`${APIRoute.FILMS}/${movieId}`)
-    .then(({data}) => dispatch(StateActionCreator.setLastActiveMovie(data)))
-    .then(() => setIsLoading(false))
-    .catch(() => setIsLoading(false))
-);
-
 export const loadMoviePage = (movieId, setIsLoading) => (dispatch, _getState, api) => (
   api.get(`${APIRoute.FILMS}/${movieId}`)
     .then(({data}) => dispatch(StateActionCreator.setLastActiveMovie(data)))
@@ -20,22 +13,34 @@ export const loadMoviePage = (movieId, setIsLoading) => (dispatch, _getState, ap
     .catch(() => setIsLoading(false))
 );
 
-export const loadMainPage = (setIsLoading) => (dispatch, _getState, api) => (
-  api.get(`${APIRoute.PROMO_MOVIE}`)
-    .then(({data}) => dispatch(DataActionCreator.loadPromoMovie(data)))
+export const loadMovie = (movieId, setIsLoading) => (dispatch, _getState, api) => (
+  api.get(`${APIRoute.FILMS}/${movieId}`)
+    .then(({data}) => dispatch(StateActionCreator.setLastActiveMovie(data)))
+    .then(() => setIsLoading(false))
+    .catch(() => setIsLoading(false))
+);
+
+export const loadMainPage = (setIsLoading) => (dispatch, _getState, _api) => (
+  dispatch(loadPromoMovie())
     .then(() => dispatch(loadMoviesList()))
     .then(() => setIsLoading(false))
     .catch(() => setIsLoading(false))
 );
 
+export const loadPromoMovie = () => (dispatch, _getState, api) => (
+  api.get(APIRoute.PROMO_FILM)
+    .then(({data}) => dispatch(DataActionCreator.loadPromoMovie(data)))
+    .catch(() => {})
+);
+
 export const loadMoviesList = () => (dispatch, _getState, api) => (
-  api.get(`${APIRoute.FILMS}`)
+  api.get(APIRoute.FILMS)
     .then(({data}) => dispatch(DataActionCreator.loadMovies(data)))
     .catch(() => {})
 );
 
 export const loadFavoriteMoviesList = (setIsLoading) => (dispatch, _getState, api) => (
-  api.get(`${APIRoute.FAVORITE_FILMS}`)
+  api.get(APIRoute.FAVORITE_FILMS)
     .then(({data}) => dispatch(DataActionCreator.loadFavoriteMovies(data)))
     .then(() => setIsLoading(false))
     .catch(() => setIsLoading(false))
@@ -50,7 +55,7 @@ export const loadCommentsList = (movieId) => (dispatch, _getState, api) => (
 export const sendComment = (movieId, {movieRating: rating, movieComment: comment}, setErrorMsg) => (dispatch, _getState, api) => (
   api.post(`${APIRoute.COMMENTS}/${movieId}`, {rating, comment})
     .then(({data}) => dispatch(DataActionCreator.loadComments(data)))
-    .then(dispatch(StateActionCreator.redirectToRoute(`${AppRoute.FILMS}/${movieId}`)))
+    .then(() => dispatch(StateActionCreator.redirectToRoute(`${AppRoute.FILMS}/${movieId}`)))
     .catch((err) => setErrorMsg(err.message))
 );
 
