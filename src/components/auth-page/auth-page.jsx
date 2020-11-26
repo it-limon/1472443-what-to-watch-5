@@ -25,11 +25,11 @@ const AuthPage = (props) => {
     const invalidLogin = !login || !regex.test(login);
     const invalidPassword = !password;
 
-    setIsInvalidLogin(invalidLogin);
-    setIsInvalidPassword(invalidPassword);
-
     if (!invalidLogin && !invalidPassword) {
       onUserLogin({login, password});
+    } else {
+      setIsInvalidLogin(invalidLogin);
+      setIsInvalidPassword(invalidPassword);
     }
   };
 
