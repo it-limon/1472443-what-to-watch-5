@@ -1,31 +1,31 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import configureStore from "redux-mock-store";
-import ReviewPage from "./review-page";
+import App from "./app";
 import {Provider} from "react-redux";
-import {AuthorizationStatus} from "../../const";
 import {Route, BrowserRouter} from "react-router-dom";
-import {createAPI} from "../../services/api";
-import thunk from "redux-thunk";
+import {AuthorizationStatus} from "../../const";
 import {testMovie} from "../../test-dataset/test-movie";
+import {testMovies} from "../../test-dataset/test-movies";
 import {testUser} from "../../test-dataset/test-user";
-
-const noop = () => {};
 
 let mockStore = null;
 let store = null;
 
-const api = createAPI(() => {}, () => {});
-let middlewares = [thunk.withExtraArgument(api)];
+describe(`Render App`, () => {
+  it(`Render App`, () => {
+    mockStore = configureStore({});
 
-describe(`Render ReviewPage`, () => {
-
-  it(`Render ReviewPage`, () => {
-    mockStore = configureStore(middlewares);
     store = mockStore({
+      DATA: {
+        movies: testMovies,
+        promoMovie: testMovie
+      },
       STATE: {
         lastActiveMovie: testMovie,
-        isPageNotFound: false
+        isPageNotFound: false,
+        currentGenre: `All genres`,
+        shownMoviesCount: 2
       },
       USER: {
         authorizationStatus: AuthorizationStatus.AUTH,
@@ -36,14 +36,9 @@ describe(`Render ReviewPage`, () => {
     const tree = renderer.create(
         <Provider store={store}>
           <BrowserRouter>
-            <Route
-              render={(routeProps) => (
-                <ReviewPage
-                  {...routeProps}
-                  onLoadMovie={noop}
-                />
-              )}
-            />
+            <Route>
+              <App />
+            </Route>
           </BrowserRouter>
         </Provider>
     ).toJSON();

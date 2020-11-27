@@ -37,7 +37,6 @@ describe(`Render MyListPage`, () => {
           <BrowserRouter>
             <Route>
               <MyListPage
-                withLoader={false}
                 onLoadFavoriteMoviesList={noop}
               />
             </Route>
@@ -65,7 +64,6 @@ describe(`Render MyListPage`, () => {
           <BrowserRouter>
             <Route>
               <MyListPage
-                withLoader={false}
                 onLoadFavoriteMoviesList={noop}
               />
             </Route>

@@ -2,7 +2,25 @@ import {extend} from "../../utils";
 import {DataActionType} from "../actions/data-action";
 
 const initialState = {
-  promoMovie: {},
+  promoMovie: {
+    id: -1,
+    name: ``,
+    posterImage: ``,
+    previewImage: ``,
+    backgroundImage: ``,
+    backgroundColor: ``,
+    videoLink: ``,
+    previewVideoLink: ``,
+    description: ``,
+    rating: 0,
+    scoresCount: 0,
+    director: ``,
+    starring: [],
+    runTime: 0,
+    genre: ``,
+    released: 0,
+    isFavorite: false
+  },
   movies: [],
   favoriteMovies: [],
   comments: []

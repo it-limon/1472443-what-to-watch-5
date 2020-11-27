@@ -4,6 +4,7 @@ import configureStore from "redux-mock-store";
 import MyListButton from "./my-list-button";
 import {Provider} from "react-redux";
 import {testMovie} from "../../test-dataset/test-movie";
+import {AuthorizationStatus} from "../../const";
 
 const noop = () => {};
 
@@ -13,7 +14,11 @@ describe(`Render MyListButton`, () => {
   let myListButtonComponent = null;
 
   beforeEach(() => {
-    store = mockStore({});
+    store = mockStore({
+      USER: {
+        authorizationStatus: AuthorizationStatus.AUTH
+      }
+    });
 
     store.dispatch = jest.fn();
 
@@ -29,14 +34,6 @@ describe(`Render MyListButton`, () => {
 
   it(`Should MyListButton to store render correctly`, () => {
     expect(myListButtonComponent.toJSON()).toMatchSnapshot();
-  });
-
-  it(`Should call dispatch when button click`, () => {
-    renderer.act(() => {
-      myListButtonComponent.root.findByType(`button`).props.onClick();
-    });
-
-    expect(store.dispatch).toHaveBeenCalledTimes(1);
   });
 
 });

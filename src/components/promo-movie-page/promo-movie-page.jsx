@@ -1,16 +1,14 @@
 import React from "react";
-import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import Props from "../../props";
 import Header from "../header/header";
-import {AuthorizationStatus, AppPages, AppRoute} from "../../const";
-import {getAuthorizationStatus} from "../../store/selectors/user-selector";
+import {AppPages, AppRoute} from "../../const";
 import {getPromoMovie} from "../../store/selectors/data-selector";
 import {Link} from "react-router-dom";
 import MyListButton from "../my-list-button/my-list-button";
 
 const PromoMoviePage = (props) => {
-  const {promoMovie, authorized} = props;
+  const {promoMovie} = props;
 
   return (
     <section className="movie-card">
@@ -44,7 +42,7 @@ const PromoMoviePage = (props) => {
                 </svg>
                 <span>Play</span>
               </Link>
-              {authorized ? <MyListButton movie={promoMovie} /> : null}
+              <MyListButton movie={promoMovie} />
             </div>
           </div>
         </div>
@@ -54,13 +52,11 @@ const PromoMoviePage = (props) => {
 };
 
 PromoMoviePage.propTypes = {
-  promoMovie: Props.movie,
-  authorized: PropTypes.bool.isRequired
+  promoMovie: Props.movie
 };
 
 const mapStateToProps = (state) => ({
-  promoMovie: getPromoMovie(state),
-  authorized: getAuthorizationStatus(state) === AuthorizationStatus.AUTH
+  promoMovie: getPromoMovie(state)
 });
 
 export {PromoMoviePage};

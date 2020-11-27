@@ -1,5 +1,5 @@
 import axios from "axios";
-import {toStandardKeys} from "../utils";
+import {convertToStandardKeys} from "../utils";
 
 const BACKEND_URL = `https://5.react.pages.academy/wtw`;
 const REQUEST_TIMEOUT = 5000;
@@ -18,7 +18,7 @@ export const createAPI = (onUnauthorized, onPageNotFound) => {
 
   const onSuccess = (response) => {
     onPageNotFound(false);
-    response.data = toStandardKeys(response.data);
+    response.data = convertToStandardKeys(response.data);
     return response;
   };
 

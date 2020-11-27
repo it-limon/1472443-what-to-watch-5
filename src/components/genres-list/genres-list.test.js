@@ -35,12 +35,4 @@ describe(`Render GenresList`, () => {
     expect(genresListComponent.toJSON()).toMatchSnapshot();
   });
 
-  it(`Should call dispatch when button click`, () => {
-    renderer.act(() => {
-      genresListComponent.root.findAllByProps({className: `catalog__genres-item`})[0].props.onClick();
-    });
-
-    expect(store.dispatch).toHaveBeenCalledTimes(1);
-  });
-
 });

@@ -62,13 +62,6 @@ describe(`Render Catalog with 1 shown movie`, () => {
     expect(catalogComponent.toJSON()).toMatchSnapshot();
   });
 
-  it(`Should call dispatch when button click`, () => {
-    renderer.act(() => {
-      catalogComponent.root.findByType(`button`).props.onClick();
-    });
-
-    expect(store.dispatch).toHaveBeenCalledTimes(1);
-  });
 });
 
 describe(`Render Catalog with 2 shown movies`, () => {

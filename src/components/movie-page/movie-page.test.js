@@ -44,7 +44,6 @@ describe(`Render MoviePage`, () => {
               render={(routeProps) => (
                 <MoviePage
                   {...routeProps}
-                  withLoader={false}
                   onLoadMoviePage={noop}
                 />
               )}
@@ -78,7 +77,6 @@ describe(`Render MoviePage`, () => {
               render={(routeProps) => (
                 <MoviePage
                   {...routeProps}
-                  withLoader={false}
                   onLoadMoviePage={noop}
                 />
               )}

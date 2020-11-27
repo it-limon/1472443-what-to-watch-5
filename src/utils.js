@@ -27,13 +27,13 @@ export const getCommentsColumns = (comments) => {
   return commentsColumns;
 };
 
-export const toStandardKeys = (obj) => {
+export const convertToStandardKeys = (obj) => {
   let newObj;
 
   if (obj instanceof Array) {
     return obj.map((it) => {
       if (typeof it === `object`) {
-        it = toStandardKeys(it);
+        it = convertToStandardKeys(it);
       }
 
       return it;
@@ -48,7 +48,7 @@ export const toStandardKeys = (obj) => {
         let value = obj[key];
 
         if (value instanceof Array || (value !== null && value.constructor === Object)) {
-          value = toStandardKeys(value);
+          value = convertToStandardKeys(value);
         }
 
         newObj[newKey] = value;

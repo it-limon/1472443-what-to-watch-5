@@ -14,7 +14,6 @@ describe(`Render PlayerPage`, () => {
             movie={testMovie}
             onLoadMovie={noop}
             isPageNotFound={false}
-            withLoader={false}
             match={{params: {id: `1`}}}
           />
       )

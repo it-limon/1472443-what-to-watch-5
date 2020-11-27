@@ -45,7 +45,6 @@ describe(`Render MainPage`, () => {
           <BrowserRouter>
             <Route>
               <MainPage
-                withLoader={false}
                 onLoadMainPage={noop}
               />
             </Route>
@@ -81,7 +80,6 @@ describe(`Render MainPage`, () => {
           <BrowserRouter>
             <Route>
               <MainPage
-                withLoader={false}
                 onLoadMainPage={noop}
               />
             </Route>

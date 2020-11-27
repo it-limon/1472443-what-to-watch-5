@@ -13,7 +13,25 @@ const api = createAPI(() => {}, () => {});
 
 it(`Data reducer without additional parameters should return initial state`, () => {
   expect(appData(void 0, {})).toEqual({
-    promoMovie: {},
+    promoMovie: {
+      id: -1,
+      name: ``,
+      posterImage: ``,
+      previewImage: ``,
+      backgroundImage: ``,
+      backgroundColor: ``,
+      videoLink: ``,
+      previewVideoLink: ``,
+      description: ``,
+      rating: 0,
+      scoresCount: 0,
+      director: ``,
+      starring: [],
+      runTime: 0,
+      genre: ``,
+      released: 0,
+      isFavorite: false
+    },
     movies: [],
     favoriteMovies: [],
     comments: []
@@ -22,7 +40,25 @@ it(`Data reducer without additional parameters should return initial state`, () 
 
 it(`Reducer should update promo movie by load promo movie`, () => {
   expect(appData({
-    promoMovie: {},
+    promoMovie: {
+      id: -1,
+      name: ``,
+      posterImage: ``,
+      previewImage: ``,
+      backgroundImage: ``,
+      backgroundColor: ``,
+      videoLink: ``,
+      previewVideoLink: ``,
+      description: ``,
+      rating: 0,
+      scoresCount: 0,
+      director: ``,
+      starring: [],
+      runTime: 0,
+      genre: ``,
+      released: 0,
+      isFavorite: false
+    },
   }, {
     type: DataActionType.LOAD_PROMO_MOVIE,
     payload: testMovie,
@@ -114,7 +150,7 @@ describe(`Async data operations work correctly`, () => {
       .onGet(APIRoute.FAVORITE_FILMS)
       .reply(200, [{fake: true}]);
 
-    const favoriteMoviesListLoader = loadFavoriteMoviesList(() => {});
+    const favoriteMoviesListLoader = loadFavoriteMoviesList();
 
     return favoriteMoviesListLoader(dispatch, () => {}, api)
       .then(() => {

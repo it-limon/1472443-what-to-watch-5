@@ -1,4 +1,4 @@
-import React, {Fragment, useState, useEffect} from "react";
+import React, {Fragment, useEffect} from "react";
 import PropTypes from "prop-types";
 import Footer from "../footer/footer";
 import Catalog from "../catalog/catalog";
@@ -6,53 +6,49 @@ import {AppPages} from "../../const";
 import PromoMoviePage from "../promo-movie-page/promo-movie-page";
 import {connect} from "react-redux";
 import {loadMainPage} from "../../store/api-actions";
-import LoaderPage from "../loader-page/loader-page";
 import {getIsPageNotFound} from "../../store/selectors/state-selector";
 import PageNotFound from "../page-not-found/page-not-found";
+import {getPromoMovie} from "../../store/selectors/data-selector";
+import Props from "../../props";
 
 const MainPage = (props) => {
-  const {withLoader, onLoadMainPage, isPageNotFound} = props;
+  const {promoMovie, onLoadMainPage, isPageNotFound} = props;
 
-  const [isLoading, setIsLoading] = useState(withLoader);
   useEffect(() => {
-    onLoadMainPage(setIsLoading);
+    onLoadMainPage();
   }, []);
+
+  if (!isPageNotFound && (promoMovie.id === -1)) {
+    return null;
+  }
 
   return (
     <Fragment>
-      {isLoading ?
-        <LoaderPage /> :
+      {isPageNotFound ?
+        <PageNotFound fromMainPage={true}/> :
         <Fragment>
-          {isPageNotFound ?
-            <PageNotFound fromMainPage={true}/> :
-            <Fragment>
-              <PromoMoviePage />
+          <PromoMoviePage />
 
-              <div className="page-content">
-                <Catalog />
+          <div className="page-content">
+            <Catalog />
 
-                <Footer currentPage={AppPages.MAIN} />
-              </div>
+            <Footer currentPage={AppPages.MAIN} />
+          </div>
 
-            </Fragment>
-          }
         </Fragment>
       }
     </Fragment>
   );
 };
 
-MainPage.defaultProps = {
-  withLoader: true
-};
-
 MainPage.propTypes = {
-  withLoader: PropTypes.bool.isRequired,
+  promoMovie: Props.movie,
   onLoadMainPage: PropTypes.func.isRequired,
   isPageNotFound: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state) => ({
+  promoMovie: getPromoMovie(state),
   isPageNotFound: getIsPageNotFound(state)
 });
 

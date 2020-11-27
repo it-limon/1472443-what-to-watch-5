@@ -5,26 +5,24 @@ import {AuthorizationStatus, AppRoute, APIRoute} from "../const";
 import {getPromoMovie} from "./selectors/data-selector";
 import {getLastActiveMovie} from "./selectors/state-selector";
 
-export const loadMoviePage = (movieId, setIsLoading) => (dispatch, _getState, api) => (
+export const loadMoviePage = (movieId) => (dispatch, _getState, api) => (
   api.get(`${APIRoute.FILMS}/${movieId}`)
     .then(({data}) => dispatch(StateActionCreator.setLastActiveMovie(data)))
     .then(() => dispatch(loadMoviesList()))
-    .then(() => setIsLoading(false))
-    .catch(() => setIsLoading(false))
+    .catch(() => {})
 );
 
 export const loadMovie = (movieId, setIsLoading) => (dispatch, _getState, api) => (
   api.get(`${APIRoute.FILMS}/${movieId}`)
     .then(({data}) => dispatch(StateActionCreator.setLastActiveMovie(data)))
-    .then(() => setIsLoading(false))
-    .catch(() => setIsLoading(false))
+    .then(() => setIsLoading())
+    .catch(() => {})
 );
 
-export const loadMainPage = (setIsLoading) => (dispatch, _getState, _api) => (
+export const loadMainPage = () => (dispatch, _getState, _api) => (
   dispatch(loadPromoMovie())
     .then(() => dispatch(loadMoviesList()))
-    .then(() => setIsLoading(false))
-    .catch(() => setIsLoading(false))
+    .catch(() => {})
 );
 
 export const loadPromoMovie = () => (dispatch, _getState, api) => (
@@ -39,11 +37,10 @@ export const loadMoviesList = () => (dispatch, _getState, api) => (
     .catch(() => {})
 );
 
-export const loadFavoriteMoviesList = (setIsLoading) => (dispatch, _getState, api) => (
+export const loadFavoriteMoviesList = () => (dispatch, _getState, api) => (
   api.get(APIRoute.FAVORITE_FILMS)
     .then(({data}) => dispatch(DataActionCreator.loadFavoriteMovies(data)))
-    .then(() => setIsLoading(false))
-    .catch(() => setIsLoading(false))
+    .catch(() => {})
 );
 
 export const loadCommentsList = (movieId) => (dispatch, _getState, api) => (

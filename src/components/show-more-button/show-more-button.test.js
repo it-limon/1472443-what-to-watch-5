@@ -36,13 +36,6 @@ describe(`Render ShowMoreButton with 1 shown movie`, () => {
     expect(showMoreButtonComponent.toJSON()).toMatchSnapshot();
   });
 
-  it(`Should call dispatch when button click`, () => {
-    renderer.act(() => {
-      showMoreButtonComponent.root.findByType(`button`).props.onClick();
-    });
-
-    expect(store.dispatch).toHaveBeenCalledTimes(1);
-  });
 });
 
 describe(`Render ShowMoreButton with 2 shown movies`, () => {
